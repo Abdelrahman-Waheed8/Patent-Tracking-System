@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Page-1" id="TNLV5O6-giGzgFEJ65Fw">
-    <mxGraphModel dx="2289" dy="2509" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1940" dy="2075" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -179,40 +179,40 @@
           <mxGeometry height="40" width="100" x="640" y="1660" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-66" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;LicenseAgreement&lt;/b&gt;&lt;/span&gt;" vertex="1">
-          <mxGeometry height="30" width="60" x="280" y="2060" as="geometry" />
+          <mxGeometry height="30" width="60" x="220" y="2070" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-67" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;u&gt;&lt;b&gt;LicenseID&lt;/b&gt;&lt;/u&gt;&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="240" y="2110" as="geometry" />
+          <mxGeometry height="40" width="100" x="180" y="2120" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-68" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Type&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="440" y="2110" as="geometry" />
+          <mxGeometry height="40" width="100" x="380" y="2120" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-69" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;StartDate&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="540" y="2110" as="geometry" />
+          <mxGeometry height="40" width="100" x="480" y="2120" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-70" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Territory&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="640" y="2110" as="geometry" />
+          <mxGeometry height="40" width="100" x="580" y="2120" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-71" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;EndDate&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="740" y="2110" as="geometry" />
+          <mxGeometry height="40" width="100" x="680" y="2120" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-72" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;RoyaltyPayment&lt;/b&gt;&lt;/span&gt;" vertex="1">
-          <mxGeometry height="30" width="60" x="270" y="2220" as="geometry" />
+          <mxGeometry height="30" width="60" x="210" y="2220" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-73" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;u&gt;&lt;b&gt;royaltyID&lt;/b&gt;&lt;/u&gt;&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="240" y="2260" as="geometry" />
+          <mxGeometry height="40" width="100" x="180" y="2260" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-74" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Amount&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="440" y="2260" as="geometry" />
+          <mxGeometry height="40" width="100" x="380" y="2260" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-75" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Currency&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="540" y="2260" as="geometry" />
+          <mxGeometry height="40" width="100" x="480" y="2260" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-76" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;calculationMethod&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="120" x="640" y="2260" as="geometry" />
+          <mxGeometry height="40" width="120" x="580" y="2260" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-78" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;DistributionStatus&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="120" x="760" y="2260" as="geometry" />
+          <mxGeometry height="40" width="120" x="700" y="2260" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-79" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;PatentApplication&lt;/b&gt;&lt;/span&gt;" vertex="1">
           <mxGeometry height="30" width="60" x="290" y="330" as="geometry" />
@@ -269,10 +269,10 @@
           <mxGeometry height="40" width="100" x="240" y="2650" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-99" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;AlertType&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="640" y="2650" as="geometry" />
+          <mxGeometry height="40" width="100" x="740" y="2650" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-100" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Reason&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="740" y="2650" as="geometry" />
+          <mxGeometry height="40" width="100" x="840" y="2650" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-101" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;PatentFee&lt;/b&gt;&lt;/span&gt;" vertex="1">
           <mxGeometry height="30" width="60" x="250" y="1770" as="geometry" />
@@ -435,7 +435,7 @@
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-145" edge="1" parent="1" source="WbN8Ct82t6hS7EZdWBqZ-144" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="WbN8Ct82t6hS7EZdWBqZ-61">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="390" y="2050" />
+              <mxPoint x="340" y="2050" />
               <mxPoint x="180" y="2050" />
               <mxPoint x="180" y="1720" />
               <mxPoint x="265" y="1720" />
@@ -443,7 +443,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-144" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;u&gt;&lt;b&gt;Patent_ID&lt;/b&gt;&lt;/u&gt;&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="340" y="2110" as="geometry" />
+          <mxGeometry height="40" width="100" x="280" y="2120" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-146" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;GrantedPatents&lt;/b&gt;&lt;/span&gt;" vertex="1">
           <mxGeometry height="30" width="60" x="490" y="3135" as="geometry" />
@@ -484,10 +484,15 @@
           <mxGeometry height="40" width="100" x="440" y="1810" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-154" edge="1" parent="1" source="WbN8Ct82t6hS7EZdWBqZ-153" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="WbN8Ct82t6hS7EZdWBqZ-67">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="2200" />
+              <mxPoint x="230" y="2200" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-153" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;u&gt;&lt;b&gt;LicenseID&lt;/b&gt;&lt;/u&gt;&lt;/span&gt;" vertex="1">
-          <mxGeometry height="40" width="100" x="340" y="2260" as="geometry" />
+          <mxGeometry height="40" width="100" x="280" y="2260" as="geometry" />
         </mxCell>
         <mxCell id="WbN8Ct82t6hS7EZdWBqZ-156" edge="1" parent="1" source="WbN8Ct82t6hS7EZdWBqZ-155" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="WbN8Ct82t6hS7EZdWBqZ-80">
           <mxGeometry relative="1" as="geometry">
@@ -605,6 +610,25 @@
               <mxPoint x="329" y="1730" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="jIze8h73FHENK1IVOS3r-2" edge="1" parent="1" source="jIze8h73FHENK1IVOS3r-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="WbN8Ct82t6hS7EZdWBqZ-103">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="690" y="2590" />
+              <mxPoint x="920" y="2590" />
+              <mxPoint x="920" y="1870" />
+              <mxPoint x="290" y="1870" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jIze8h73FHENK1IVOS3r-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;u&gt;&lt;b&gt;patentfeeID&lt;/b&gt;&lt;/u&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="100" x="640" y="2650" as="geometry" />
+        </mxCell>
+        <mxCell id="jIze8h73FHENK1IVOS3r-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;IsExclusive&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="100" x="780" y="2120" as="geometry" />
+        </mxCell>
+        <mxCell id="jIze8h73FHENK1IVOS3r-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;PmtDate&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="70" x="820" y="2260" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
