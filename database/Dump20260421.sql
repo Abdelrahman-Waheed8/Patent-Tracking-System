@@ -39,7 +39,7 @@ CREATE TABLE `alerts` (
   CONSTRAINT `alerts_ibfk_2` FOREIGN KEY (`ActionID`) REFERENCES `officeaction` (`ActionID`) ON DELETE SET NULL,
   CONSTRAINT `alerts_ibfk_3` FOREIGN KEY (`SentAlertTo`) REFERENCES `user` (`usr_ID`) ON DELETE CASCADE,
   CONSTRAINT `alerts_ibfk_4` FOREIGN KEY (`patentfeeID`) REFERENCES `patentfee` (`patentfeeID`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `claim` (
   KEY `DependentClaimID` (`DependentClaimID`),
   CONSTRAINT `claim_ibfk_1` FOREIGN KEY (`Patent_ID`) REFERENCES `patent` (`Patent_ID`) ON DELETE CASCADE,
   CONSTRAINT `claim_ibfk_2` FOREIGN KEY (`DependentClaimID`) REFERENCES `claim` (`Claim_ID`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,7 +77,7 @@ CREATE TABLE `coverdterritory` (
   KEY `JurisdictionalID` (`JurisdictionalID`),
   CONSTRAINT `coverdterritory_ibfk_1` FOREIGN KEY (`PatentAppID`) REFERENCES `patentapplication` (`AppID`) ON DELETE CASCADE,
   CONSTRAINT `coverdterritory_ibfk_2` FOREIGN KEY (`JurisdictionalID`) REFERENCES `jursidiction` (`JurisdictionalID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `disclosure` (
   PRIMARY KEY (`disc_ID`),
   KEY `Classification_ID` (`Classification_ID`),
   CONSTRAINT `disclosure_ibfk_1` FOREIGN KEY (`Classification_ID`) REFERENCES `ipc_classification` (`Classification_ID`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +117,7 @@ CREATE TABLE `document` (
   PRIMARY KEY (`document_ID`),
   KEY `evidence_ID` (`evidence_ID`),
   CONSTRAINT `document_ibfk_1` FOREIGN KEY (`evidence_ID`) REFERENCES `evidence_vault` (`evidence_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +134,7 @@ CREATE TABLE `evidence_vault` (
   PRIMARY KEY (`evidence_ID`),
   KEY `disc_ID` (`disc_ID`),
   CONSTRAINT `evidence_vault_ibfk_1` FOREIGN KEY (`disc_ID`) REFERENCES `disclosure` (`disc_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +150,7 @@ CREATE TABLE `feeschedule` (
   `baseAmount` decimal(10,2) NOT NULL,
   `dueDate` date DEFAULT NULL,
   PRIMARY KEY (`feeScheduleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,7 +167,7 @@ CREATE TABLE `generatedportfolio` (
   KEY `Patent_ID` (`Patent_ID`),
   CONSTRAINT `generatedportfolio_ibfk_1` FOREIGN KEY (`portfolio_ID`) REFERENCES `portfolio` (`portfolio_ID`) ON DELETE CASCADE,
   CONSTRAINT `generatedportfolio_ibfk_2` FOREIGN KEY (`Patent_ID`) REFERENCES `patent` (`Patent_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,7 +184,7 @@ CREATE TABLE `grantedpatents` (
   KEY `AppID` (`AppID`),
   CONSTRAINT `grantedpatents_ibfk_1` FOREIGN KEY (`Patent_ID`) REFERENCES `patent` (`Patent_ID`) ON DELETE CASCADE,
   CONSTRAINT `grantedpatents_ibfk_2` FOREIGN KEY (`AppID`) REFERENCES `patentapplication` (`AppID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +200,7 @@ CREATE TABLE `ipc_classification` (
   `Class` varchar(50) DEFAULT NULL,
   `Group` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`Classification_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +216,7 @@ CREATE TABLE `jursidiction` (
   `name` varchar(100) DEFAULT NULL,
   `countryCode` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`JurisdictionalID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,7 +237,7 @@ CREATE TABLE `licenseagreement` (
   PRIMARY KEY (`LicenseID`),
   KEY `Patent_ID` (`Patent_ID`),
   CONSTRAINT `licenseagreement_ibfk_1` FOREIGN KEY (`Patent_ID`) REFERENCES `patent` (`Patent_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,7 +257,7 @@ CREATE TABLE `logs` (
   PRIMARY KEY (`LogID`),
   KEY `usr_ID` (`usr_ID`),
   CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`usr_ID`) REFERENCES `user` (`usr_ID`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +277,7 @@ CREATE TABLE `officeaction` (
   PRIMARY KEY (`ActionID`),
   KEY `AppID` (`AppID`),
   CONSTRAINT `officeaction_ibfk_1` FOREIGN KEY (`AppID`) REFERENCES `patentapplication` (`AppID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -295,7 +295,7 @@ CREATE TABLE `ownershipofinvention` (
   KEY `usr_ID` (`usr_ID`),
   CONSTRAINT `ownershipofinvention_ibfk_1` FOREIGN KEY (`disc_ID`) REFERENCES `disclosure` (`disc_ID`) ON DELETE CASCADE,
   CONSTRAINT `ownershipofinvention_ibfk_2` FOREIGN KEY (`usr_ID`) REFERENCES `user` (`usr_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +313,7 @@ CREATE TABLE `patent` (
   `Expiration` date DEFAULT NULL,
   PRIMARY KEY (`Patent_ID`),
   UNIQUE KEY `Number` (`Number`)
-) ENGINE=InnoDB AUTO_INCREMENT=6000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -333,7 +333,7 @@ CREATE TABLE `patentapplication` (
   UNIQUE KEY `appNum` (`appNum`),
   KEY `disc_ID` (`disc_ID`),
   CONSTRAINT `patentapplication_ibfk_1` FOREIGN KEY (`disc_ID`) REFERENCES `disclosure` (`disc_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -355,7 +355,7 @@ CREATE TABLE `patentfee` (
   KEY `Patent_ID` (`Patent_ID`),
   CONSTRAINT `patentfee_ibfk_1` FOREIGN KEY (`feeScheduleID`) REFERENCES `feeschedule` (`feeScheduleID`) ON DELETE CASCADE,
   CONSTRAINT `patentfee_ibfk_2` FOREIGN KEY (`Patent_ID`) REFERENCES `patent` (`Patent_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -372,7 +372,7 @@ CREATE TABLE `portfolio` (
   `CreatedDate` date DEFAULT NULL,
   `Score` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`portfolio_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -390,7 +390,7 @@ CREATE TABLE `prior_art` (
   PRIMARY KEY (`Prior_ID`),
   KEY `disc_ID` (`disc_ID`),
   CONSTRAINT `prior_art_ibfk_1` FOREIGN KEY (`disc_ID`) REFERENCES `disclosure` (`disc_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -411,7 +411,7 @@ CREATE TABLE `royaltypayment` (
   PRIMARY KEY (`royaltyID`),
   KEY `LicenseID` (`LicenseID`),
   CONSTRAINT `royaltypayment_ibfk_1` FOREIGN KEY (`LicenseID`) REFERENCES `licenseagreement` (`LicenseID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -429,7 +429,7 @@ CREATE TABLE `user` (
   `2FA_Enabled` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`usr_ID`),
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -449,7 +449,7 @@ CREATE TABLE `workflow` (
   PRIMARY KEY (`workflow_ID`),
   KEY `disc_ID` (`disc_ID`),
   CONSTRAINT `workflow_ibfk_1` FOREIGN KEY (`disc_ID`) REFERENCES `disclosure` (`disc_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
