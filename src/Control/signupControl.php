@@ -15,19 +15,24 @@ class SignupControl extends signupModel{
 
     public function signup()
     {
-        if($this->emptyinput())
+        if($this->emptyinput() == false)
             {
                 echo "All fields needs to be filled! <br>";
                 exit();
             }
-        if($this->invalidEmail())
+        if($this->invalidEmail() == false)
             {
                 echo "Invalid email! <br>";
                 exit();
             }
-        if($this->isUserSignedin())
+        if($this->isUserSignedin() == true)
             {
                 echo "User already exists!<br>";
+                exit();
+            }
+        if($this->pwdMatch() == false)
+            {
+                echo "Password do not match!<br>";
                 exit();
             }
         
@@ -61,6 +66,15 @@ class SignupControl extends signupModel{
             {
                 $result = false;
             }
-        return false;
+        return $result;
+    }
+
+    public function pwdMatch()
+    {
+        if($this->password !== $this->repeatedPass)
+            {
+                return false;
+            }
+        return true;
     }
 }
