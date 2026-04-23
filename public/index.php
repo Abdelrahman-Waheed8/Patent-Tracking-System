@@ -1,3 +1,8 @@
+<?php
+session_start();
+include "../src/view/signupView.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +18,10 @@
   <div class="form-container sign-up">
     <form action="../src/signup.php" method = "POST">
       <h1>Create Account</h1>
+      <?php
+            $view = new signupView();
+            $view->displayErrorsignup();;
+        ?>
       <input type="email" placeholder="Email" name = "email">
       <input type="password" placeholder="Password" name = "password">
       <input type="password" placeholder="Repeat Password" name = "repeatedpassword">
