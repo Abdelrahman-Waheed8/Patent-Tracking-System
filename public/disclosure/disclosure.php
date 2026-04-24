@@ -112,7 +112,7 @@
                 </div>
                 <div class="bodyAction">
                     <div class="action-card">
-                        <a href="../inventore/inventore.html">
+                        <a href="../inventor/inventor.php">
                             <div class="icon-wrapper">
                                 <i class="fa-solid fa-plus"></i>
                             </div>
