@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    background-color: #f1f3f5;
+}
+
+/* ================= Layout ================= */
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ================= Sidebar ================= */
+.sidebar {
+    background-color: #353f48;
+    width: 15vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+.container.closed .sidebar {
+    transform: translateX(-100%);
+    transition: 0.3s;
+}
+
+.container.closed .page_structure {
+    margin-left: 0;
+    width: 100%;
+}
+.logo {
+    background-color: #03353b;
+    color: white;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.menu {
+    list-style: none;
+    padding: 10px;
+}
+
+.menu li {
+    margin: 12px 0;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.menu a:hover,
+.menu a.active {
+    background-color: #296d74;
+}
+
+.logout {
+    margin-top: auto;
+    margin: 20px 10px;
+    padding: 10px;
+    border: 1px solid #e74c3c;
+    background: transparent;
+    color: #e74c3c;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.logout:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+/* ================= Main ================= */
+.page_structure {
+    margin-left: 15vw;
+    width: calc(100% - 15vw);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+.panel-header {
+    background-color: #296d74;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+}
+
+.left, .right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 15px;
+}
+
+.icon-btn {
+    cursor: pointer;
+    opacity: 0.85;
+    transition: 0.2s;
+}
+
+.icon-btn:hover {
+    opacity: 1;
+}
+
+h6 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.small {
+    font-size: 10px;
+}
+
+/* Search */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    width: 220px;
+}
+
+.search-box i {
+    color: gray;
+    margin-right: 5px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+    background: transparent;
+}
+
+.icon-btn {
+    cursor: pointer;
+}
+
+/* ================= Content ================= */
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+
+}
+
+/* ================= Form ================= */
+.disclosure-form {
+    background-color: firebrick;
+    background: white;
+    padding: 30px;
+    width: 90%;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+.input-group textarea {
+        resize: none;
+}
+/* Upload Box Styling */
+.upload-container {
+    margin: 20px 0;
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    border: 2px dotted #ccc;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.upload-box:hover {
+    background-color: #dfe4e8;
+}
+
+.upload-box input[type="file"] {
+    display: none;
+}
+
+.upload-box i {
+    color: #6c757d;
+    font-size: 1.2rem;
+}
+
+.form-footer {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.submit-btn {
+    background: #296d74;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #1f5056;
+}
