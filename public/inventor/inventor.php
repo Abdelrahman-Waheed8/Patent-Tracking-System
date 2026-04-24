@@ -20,10 +20,10 @@
             <h2 class="logo">IP System</h2>
 
             <ul class="menu">
-                <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a href="./inventor.php"><i class="fas fa-user-astronaut"></i>inventore</a></li>
+                <li><a href="../disclosure/disclosure.php" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="../inventor.php"><i class="fas fa-user-astronaut"></i>inventore</a></li>
 
-                <li><a href="../disclosure/disclosure.php"><i class="fas fa-lightbulb"></i> Disclosure</a></li>
+                <li><a href="#"><i class="fas fa-lightbulb"></i> Disclosure</a></li>
                 <li><a href="#"><i class="fas fa-file"></i> Patents</a></li>
                 <li><a href="#"><i class="fas fa-sync"></i> Renewals</a></li>
                 <li><a href="#"><i class="fas fa-handshake"></i> Licensing</a></li>
