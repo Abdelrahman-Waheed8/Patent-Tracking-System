@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../src/view/signupView.php";
+include "../src/view/loginView.php";
 
 ?>
 <!DOCTYPE html>
@@ -34,6 +35,10 @@ include "../src/view/signupView.php";
   <div class="form-container sign-in">
     <form action="../src/control/loginControl.php">
       <h1>Login</h1>
+      <?php
+            $view = new loginView();
+            $view->displayErrorslogin();
+        ?>
       <input type="email" placeholder="Email" name = "email">
       <input type="password" placeholder="Password" name = "password">
       <button name ="submit">Login</button>
