@@ -1,5 +1,6 @@
 <?php
 include "../../src/config/config_session.php";
+include "../../src/view/disclosureView.php";
 
 if(!isset($_SESSION["user_id"]))
     {
@@ -66,6 +67,11 @@ if(!isset($_SESSION["user_id"]))
                     </div>
                 </div>
             </nav>
+
+            <?php
+                $disclosureView = new disclosureView();
+                $disclosureView->displaySessionInfo();
+            ?>
 
             <!-- Cards -->
             <div class="cards">

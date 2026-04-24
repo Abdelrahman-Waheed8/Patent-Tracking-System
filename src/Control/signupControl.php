@@ -4,14 +4,18 @@ class SignupControl extends signupModel{
     private $email;
     private $password;
     private $repeatedPass;
+    private $firstname;
+    private $lastname;
     public $errors = [];
 
 
-    public function __construct($email, $password, $repeatedPass)
+    public function __construct($email, $password, $repeatedPass,$firstname,$lastname)
     {
         $this->email = $email;
         $this->password = $password;
         $this->repeatedPass = $repeatedPass;
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
     }
 
     public function signup()
@@ -20,12 +24,13 @@ class SignupControl extends signupModel{
         $this->emptyinput();
         $this->invalidEmail();
         $this->pwdMatch();
+        $this->invalidName();
         
         if (!empty($this->errors)) {
             return false; 
         }
         
-        $this->setUser($this->email, $this->password);
+        $this->setUser($this->email, $this->password , $this->firstname, $this->lastname);
         return true;
     }
 
@@ -52,4 +57,11 @@ class SignupControl extends signupModel{
             $this->errors["password_mismatch"] = "Passwords do not match!";
         }
     }
+
+    private function invalidName() {
+    // This allows ONLY letters. No spaces, no numbers.
+    if (!preg_match("/^[a-zA-Z]*$/", $this->firstname) || !preg_match("/^[a-zA-Z]*$/", $this->lastname)) {
+        $this->errors["invalid_name"] = "Names must only contain letters!";
+    }
+}
 }

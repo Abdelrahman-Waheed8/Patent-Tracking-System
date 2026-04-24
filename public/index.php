@@ -24,6 +24,8 @@ include "../src/config/config_session.php";
             $view->displayErrorsignup();
         ?>
       <input type="email" placeholder="Email" name = "email">
+      <input type="text" placeholder="First Name" name = "fname">
+      <input type="text" placeholder="Last Name" name = "lname">
       <input type="password" placeholder="Password" name = "password">
       <input type="password" placeholder="Repeat Password" name = "repeatedpassword">
       <button name ="submit">Sign Up</button>

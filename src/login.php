@@ -26,6 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             }
 
             $_SESSION["user_id"] = $userData["usr_ID"];
+            $_SESSION["firstname"] = $userData["first_name"];
 
             // Directs you to the page based on role
             if($userData["Role"] == "Inventor")

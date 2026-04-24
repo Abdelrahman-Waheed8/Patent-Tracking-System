@@ -5,6 +5,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $repeatedpwd = $_POST["repeatedpassword"];
         $email = $_POST["email"];
         $pwd = $_POST["password"];
+        $firstname = $_POST["fname"];
+        $lastname = $_POST["lname"];
 
 
         try {
@@ -14,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             include "control/signupControl.php";
             include "config/config_session.php";
             
-            $signup = new SignupControl($email,$pwd,$repeatedpwd);
+            $signup = new SignupControl($email,$pwd,$repeatedpwd,$firstname,$lastname);
 
             // Running error handlers
             if ($signup->signup() === false) {
