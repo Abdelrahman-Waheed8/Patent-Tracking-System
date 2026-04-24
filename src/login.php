@@ -27,8 +27,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
             $_SESSION["user_id"] = $userData["usr_ID"];
 
-            // Returning back to front page
-            header("Location: ../public/index.php?login=success");
+            // Directs you to the disclosure page
+            header("Location: ../public/disclosure/disclosure.php?login=success");
             die();
         } catch (PDOException $e) {
             echo "Query Failed" . $e->getMessage() ;
