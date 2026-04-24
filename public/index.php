@@ -1,7 +1,7 @@
 <?php
-session_start();
 include "../src/view/signupView.php";
 include "../src/view/loginView.php";
+include "../src/config/config_session.php";
 
 ?>
 <!DOCTYPE html>
@@ -10,7 +10,6 @@ include "../src/view/loginView.php";
   <meta charset="UTF-8">
   <title>Auth UI</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -33,7 +32,7 @@ include "../src/view/loginView.php";
 
   <!-- LOGIN -->
   <div class="form-container sign-in">
-    <form action="../src/control/loginControl.php">
+    <form action="../src/login.php" method="POST">
       <h1>Login</h1>
       <?php
             $view = new loginView();

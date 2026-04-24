@@ -18,6 +18,10 @@ class loginControl extends loginModel{
         
         $user = $this->getuser($this->email);
         
+        if (!empty($this->errors)) {
+        return false;
+        }
+
         if(!$user)
             {
                 $this->errors["login_failed"] = "Invalid Credentials!";
@@ -30,7 +34,7 @@ class loginControl extends loginModel{
                 return false;
             }
 
-        return true;
+        return $user;
     }
 
     private function emptyinput()

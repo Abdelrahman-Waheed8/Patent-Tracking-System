@@ -6,14 +6,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $email = $_POST["email"];
         $pwd = $_POST["password"];
 
-        session_start();
 
         try {
             //Instantiate signupController class
             include "config/config.php";
             include "model/signupModel.php";
             include "control/signupControl.php";
-
+            include "config/config_session.php";
+            
             $signup = new SignupControl($email,$pwd,$repeatedpwd);
 
             // Running error handlers
