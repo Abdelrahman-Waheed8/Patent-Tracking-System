@@ -9,10 +9,11 @@ include "../src/view/signupView.php";
   <meta charset="UTF-8">
   <title>Auth UI</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
-<div class="container" id="container">
+<div class="container <?php echo (isset($_GET['signup']) && $_GET['signup'] == 'failed') || isset($_SESSION['errorsignup']) ? 'active' : ''; ?>" id="container">
 
   <!-- REGISTER -->
   <div class="form-container sign-up">
@@ -20,7 +21,7 @@ include "../src/view/signupView.php";
       <h1>Create Account</h1>
       <?php
             $view = new signupView();
-            $view->displayErrorsignup();;
+            $view->displayErrorsignup();
         ?>
       <input type="email" placeholder="Email" name = "email">
       <input type="password" placeholder="Password" name = "password">

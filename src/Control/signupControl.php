@@ -16,9 +16,9 @@ class SignupControl extends signupModel{
 
     public function signup()
     {
+        $this->isUserSignedin();
         $this->emptyinput();
         $this->invalidEmail();
-        $this->isUserSignedin();
         $this->pwdMatch();
         
         if (!empty($this->errors)) {
