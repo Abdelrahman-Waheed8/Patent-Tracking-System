@@ -27,9 +27,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
             $_SESSION["user_id"] = $userData["usr_ID"];
 
-            // Directs you to the disclosure page
-            header("Location: ../public/disclosure/disclosure.php?login=success");
-            die();
+            // Directs you to the page based on role
+            if($userData["Role"] == "Inventor")
+            {
+                header("Location: ../public/disclosure/disclosure.php");
+                die();
+            } else {
+                header("Location: ../public/index.php");
+            }
         } catch (PDOException $e) {
             echo "Query Failed" . $e->getMessage() ;
         }
