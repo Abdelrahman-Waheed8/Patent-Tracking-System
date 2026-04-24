@@ -137,3 +137,16 @@ background: linear-gradient(135deg, #1c696f, #2f8f96);
     background-color: #fff;
     color: #1c696f;
 }
+
+.error-message {
+    background-color: #fce4e4; /* Light red background */
+    color: #ff0101;            /* Dark red text for readability */
+    padding: 10px;
+    border-radius: 8px;
+    border-left: 5px solid #1c696f ; /* Teal accent to match your theme */
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
