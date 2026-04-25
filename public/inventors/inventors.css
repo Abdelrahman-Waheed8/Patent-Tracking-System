@@ -1,0 +1,428 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    background-color: #f1f3f5;
+}
+
+/* ================= Layout ================= */
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ================= Sidebar ================= */
+.sidebar {
+    background-color: #353f48;
+    width: 15vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+.container.closed .sidebar {
+    transform: translateX(-100%);
+    transition: 0.3s;
+}
+
+.container.closed .page_structure {
+    margin-left: 0;
+    width: 100%;
+}
+.logo {
+    background-color: #03353b;
+    color: white;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.menu {
+    list-style: none;
+    padding: 10px;
+}
+
+.menu li {
+    margin: 12px 0;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.menu a:hover,
+.menu a.active {
+    background-color: #296d74;
+}
+
+.logout {
+    margin-top: auto;
+    margin: 20px 10px;
+    padding: 10px;
+    border: 1px solid #e74c3c;
+    background: transparent;
+    color: #e74c3c;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.logout:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+/* ================= Main ================= */
+.page_structure {
+    margin-left: 15vw;
+    width: calc(100% - 15vw);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+.panel-header {
+    background-color: #296d74;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+}
+
+.left, .right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 15px;
+}
+
+.icon-btn {
+    cursor: pointer;
+    opacity: 0.85;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.icon-btn:hover {
+    opacity: 1;
+}
+
+h6 {
+    font-size: 16px;
+    font-weight: 600;
+}
+.right .btn-primary{
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.12);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.25s ease;
+    backdrop-filter: blur(6px);
+}
+
+/* hover */
+.right .btn-primary:hover{
+    background: rgba(255,255,255,0.22);
+    transform: translateY(-1px);
+}
+
+/* active */
+.right .btn-primary:active{
+    transform: scale(0.98);
+}
+/* inventions.css */
+
+.content-wrapper {
+    padding: 25px;
+    flex: 1;
+}
+
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header-actions h2 {
+    color: #03353b;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Table Container */
+.table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    overflow-x: auto;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+/* Header */
+thead {
+    background: #296d74;
+}
+
+th {
+    padding: 14px;
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+/* Rows */
+td {
+    padding: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #444;
+    vertical-align: middle;
+}
+
+/* Hover */
+tbody tr:hover {
+    background: #f7fbfc;
+}
+
+/* Title cell */
+td strong {
+    display: block;
+    color: #03353b;
+    font-size: 14px;
+}
+
+td small {
+    color: #888;
+    font-size: 12px;
+}
+
+/* Status */
+.status-finalized,
+.status-draft,
+.status-submitted,
+.status-granted,
+.status-abandoned {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-finalized {
+    background: #2ecc71;
+    color: #fff;
+}
+
+.status-draft {
+    background: #f1c40f;
+    color: #222;
+}
+
+.status-submitted {
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+.status-granted {
+    background-color: #036d2f;
+    color: #ffffff;
+}
+
+.status-abandoned {
+    background-color: #e74c3c;
+    color: #ffffff;
+}
+/* Actions */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.actions i {
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 15px;
+}
+
+.actions i:hover {
+    transform: scale(1.2);
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 500px;
+    animation: slide-down 0.3s ease-out;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+    color: #03353b;
+    font-weight: 600;
+}
+
+.close-modal {
+    cursor: pointer;
+    font-size: 20px;
+    color: #888;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-actions .btn-secondary {
+    background: #eee;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.form-actions .btn-primary {
+    background: #296d74;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* View Modal Specific Styles */
+#view-invention-details .detail-item {
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+#view-invention-details .detail-item strong {
+    display: block;
+    color: #03353b;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+#view-invention-details .detail-item span {
+    color: #555;
+}
+
+
+/* Responsive */
+@media (max-width: 992px) {
+    .content-wrapper {
+        padding: 15px;
+    }
+    
+    th, td {
+        padding: 12px 10px;
+        font-size: 13.5px;
+    }
+}

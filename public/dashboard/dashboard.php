@@ -17,7 +17,7 @@ if(!isset($_SESSION["user_id"]))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - IP System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="disclosure.css">
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 
 <body>
@@ -29,10 +29,10 @@ if(!isset($_SESSION["user_id"]))
             <h2 class="logo">IP System</h2>
 
             <ul class="menu">
-                <li><a href="./disclosure.php" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a href="../inventor/inventor.php"><i class="fas fa-user-astronaut"></i>inventore</a></li>
-                <li><a href="#"><i class="fas fa-lightbulb"></i> Disclosure</a></li>
-
+                <li><a href="./dashboard.php" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="../inventors/inventors.php"><i class="fas fa-user-astronaut"></i>inventors</a></li>
+                <li><a href="../invention_disclosure/disclosure.php"><i class="fas fa-lightbulb"></i> Disclosure</a>
+                </li>
                 <li><a href="#"><i class="fas fa-file"></i> Patents</a></li>
                 <li><a href="#"><i class="fas fa-sync"></i> Renewals</a></li>
                 <li><a href="#"><i class="fas fa-handshake"></i> Licensing</a></li>
@@ -152,7 +152,7 @@ if(!isset($_SESSION["user_id"]))
         </div>
     </div>
 
-    <script src="js.js"></script>
+    <script src="dashboard.js"></script>
 
 </body>
 

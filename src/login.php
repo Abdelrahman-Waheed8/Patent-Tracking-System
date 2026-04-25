@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             // Directs you to the page based on role
             if($userData["Role"] == "Inventor")
             {
-                header("Location: ../public/disclosure/disclosure.php");
+                header("Location: ../public/dashboard/dashboard.php");
                 die();
             } else {
                 header("Location: ../public/index.php");
