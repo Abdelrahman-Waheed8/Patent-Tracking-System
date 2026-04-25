@@ -21,7 +21,7 @@
 
             <ul class="menu">
                 <li><a href="../disclosure/disclosure.php" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a href="../inventor.php"><i class="fas fa-user-astronaut"></i>inventore</a></li>
+                <li><a href="inventor.php"><i class="fas fa-user-astronaut"></i>inventore</a></li>
 
                 <li><a href="#"><i class="fas fa-lightbulb"></i> Disclosure</a></li>
                 <li><a href="#"><i class="fas fa-file"></i> Patents</a></li>
