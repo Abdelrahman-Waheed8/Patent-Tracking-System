@@ -35,7 +35,7 @@ class SignupControl extends signupModel{
     }
 
     private function emptyinput() {
-        if (empty($this->email) || empty($this->password) || empty($this->repeatedPass)) {
+        if (empty($this->email) || empty($this->password) || empty($this->repeatedPass) || empty($this->firstname) || empty($this->lastname)) {
             $this->errors["empty_input"] = "Fill in all fields!";
         }
     }
