@@ -386,3 +386,27 @@ h6 {
     }
 
 }
+.session-info{
+    display: flex;
+    justify-content:center ;
+    align-items: center;
+    padding:10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.session-info {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1f4f52;
+    display: flex;
+    justify-content:center ;
+    align-items: center;
+    padding:10px;
+}
+
+.session-info span {
+    color: #0d9488;
+    font-weight: 700;
+        margin-left: 5px;
+
+}
