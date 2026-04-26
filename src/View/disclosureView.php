@@ -6,7 +6,6 @@ class disclosureView
     {
         if(isset($_SESSION["firstname"]))
             {
-                echo "<p class= 'session-info'> Welcome Back " . $_SESSION["firstname"] . '</p>';
-            }
+echo "<p class='session-info'>Welcome Back   <span>  " . $_SESSION['firstname'] . "</span></p>";            }
     }
 }
