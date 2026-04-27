@@ -29,10 +29,11 @@
                 <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
 
+
             <a class="logout-btn" href="../index.php">
-                <button class="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout
+                <button class="logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </a>
         </aside>
 

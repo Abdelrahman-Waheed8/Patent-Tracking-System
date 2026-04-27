@@ -39,9 +39,11 @@ if(!isset($_SESSION["user_id"]))
                 <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
 
+
             <a class="logout-btn" href="../index.php">
-                <i class="fas fa-sign-out-alt"></i>
-                Logout
+                <button class="logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </a>
         </div>
 
@@ -128,7 +130,7 @@ if(!isset($_SESSION["user_id"]))
                 </div>
                 <div class="bodyAction">
                     <div class="action-card">
-                        <a href="../inventor/inventor.php">
+                        <a href="../invention_disclosure/disclosure.php">
                             <div class="icon-wrapper">
                                 <i class="fa-solid fa-plus"></i>
                             </div>
@@ -139,7 +141,7 @@ if(!isset($_SESSION["user_id"]))
 
 
                     <div class="action-card">
-                        <a href="#">
+                        <a href="../patent/patent.php">
                             <div class="icon-wrapper">
                                 <i class="fa-solid fa-file-invoice"></i>
                             </div>

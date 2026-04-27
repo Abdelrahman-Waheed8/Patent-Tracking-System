@@ -53,9 +53,8 @@ html, body {
     font-weight: 600;
     font-size: 28px;
 }
-.logout-btn{
-    text-decoration: none;
-}
+
+
 /* Menu */
 .menu {
     list-style: none;
@@ -102,7 +101,9 @@ html, body {
     background: #e74c3c;
     color: white;
 }
-
+.logout-btn{
+    text-decoration: none;
+}
 /* Main Content */
 .page_structure {
     margin-left: 15vw;

@@ -73,7 +73,6 @@ body {
 .menu a.active {
     background-color: #296d74;
 }
-
 .logout {
     margin-top: auto;
     margin: 20px 10px;
@@ -89,7 +88,9 @@ body {
     background: #e74c3c;
     color: white;
 }
-
+.logout-btn{
+    text-decoration: none;
+}
 /* ================= Main ================= */
 .page_structure {
     margin-left: 15vw;
