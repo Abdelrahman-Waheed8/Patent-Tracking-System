@@ -144,21 +144,35 @@ function addTableActionListeners() {
             const patent = patents.find(p => p.id === patentId);
 
             if (patent) {
-                let message = "";
+                let title, text, icon;
                 switch (patent.status.toLowerCase()) {
                     case "active":
-                        message = `Patent ${patent.id} is currently Active. Your rights are protected.`;
+                        title = "Patent Active!";
+                        text = `Patent ${patent.id} is currently Active. Your rights are protected.`;
+                        icon = "success";
                         break;
                     case "expired":
-                        message = `Warning! Patent ${patent.id} has Expired. Take immediate action to renew if possible.`;
+                        title = "Patent Expired!";
+                        text = `Warning! Patent ${patent.id} has Expired. Take immediate action to renew if possible.`;
+                        icon = "warning";
                         break;
                     case "abandoned":
-                        message = `Notice: Patent ${patent.id} is Abandoned. You no longer hold rights to this invention.`;
+                        title = "Patent Abandoned!";
+                        text = `Notice: Patent ${patent.id} is Abandoned. You no longer hold rights to this invention.`;
+                        icon = "error";
                         break;
                     default:
-                        message = `Payment information for Patent ID: ${patent.id}.`;
+                        title = "Payment Information";
+                        text = `Payment information for Patent ID: ${patent.id}.`;
+                        icon = "info";
                 }
-                alert(message);
+
+                Swal.fire({
+                    title: title,
+                    text: text,
+                    icon: icon,
+                    draggable: true
+                });
             }
         });
     });
