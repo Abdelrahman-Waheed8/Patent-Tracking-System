@@ -69,8 +69,8 @@ if(!isset($_SESSION["user_id"]))
             </nav>
 
             <?php
-                $disclosureView = new disclosureView();
-                $disclosureView->displaySessionInfo();
+                $inventorview = new inventorView();
+                $inventorview->displaySessionInfo();
             ?>
 
             <!-- Cards -->

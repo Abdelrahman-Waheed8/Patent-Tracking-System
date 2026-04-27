@@ -6,16 +6,18 @@ class disclosureModel extends DBH
 
     protected function setDisclosure($title, $description)
     {
-        $query = "INSERT INTO disclosure (Title, FilingDate, Description) VALUES (:title, NOW(), :description);";
-        $stmt = $this->connect()->prepare($query);
+        $pdo = $this->connect();
+
+        $query = "INSERT INTO disclosure (Title, FilingDate, `Description`) VALUES (:title, NOW(), :description);";
+        $stmt = $pdo->prepare($query);
         $stmt->bindParam(":title", $title);
         $stmt->bindParam(":description", $description);
         $stmt->execute();
 
 
-        $newId = $this->connect()->lastInsertId();
+        $newId = $pdo->lastInsertId();
 
-        $stmt2 = $this->connect()->prepare("SELECT FilingDate FROM disclosure WHERE disc_ID = :id");
+        $stmt2 = $pdo->prepare("SELECT FilingDate FROM disclosure WHERE disc_ID = :id");
         $stmt2->bindParam(":id", $newId);
         $stmt2->execute();
 
@@ -23,12 +25,13 @@ class disclosureModel extends DBH
         $fillingDate = $dateRow['FilingDate'];
 
         //Move fingerprint logic to Controller later
-        $fingerprint = hash('sha256', $newId . $fillingDate . $title);
+        $fingerprint = hash('sha256', $newId . $fillingDate );
 
-        $stmt3 = $this->connect()->prepare("UPDATE disclosure SET Unique_fgrPrint = :fp WHERE disc_ID = :id");
-        $stmt3->execute([':fp' => $fingerprint, ':id' => $newId]);
+        $stmt3 = $pdo->prepare("UPDATE disclosure SET Unique_fgrPrint = :fp WHERE disc_ID = :id");
+        $stmt3->bindParam(":fp", $fingerprint);
+        $stmt3->bindParam(":id", $newId);
+        $stmt3->execute();
 
         $stmt = null;
-        return $newId;
     }
 }
