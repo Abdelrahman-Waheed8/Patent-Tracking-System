@@ -48,7 +48,9 @@ body {
     font-size: 22px;
     font-weight: 600;
 }
-
+.logout-btn{
+    text-decoration: none;
+}
 .menu {
     list-style: none;
     padding: 10px;

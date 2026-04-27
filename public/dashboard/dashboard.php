@@ -33,16 +33,16 @@ if(!isset($_SESSION["user_id"]))
                 <li><a href="../inventors/inventors.php"><i class="fas fa-user-astronaut"></i>inventors</a></li>
                 <li><a href="../invention_disclosure/disclosure.php"><i class="fas fa-lightbulb"></i> Disclosure</a>
                 </li>
-                <li><a href="#"><i class="fas fa-file"></i> Patents</a></li>
+                <li><a href="../patent/patent.php"><i class="fas fa-file"></i> Patents</a></li>
                 <li><a href="#"><i class="fas fa-sync"></i> Renewals</a></li>
                 <li><a href="#"><i class="fas fa-handshake"></i> Licensing</a></li>
                 <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
 
-            <button class="logout">
+            <a class="logout-btn" href="../index.php">
                 <i class="fas fa-sign-out-alt"></i>
                 Logout
-            </button>
+            </a>
         </div>
 
         <!-- Main Content -->

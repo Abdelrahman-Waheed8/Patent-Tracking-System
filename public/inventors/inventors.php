@@ -20,13 +20,13 @@
                 <li><a href="./inventors.php"><i class="fas fa-user-astronaut"></i> Inventors</a></li>
                 <li><a href="../invention_disclosure/disclosure.php"><i class="fas fa-lightbulb"></i> Disclosure</a>
                 </li>
-                <li><a href="#"><i class="fas fa-file"></i> Patents</a></li>
+                <li><a href="../patent/patent.php"><i class="fas fa-file"></i> Patents</a></li>
                 <li><a href="#"><i class="fas fa-sync"></i> Renewals</a></li>
                 <li><a href="#"><i class="fas fa-handshake"></i> Licensing</a></li>
                 <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
 
-            <a href="">
+            <a class="logout-btn" href="../index.php">
                 <button class="logout">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </button>

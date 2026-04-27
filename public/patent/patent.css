@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
+     font-family: "Montserrat", sans-serif;
 }
 
-body {
+html, body {
+    height: 100%;
     background-color: #f1f3f5;
+
 }
 
 /* ================= Layout ================= */
@@ -17,7 +18,7 @@ body {
     min-height: 100vh;
 }
 
-/* ================= Sidebar ================= */
+/* Sidebar */
 .sidebar {
     background-color: #353f48;
     width: 15vw;
@@ -27,44 +28,51 @@ body {
     left: 0;
     display: flex;
     flex-direction: column;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
 }
 .container.closed .sidebar {
     transform: translateX(-100%);
-    transition: 0.3s;
 }
-
 .container.closed .page_structure {
     margin-left: 0;
     width: 100%;
 }
+
+/* Logo */
 .logo {
     background-color: #03353b;
     color: white;
-    height: 55px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 22px;
+    height: 55px;
+    margin-bottom: 30px;
+    text-align: center;
     font-weight: 600;
+    font-size: 28px;
 }
 
+/* Menu */
 .menu {
     list-style: none;
-    padding: 10px;
+    padding: 0 10px;
 }
 
 .menu li {
-    margin: 12px 0;
+    margin: 15px 0;
 }
 
 .menu a {
     color: white;
     text-decoration: none;
     display: flex;
+    align-items: center;
     gap: 10px;
     padding: 10px;
     border-radius: 8px;
+    transition: 0.3s;
 }
 
 .menu a:hover,
@@ -72,6 +80,7 @@ body {
     background-color: #296d74;
 }
 
+/* Logout */
 .logout {
     margin-top: auto;
     margin: 20px 10px;
@@ -81,6 +90,10 @@ body {
     color: #e74c3c;
     border-radius: 8px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
 }
 
 .logout:hover {
@@ -90,13 +103,13 @@ body {
 .logout-btn{
     text-decoration: none;
 }
-/* ================= Main ================= */
+/* Main Content */
 .page_structure {
     margin-left: 15vw;
     width: calc(100% - 15vw);
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    transition: all 0.3s ease;
+    padding-bottom: 40px;
 }
 
 /* Navbar */
@@ -123,7 +136,6 @@ body {
     cursor: pointer;
     opacity: 0.85;
     transition: 0.2s;
-    cursor: pointer;
 }
 
 .icon-btn:hover {
@@ -134,143 +146,147 @@ h6 {
     font-size: 16px;
     font-weight: 600;
 }
-.right .btn-primary{
-    padding: 10px 18px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.12);
-    color: white;
-    font-weight: 600;
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.small {
+    font-size: 10px;
+}
+
+/* Search */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    width: 300px;
+}
+
+.search-box i {
+    color: gray;
+    margin-right: 5px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
     font-size: 14px;
-    cursor: pointer;
+    width: 100%;
+    background: transparent;
+}
+/* Cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.card-top {
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: 0.25s ease;
-    backdrop-filter: blur(6px);
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
-/* hover */
-.right .btn-primary:hover{
-    background: rgba(255,255,255,0.22);
-    transform: translateY(-1px);
-}
-
-/* active */
-.right .btn-primary:active{
-    transform: scale(0.98);
-}
-/* inventions.css */
-
-.content-wrapper {
-    padding: 25px;
-    flex: 1;
-}
-
-.header-actions {
+.card-top i {
+    font-size: 22px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    justify-content: center;
 }
 
-.header-actions h2 {
-    color: #03353b;
+.card-top span {
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+.card h1 {
+    font-size: 32px;
+    margin: 0 0 5px 0;
+    color: #222;
     font-weight: 700;
+}
+
+.card p {
+    font-size: 13px;
+    color: #888;
     margin: 0;
 }
 
 /* Table Container */
+
 .table-container {
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    padding: 10px;
     overflow-x: auto;
+        margin: 0 20px;
+
 }
 
 /* Table */
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 900px;
+    min-width: 800px;
 }
 
 /* Header */
 thead {
-    background: #296d74;
+    background: #f8f9fa;
 }
 
 th {
     padding: 14px;
-    color: #fff;
+    color: #343a40;
     font-size: 13px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     text-align: left;
+    border-bottom: 2px solid #dee2e6;
 }
 
 /* Rows */
 td {
-    padding: 14px;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 16px 14px;
+    border-bottom: 1px solid #f1f3f5;
     font-size: 14px;
-    color: #444;
+    color: #495057;
     vertical-align: middle;
+}
+
+td b {
+    color: #03353b;
+    font-weight: 600;
 }
 
 /* Hover */
 tbody tr:hover {
-    background: #f7fbfc;
-}
-
-/* Title cell */
-td strong {
-    display: block;
-    color: #03353b;
-    font-size: 14px;
-}
-
-td small {
-    color: #888;
-    font-size: 12px;
-}
-
-/* Status */
-.status-finalized,
-.status-draft,
-.status-submitted,
-.status-granted,
-.status-abandoned {
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    display: inline-block;
-}
-
-.status-finalized {
-    background: #2ecc71;
-    color: #fff;
-}
-
-.status-draft {
-    background: #f1c40f;
-    color: #222;
-}
-
-.status-submitted {
-    background-color: #3498db;
-    color: #ffffff;
-}
-
-.status-granted {
-    background-color: #036d2f;
-    color: #ffffff;
-}
-
-.status-abandoned {
-    background-color: #e74c3c;
-    color: #ffffff;
+    background: #f1f3f5;
 }
 /* Actions */
 .actions {
@@ -341,27 +357,6 @@ td small {
     padding: 20px;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 14px;
-    color: #333;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 14px;
-}
-
 .form-actions {
     display: flex;
     justify-content: flex-end;
@@ -378,14 +373,8 @@ td small {
     font-weight: 600;
 }
 
-.form-actions .btn-primary {
-    background: #296d74;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
+.form-actions .btn-secondary:hover {
+    background: #ddd;
 }
 
 @keyframes slide-down {
@@ -400,27 +389,34 @@ td small {
 }
 
 /* View Modal Specific Styles */
-#view-invention-details .detail-item {
+#view-patent-details .detail-item {
     margin-bottom: 15px;
     font-size: 15px;
 }
 
-#view-invention-details .detail-item strong {
+#view-patent-details .detail-item strong {
     display: block;
     color: #03353b;
     margin-bottom: 5px;
     font-weight: 600;
 }
 
-#view-invention-details .detail-item span {
+#view-patent-details .detail-item span {
     color: #555;
 }
 
 
 /* Responsive */
 @media (max-width: 992px) {
-    .content-wrapper {
-        padding: 15px;
+    .page_structure {
+        width: 100%;
+        margin-left: 0;
+    }
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .container.closed .sidebar {
+        transform: translateX(0);
     }
     
     th, td {
@@ -428,3 +424,36 @@ td small {
         font-size: 13.5px;
     }
 }
+
+/* Status & Renewal Badges */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: inline-block;
+}
+.status-active { background: #dcfce7; color: #16a34a; }
+.status-expired { background: #fee2e2; color: #dc2626; }
+.status-abandoned { background: #e5e7eb; color: #4b5563; }
+
+.renewal-status {
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1.5px solid;
+    background: transparent;
+    display: inline-block;
+}
+.renew-safe { border-color: #10b981; color: #047857; }
+.renew-medium { border-color: #f59e0b; color: #b45309; }
+.renew-danger { border-color: #ef4444; color: #b91c1c; }
+.renew-late { border-color: #7f1d1d; color: #7f1d1d; background: #fee2e2; }
+
+/* Card Icon Colors */
+.card:nth-child(1) .card-top i { background: #e0f7ff; color: #0ea5e9; } /* Light Blue for Total */
+.card:nth-child(2) .card-top i { background: #dcfce7; color: #22c55e; } /* Light Green for Active */
+.card:nth-child(3) .card-top i { background: #fee2e2; color: #ef4444; } /* Light Red for Expired */
+.card:nth-child(4) .card-top i { background: #e5e7eb; color: #6b7280; } /* Light Gray for Abandoned */
