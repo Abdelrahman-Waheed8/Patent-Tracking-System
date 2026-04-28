@@ -1,3 +1,8 @@
+<?php
+include "../../src/config/config_session.php";
+include "../../src/view/disclosureView.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,35 +70,49 @@
             <!-- Content -->
             <section class="content">
 
-                <form class="disclosure-form">
+                <form action="../../src/disclosure.php" class="disclosure-form" enctype="multipart/form-data" method="POST">
                     <h2>Invention Disclosure</h2>
 
                     <div class="input-group">
                         <label>Invention Title</label>
-                        <input type="text" required>
+                        <input type="text" name="title">
                     </div>
 
                     <div class="input-group">
                         <label>Description</label>
-                        <textarea rows="6"></textarea>
+                        <textarea rows="6" name="description"></textarea>
                     </div>
 
-                    <div class="input-group">
-                        <label>Prior Art References</label>
-                        <input type="text">
+                    <div class="contributors-section">
+                        <h3>Contributors</h3>
+                        <div id="contributors-list">
+                            <div class="contributor-row" style="display:flex; gap:10px; margin-bottom:10px;">
+                                <input type="text" name="ContributorIDs[]" placeholder="Contributor ID" style="flex:2; padding:5px;">
+                                <input type="text" name="contributionPercentages[]" placeholder="%" style="flex:1; padding:5px;">
+                                <button type="button" onclick="removeRow(this)">-</button>
+                            </div>
+                        </div>
+                        <button type="button" onclick="addContributor()" class="submit-btn">+ Add Contributor</button>
                     </div>
 
                     <div class="upload-container">
                         <label class="upload-box">
-                            <input type="file" multiple>
+                            <input type="file" name="file" id="file-upload">
                             <i class="fas fa-cloud-upload-alt"></i>
                             <span>Upload Files</span>
                         </label>
                     </div>
 
+                    <?php
+                    $disclosureView = new disclosureView();
+                    $disclosureView->displaySessionInfo();
+                    ?>
+
                     <div class="form-footer">
                         <button type="submit" class="submit-btn">Submit</button>
                     </div>
+
+
                 </form>
 
             </section>

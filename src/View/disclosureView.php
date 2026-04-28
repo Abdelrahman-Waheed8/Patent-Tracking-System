@@ -4,8 +4,13 @@ class disclosureView
 {
     public function displaySessionInfo()
     {
-        if(isset($_SESSION["firstname"]))
+        if(isset($_SESSION["errorsDisclosure"]))
             {
-echo "<p class='session-info'>Welcome Back   <span>  " . $_SESSION['firstname'] . "</span></p>";            }
+                $errors = $_SESSION["errorsDisclosure"];
+                foreach($errors as $error)
+                echo "<p class='error-info'>  " . $error . "</p>";            
+        }
+
+        unset($_SESSION["errorsDisclosure"]);
     }
 }

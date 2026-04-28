@@ -1,0 +1,80 @@
+<?php
+
+class disclosureModel extends DBH
+{
+    protected function setDisclosure($title, $description, $contributors)
+    {
+        $pdo = $this->connect();
+
+        $stmt = $pdo->prepare("
+            INSERT INTO disclosure (Title, FilingDate, Description) 
+            VALUES (:title, NOW(), :description)
+        ");
+
+        $stmt->bindParam(":title", $title);
+        $stmt->bindParam(":description", $description);
+        $stmt->execute();
+
+        $newId = $pdo->lastInsertId();
+
+        $stmt2 = $pdo->prepare("SELECT FilingDate FROM disclosure WHERE disc_ID = :id");
+        $stmt2->bindParam(":id", $newId);
+        $stmt2->execute();
+        $dateRow = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+        $fingerprint = hash('sha256', $newId . $dateRow['FilingDate']);
+
+        $stmt3 = $pdo->prepare("
+            UPDATE disclosure 
+            SET Unique_fgrPrint = :fp 
+            WHERE disc_ID = :id
+        ");
+
+        $stmt3->bindParam(":fp", $fingerprint);
+        $stmt3->bindParam(":id", $newId);
+        $stmt3->execute();
+
+        $stmt4 = $pdo->prepare("
+            INSERT INTO ownershipofinvention 
+            (disc_ID, usr_ID, ContributionPercentage) 
+            VALUES (:disc_id, :userId, :percentage)
+        ");
+
+        $ids = $contributors['ContributorIDs'] ?? [];
+        $percentages = $contributors['contributionPercentages'] ?? [];
+
+        $invalidUsers = [];
+
+        for ($i = 0; $i < count($ids); $i++) {
+
+            $userId = $ids[$i];
+            $percentage = $percentages[$i];
+
+            if (empty($userId) || empty($percentage)) {
+                continue;
+            }
+
+            if (!$this->userExists($userId)) {
+                $invalidUsers[] = $userId;
+                continue;
+            }
+
+            $stmt4->bindParam(":disc_id", $newId);
+            $stmt4->bindParam(":userId", $userId);
+            $stmt4->bindParam(":percentage", $percentage);
+            $stmt4->execute();
+        }
+    }
+
+    public function userExists($userId)
+    {
+        $stmt = $this->connect()->prepare("
+            SELECT 1 FROM user WHERE usr_ID = ?
+        ");
+
+        $stmt->bindParam(1, $userId);
+        $stmt->execute();
+
+        return $stmt->fetchColumn() !== false;
+    }
+}

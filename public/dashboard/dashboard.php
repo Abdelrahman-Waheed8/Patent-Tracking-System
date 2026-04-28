@@ -1,6 +1,6 @@
 <?php
 include "../../src/config/config_session.php";
-include "../../src/view/disclosureView.php";
+include "../../src/view/inventorView.php";
 
 if(!isset($_SESSION["user_id"]))
     {
@@ -71,8 +71,8 @@ if(!isset($_SESSION["user_id"]))
             </nav>
 
             <?php
-                $disclosureView = new disclosureView();
-                $disclosureView->displaySessionInfo();
+                $inventorview = new inventorView();
+                $inventorview->displaySessionInfo();
             ?>
 
             <!-- Cards -->
