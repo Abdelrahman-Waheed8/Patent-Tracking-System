@@ -24,8 +24,8 @@
                 <li><a href="../inventors/inventors.php"><i class="fas fa-user-astronaut"></i>inventors</a></li>
                 <li><a href="./disclosure.php" class="active"><i class="fas fa-lightbulb"></i> Disclosure</a></li>
                 <li><a href="../patent/patent.php"><i class="fas fa-file"></i> Patents</a></li>
-                <li><a href="#"><i class="fas fa-sync"></i> Renewals</a></li>
-                <li><a href="#"><i class="fas fa-handshake"></i> Licensing</a></li>
+                <li><a href="../renewal/renewal.php"><i class="fas fa-sync"></i> Renewals</a></li>
+                <li><a href="../licensing/licensing.php"><i class="fas fa-handshake"></i> Licensing</a></li>
                 <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
 
