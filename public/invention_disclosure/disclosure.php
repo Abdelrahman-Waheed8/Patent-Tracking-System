@@ -68,7 +68,7 @@ include "../../src/view/disclosureView.php";
             <!-- Content -->
             <section class="content">
 
-                <form action="../../src/disclosure.php" class="disclosure-form" enctype="multipart/form-data" method ="POST">
+                <form action="../../src/disclosure.php" class="disclosure-form" enctype="multipart/form-data" method="POST">
                     <h2>Invention Disclosure</h2>
 
                     <div class="input-group">
@@ -79,6 +79,18 @@ include "../../src/view/disclosureView.php";
                     <div class="input-group">
                         <label>Description</label>
                         <textarea rows="6" name="description"></textarea>
+                    </div>
+
+                    <div class="contributors-section">
+                        <h3>Contributors</h3>
+                        <div id="contributors-list">
+                            <div class="contributor-row" style="display:flex; gap:10px; margin-bottom:10px;">
+                                <input type="text" name="ContributorIDs[]" placeholder="Contributor ID" style="flex:2; padding:5px;">
+                                <input type="text" name="contributionPercentages[]" placeholder="%" style="flex:1; padding:5px;">
+                                <button type="button" onclick="removeRow(this)">-</button>
+                            </div>
+                        </div>
+                        <button type="button" onclick="addContributor()" class="submit-btn">+ Add Contributor</button>
                     </div>
 
                     <div class="upload-container">
@@ -97,6 +109,8 @@ include "../../src/view/disclosureView.php";
                     <div class="form-footer">
                         <button type="submit" class="submit-btn">Submit</button>
                     </div>
+
+
                 </form>
 
             </section>
