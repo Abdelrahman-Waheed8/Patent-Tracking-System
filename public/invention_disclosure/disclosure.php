@@ -49,7 +49,7 @@ include "../../src/view/disclosureView.php";
             <nav class="panel-header">
                 <div class="left">
                     <i class="fas fa-list icon-btn" onclick="toggleSidebar()"></i>
-                    <h6>Dashboard</h6>
+                    <h6>Invention Disclosure</h6>
                 </div>
 
                 <div class="right">
