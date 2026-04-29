@@ -2,7 +2,7 @@
 
 class disclosureModel extends DBH
 {
-    protected function setDisclosure($title, $description, $contributors)
+    protected function setDisclosure($title, $description, $contributors, $files)
     {
         $pdo = $this->connect();
 
@@ -34,6 +34,25 @@ class disclosureModel extends DBH
         $stmt3->bindParam(":id", $newId);
         $stmt3->execute();
 
+        $stmtVault = $pdo->prepare("INSERT INTO evidence_vault (disc_ID, evidence_type) VALUES (:disc_id, 'Invention Documents')");
+        $stmtVault->bindParam(":disc_id", $newId);
+        $stmtVault->execute();
+        $evidenceID = $pdo->lastInsertId();
+
+        if(!empty($files))
+            {
+                $stmtDoc = $pdo->prepare("INSERT INTO document (evidence_ID, filePath, docType) VALUES (:ev_id, :f_path, :ext)");
+                foreach($files as $path)
+                    {
+                        $ext = pathinfo($path, PATHINFO_EXTENSION);
+                        $stmtDoc->bindParam(":ev_id", $evidenceID);
+                        $stmtDoc->bindParam(":f_path", $path);
+                        $stmtDoc->bindParam(":ext", $ext);
+                        $stmtDoc->execute();
+                    }
+            }
+
+
         $stmt4 = $pdo->prepare("
             INSERT INTO ownershipofinvention 
             (disc_ID, usr_ID, ContributionPercentage) 
@@ -64,6 +83,7 @@ class disclosureModel extends DBH
             $stmt4->bindParam(":percentage", $percentage);
             $stmt4->execute();
         }
+
     }
 
     public function userExists($userId)

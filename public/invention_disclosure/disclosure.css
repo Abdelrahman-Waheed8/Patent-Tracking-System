@@ -218,9 +218,12 @@ h6 {
     margin: 20px 0;
 }
 
+.upload-container {
+    margin: 20px 0;
+}
+
 .upload-box {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -236,8 +239,9 @@ h6 {
     background-color: #dfe4e8;
 }
 
-.upload-box input[type="file"] {
-    display: none;
+.upload-box.active {
+    border-color: #28a745;
+    background-color: #e6f4ea;
 }
 
 .upload-box i {

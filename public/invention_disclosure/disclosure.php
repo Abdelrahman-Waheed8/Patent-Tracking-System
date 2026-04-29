@@ -96,10 +96,10 @@ include "../../src/view/disclosureView.php";
                     </div>
 
                     <div class="upload-container">
-                        <label class="upload-box">
-                            <input type="file" name="file" id="file-upload">
+                        <label class="upload-box" id="uploadBox">
+                            <input type="file" id="fileInput" name="files[]" multiple hidden>
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <span>Upload Files</span>
+                            <span id="uploadText">Upload Files</span>
                         </label>
                     </div>
 

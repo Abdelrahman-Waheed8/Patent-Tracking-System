@@ -4,7 +4,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $title = $_POST['title'];
     $description = $_POST['description'];
-    $file = $_FILES['file'];
+    $reformattedfiles = [];
+
+    if (!empty($_FILES['files']['name'][0]))
+        {
+            foreach($_FILES['files']['name'] as $i => $name)
+                {
+                    $reformattedfiles[] = [
+                        'name' => $_FILES['files']['name'][$i],
+                        'type' => $_FILES['files']['type'][$i],
+                        'tmp_name' => $_FILES['files']['tmp_name'][$i],
+                        'error' => $_FILES['files']['error'][$i],
+                        'size' => $_FILES['files']['size'][$i],
+                    ];
+                }
+        }
 
     $contributors = [
         'ContributorIDs' => $_POST['ContributorIDs'] ?? [],
@@ -18,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         include "control/disclosureControl.php";
         include "config/config_session.php";
 
-        $disclosure = new Disclosure($title, $description, $file, $contributors);
+        $disclosure = new Disclosure($title, $description, $reformattedfiles, $contributors);
 
         if($disclosure->submitDisclosure() === false)
         {

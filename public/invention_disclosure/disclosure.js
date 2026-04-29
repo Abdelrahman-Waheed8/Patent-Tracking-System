@@ -45,3 +45,22 @@ function removeRow(btn) {
 // expose functions globally
 window.addContributor = addContributor;
 window.removeRow = removeRow;
+
+const fileInput = document.getElementById("fileInput");
+const uploadText = document.getElementById("uploadText");
+const uploadBox = document.getElementById("uploadBox");
+
+fileInput.addEventListener("change", function () {
+    if (this.files.length > 0) {
+        uploadBox.classList.add("active");
+
+        if (this.files.length === 1) {
+            uploadText.textContent = this.files[0].name;
+        } else {
+            uploadText.textContent = this.files[0].name + " +" + (this.files.length - 1) + " more";
+        }
+    } else {
+        uploadBox.classList.remove("active");
+        uploadText.textContent = "Upload Files";
+    }
+});

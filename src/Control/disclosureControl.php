@@ -5,29 +5,33 @@ class Disclosure extends disclosureModel
     private $title;
     private $description;
     private $contributors;
-    private $file;
+    private $files;
+    private $uploadedFiles = [];
 
     private $maxFileSize = 10 * 1024 * 1024;
     public $errors = [];
 
-    public function __construct($title, $description, $file, $contributors)
+    public function __construct($title, $description, $files, $contributors)
     {
         $this->title = $title;
         $this->description = $description;
-        $this->file = $file;
+        $this->files = $files;
         $this->contributors = $contributors;
     }
 
     public function submitDisclosure()
     {
         $this->validateFields();
-        $this->handleUpload();
+
+        if(empty($this->errors)){
+            $this->handleUpload();
+        }
 
         if (!empty($this->errors)) {
             return false;
         }
 
-        $this->setDisclosure($this->title, $this->description, $this->contributors);
+        $this->setDisclosure($this->title, $this->description, $this->contributors, $this->uploadedFiles);
 
         if (!empty($this->errors)) {
             return false;
@@ -82,39 +86,49 @@ class Disclosure extends disclosureModel
     private function handleUpload()
     {
         $allowedExt = ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png', 'txt'];
-
-        if (!isset($this->file) || $this->file['error'] === UPLOAD_ERR_NO_FILE) {
-            $this->errors['noFile'] = 'No file selected!';
-            return false;
-        }
-
-        if ($this->file['error'] !== UPLOAD_ERR_OK) {
-            $this->errors['uploadError'] = 'Upload failed!';
-            return false;
-        }
-
-        $ext = strtolower(pathinfo($this->file['name'], PATHINFO_EXTENSION));
-
-        if (!in_array($ext, $allowedExt)) {
-            $this->errors['badExt'] = 'Invalid file type!';
-            return false;
-        }
-
         $dir = "uploads/";
+
         if (!is_dir($dir)) {
             mkdir($dir, 0755, true);
         }
 
-        $name = preg_replace("/[^\w-]/", "_", pathinfo($this->file['name'], PATHINFO_FILENAME));
+        if (empty($this->files)) {
+            $this->errors['noFile'] = 'No file selected!';
+            return false;
+        }
+
+        foreach($this->files as $file)
+        {
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            $this->errors['uploadError_' . $file['name']] = 'Upload failed for' . $file['name'];
+            continue;
+        }
+
+        if($file['size'] > $this->maxFileSize)
+            {
+                $this->errors['size_' . $file['name']] = $file['name'] . 'is too large';
+                continue;
+            }
+
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        if (!in_array($ext, $allowedExt)) {
+            $this->errors['badExt_' . $file['name']] = 'Invalid file type:' . $file['name'];
+            continue;
+        }
+
+        $name = preg_replace("/[^\w-]/", "_", pathinfo($file['name'], PATHINFO_FILENAME));
         $unique = $name . "_" . bin2hex(random_bytes(4)) . "." . $ext;
 
         $path = $dir . $unique;
 
-        if (!move_uploaded_file($this->file['tmp_name'], $path)) {
-            $this->errors['uploadFail'] = 'Upload failed!';
-            return false;
+        if (!move_uploaded_file($file['tmp_name'], $path)) {
+            $this->errors['uploadFail_' . $file['name']] = 'Could not save: ' . $file['name'];
         }
-
-        return $path;
+        else
+        {
+            $this->uploadedFiles[] = $path;
+        }
+        }
     }
 }
