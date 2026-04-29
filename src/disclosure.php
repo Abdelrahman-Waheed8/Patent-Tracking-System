@@ -7,22 +7,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $reformattedfiles = [];
 
     if (!empty($_FILES['files']['name'][0]))
+    {
+        foreach($_FILES['files']['name'] as $i => $name)
         {
-            foreach($_FILES['files']['name'] as $i => $name)
-                {
-                    $reformattedfiles[] = [
-                        'name' => $_FILES['files']['name'][$i],
-                        'type' => $_FILES['files']['type'][$i],
-                        'tmp_name' => $_FILES['files']['tmp_name'][$i],
-                        'error' => $_FILES['files']['error'][$i],
-                        'size' => $_FILES['files']['size'][$i],
-                    ];
-                }
+            $reformattedfiles[] = [
+                'name' => $_FILES['files']['name'][$i],
+                'type' => $_FILES['files']['type'][$i],
+                'tmp_name' => $_FILES['files']['tmp_name'][$i],
+                'error' => $_FILES['files']['error'][$i],
+                'size' => $_FILES['files']['size'][$i],
+            ];
         }
+    }
 
     $contributors = [
         'ContributorIDs' => $_POST['ContributorIDs'] ?? [],
-        'contributionPercentages' => $_POST['contributionPercentages'] ?? []
+        'contributionPercentages' => $_POST['contributionPercentages'] ?? [],
+        'companyNames' => $_POST['companyNames'] ?? []
     ];
 
     try

@@ -20,7 +20,6 @@ include "../../src/view/disclosureView.php";
 
     <div class="container">
 
-        <!-- Sidebar -->
         <aside class="sidebar">
             <h2 class="logo">IP System</h2>
 
@@ -34,7 +33,6 @@ include "../../src/view/disclosureView.php";
                 <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
 
-
             <a class="logout-btn" href="../index.php">
                 <button class="logout">
                     <i class="fas fa-sign-out-alt"></i> Logout
@@ -42,10 +40,8 @@ include "../../src/view/disclosureView.php";
             </a>
         </aside>
 
-        <!-- Main Content -->
         <main class="page_structure">
 
-            <!-- Navbar -->
             <nav class="panel-header">
                 <div class="left">
                     <i class="fas fa-list icon-btn" onclick="toggleSidebar()"></i>
@@ -67,10 +63,10 @@ include "../../src/view/disclosureView.php";
                 </div>
             </nav>
 
-            <!-- Content -->
             <section class="content">
 
                 <form action="../../src/disclosure.php" class="disclosure-form" enctype="multipart/form-data" method="POST">
+
                     <h2>Invention Disclosure</h2>
 
                     <div class="input-group">
@@ -85,19 +81,27 @@ include "../../src/view/disclosureView.php";
 
                     <div class="contributors-section">
                         <h3>Contributors</h3>
+
                         <div id="contributors-list">
                             <div class="contributor-row" style="display:flex; gap:10px; margin-bottom:10px;">
                                 <input type="text" name="ContributorIDs[]" placeholder="Contributor ID" style="flex:2; padding:5px;">
+
                                 <input type="text" name="contributionPercentages[]" placeholder="%" style="flex:1; padding:5px;">
+
+                                <input type="text" name="externalCompanies[]" placeholder="External Company (optional)" style="flex:2; padding:5px;">
+
                                 <button type="button" onclick="removeRow(this)">-</button>
                             </div>
                         </div>
-                        <button type="button" onclick="addContributor()" class="submit-btn">+ Add Contributor</button>
+
+                        <button type="button" onclick="addContributor()" class="submit-btn">
+                            + Add Contributor
+                        </button>
                     </div>
 
                     <div class="upload-container">
                         <label class="upload-box" id="uploadBox">
-                            <input type="file" id="fileInput" name="files[]" multiple hidden>
+                            <input type="file" id="fileInput" name="file" hidden>
                             <i class="fas fa-cloud-upload-alt"></i>
                             <span id="uploadText">Upload Files</span>
                         </label>
@@ -111,7 +115,6 @@ include "../../src/view/disclosureView.php";
                     <div class="form-footer">
                         <button type="submit" class="submit-btn">Submit</button>
                     </div>
-
 
                 </form>
 

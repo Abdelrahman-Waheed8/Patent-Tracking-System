@@ -40,18 +40,17 @@ class disclosureModel extends DBH
         $evidenceID = $pdo->lastInsertId();
 
         if(!empty($files))
+        {
+            $stmtDoc = $pdo->prepare("INSERT INTO document (evidence_ID, filePath, docType) VALUES (:ev_id, :f_path, :ext)");
+            foreach($files as $path)
             {
-                $stmtDoc = $pdo->prepare("INSERT INTO document (evidence_ID, filePath, docType) VALUES (:ev_id, :f_path, :ext)");
-                foreach($files as $path)
-                    {
-                        $ext = pathinfo($path, PATHINFO_EXTENSION);
-                        $stmtDoc->bindParam(":ev_id", $evidenceID);
-                        $stmtDoc->bindParam(":f_path", $path);
-                        $stmtDoc->bindParam(":ext", $ext);
-                        $stmtDoc->execute();
-                    }
+                $ext = pathinfo($path, PATHINFO_EXTENSION);
+                $stmtDoc->bindParam(":ev_id", $evidenceID);
+                $stmtDoc->bindParam(":f_path", $path);
+                $stmtDoc->bindParam(":ext", $ext);
+                $stmtDoc->execute();
             }
-
+        }
 
         $stmt4 = $pdo->prepare("
             INSERT INTO ownershipofinvention 
@@ -59,8 +58,14 @@ class disclosureModel extends DBH
             VALUES (:disc_id, :userId, :percentage)
         ");
 
+        $stmtAgreement = $pdo->prepare("
+            INSERT INTO external_agreements (usr_ID, company_name)
+            VALUES (:userId, :company)
+        ");
+
         $ids = $contributors['ContributorIDs'] ?? [];
         $percentages = $contributors['contributionPercentages'] ?? [];
+        $companies = $contributors['externalCompanies'] ?? [];
 
         $invalidUsers = [];
 
@@ -68,6 +73,7 @@ class disclosureModel extends DBH
 
             $userId = $ids[$i];
             $percentage = $percentages[$i];
+            $company = $companies[$i] ?? null;
 
             if (empty($userId) || empty($percentage)) {
                 continue;
@@ -82,8 +88,13 @@ class disclosureModel extends DBH
             $stmt4->bindParam(":userId", $userId);
             $stmt4->bindParam(":percentage", $percentage);
             $stmt4->execute();
-        }
 
+            if (!empty($company)) {
+                $stmtAgreement->bindParam(":userId", $userId);
+                $stmtAgreement->bindParam(":company", $company);
+                $stmtAgreement->execute();
+            }
+        }
     }
 
     public function userExists($userId)

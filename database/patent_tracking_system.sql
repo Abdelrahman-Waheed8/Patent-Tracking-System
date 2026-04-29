@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2026 at 01:41 AM
+-- Generation Time: Apr 29, 2026 at 11:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -77,6 +77,15 @@ CREATE TABLE `disclosure` (
   `FilingDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `disclosure`
+--
+
+INSERT INTO `disclosure` (`disc_ID`, `Classification_ID`, `Title`, `Description`, `Unique_fgrPrint`, `FilingDate`) VALUES
+(6, NULL, 'Adaptive Power Optimization Method for IoT Devices using Machine Learning', 'Anything is a good thing', '29cc926ed20a3e7c3c22d2fe438314d6938061184ecd77942474543e991b66d9', '2026-04-28'),
+(7, NULL, 'Electrical Mechanism of Quantom', '1) unique\r\n2) cool\r\n3) wonderful', '54c8676b1e1e067e87d5fa3294a50bc91b25bca52559cf1c470fe5a7b5907587', '2026-04-28'),
+(8, NULL, 'Monomicro Services', 'So Advanced Technology', 'dd56c19ba6aaf68f121ef1aac86092c0ad6acbcda1be8b2079ec361e97bb25c5', '2026-04-28');
+
 -- --------------------------------------------------------
 
 --
@@ -102,6 +111,18 @@ CREATE TABLE `evidence_vault` (
   `evidence_ID` int(11) NOT NULL,
   `disc_ID` int(11) DEFAULT NULL,
   `evidence_type` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `external_agreements`
+--
+
+CREATE TABLE `external_agreements` (
+  `id` int(11) NOT NULL,
+  `usr_ID` int(11) DEFAULT NULL,
+  `company_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -223,6 +244,18 @@ CREATE TABLE `ownershipofinvention` (
   `ContributionPercentage` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `ownershipofinvention`
+--
+
+INSERT INTO `ownershipofinvention` (`disc_ID`, `usr_ID`, `ContributionPercentage`) VALUES
+(6, 2, 40.00),
+(6, 3, 60.00),
+(7, 1, 20.00),
+(7, 2, 50.00),
+(7, 3, 30.00),
+(8, 1, 100.00);
+
 -- --------------------------------------------------------
 
 --
@@ -325,6 +358,15 @@ CREATE TABLE `user` (
   `2FA_Enabled` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`usr_ID`, `first_name`, `last_name`, `Email`, `Role`, `pwd_hash`, `2FA_Enabled`) VALUES
+(1, 'Ahmed', 'Waheed', 'ahmed@gmail.com', 'Inventor', '$2y$10$Yf87fQwWUL6vnPl7v2dJru9n6lRSlupmzHb.B9ehowI8Oyx0mPEkW', 0),
+(2, 'Mazen', 'Reda', 'mazen@gmail.com', 'Inventor', '$2y$10$CrdNUFZTJMxg5Y5m/tsD..9ABMg4pFRIHLt9QBv3YfF9nRGblBBKy', 0),
+(3, 'Sami', 'Mohammed', 'Sami@gmail.com', 'Inventor', '$2y$10$GtfKcVLbseCPWgLqnI8BW.bGUdPDyuvCk7IAuAZNFqSylNWb4.N/K', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -389,6 +431,13 @@ ALTER TABLE `document`
 ALTER TABLE `evidence_vault`
   ADD PRIMARY KEY (`evidence_ID`),
   ADD KEY `disc_ID` (`disc_ID`);
+
+--
+-- Indexes for table `external_agreements`
+--
+ALTER TABLE `external_agreements`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usr_ID` (`usr_ID`);
 
 --
 -- Indexes for table `feeschedule`
@@ -527,7 +576,7 @@ ALTER TABLE `claim`
 -- AUTO_INCREMENT for table `disclosure`
 --
 ALTER TABLE `disclosure`
-  MODIFY `disc_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `disc_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `document`
@@ -540,6 +589,12 @@ ALTER TABLE `document`
 --
 ALTER TABLE `evidence_vault`
   MODIFY `evidence_ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `external_agreements`
+--
+ALTER TABLE `external_agreements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `feeschedule`
@@ -617,7 +672,7 @@ ALTER TABLE `royaltypayment`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `usr_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `usr_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `workflow`
@@ -669,6 +724,12 @@ ALTER TABLE `document`
 --
 ALTER TABLE `evidence_vault`
   ADD CONSTRAINT `evidence_vault_ibfk_1` FOREIGN KEY (`disc_ID`) REFERENCES `disclosure` (`disc_ID`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `external_agreements`
+--
+ALTER TABLE `external_agreements`
+  ADD CONSTRAINT `external_agreements_ibfk_1` FOREIGN KEY (`usr_ID`) REFERENCES `user` (`usr_ID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `generatedportfolio`
