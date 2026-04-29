@@ -93,6 +93,8 @@ class disclosureModel extends DBH
                 $stmtPrior->execute();
             }
 
+        
+
     }
 
     public function userExists($userId)
