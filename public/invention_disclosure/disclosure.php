@@ -81,7 +81,14 @@ include "../../src/view/disclosureView.php";
                     <div class="input-group">
                         <label>Description</label>
                         <textarea rows="6" name="description"></textarea>
+
+                        <label>Existing Patent References (Optional)</label>
+                        <input type="text" name="prior_art_link" placeholder="e.g. US9876543A">
+
+                        <label>Existing Patent References Description (Optional)</label>
+                        <input type="text" name="prior_art_desc">
                     </div>
+
 
                     <div class="contributors-section">
                         <h3>Contributors</h3>

@@ -2,7 +2,7 @@
 
 class disclosureModel extends DBH
 {
-    protected function setDisclosure($title, $description, $contributors, $files)
+    protected function setDisclosure($title, $description, $contributors, $files, $priorArt)
     {
         $pdo = $this->connect();
 
@@ -83,6 +83,15 @@ class disclosureModel extends DBH
             $stmt4->bindParam(":percentage", $percentage);
             $stmt4->execute();
         }
+
+        if(!empty($priorArt['link']) || !empty($priorArt['desc']))
+            {
+                $stmtPrior = $pdo->prepare("INSERT INTO prior_art (disc_ID, `Description`, link) VALUES (:disc_id, :descr, :link)");
+                $stmtPrior->bindParam(":disc_id", $newId);
+                $stmtPrior->bindParam(":link", $priorArt['link']);
+                $stmtPrior->bindParam(":descr", $priorArt['desc']);
+                $stmtPrior->execute();
+            }
 
     }
 

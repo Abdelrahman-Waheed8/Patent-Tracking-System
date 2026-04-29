@@ -5,6 +5,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $title = $_POST['title'];
     $description = $_POST['description'];
     $reformattedfiles = [];
+    $priorArt = 
+    [
+        'link' => !empty($_POST['prior_art_link']) ? $_POST['prior_art_link'] : null ,
+        'desc' => !empty($_POST['prior_art_desc']) ? $_POST['prior_art_desc'] : null
+    ];
 
     if (!empty($_FILES['files']['name'][0]))
         {
@@ -32,7 +37,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         include "control/disclosureControl.php";
         include "config/config_session.php";
 
-        $disclosure = new Disclosure($title, $description, $reformattedfiles, $contributors);
+        $disclosure = new Disclosure($title, $description, $reformattedfiles, $contributors, $priorArt);
 
         if($disclosure->submitDisclosure() === false)
         {

@@ -7,16 +7,18 @@ class Disclosure extends disclosureModel
     private $contributors;
     private $files;
     private $uploadedFiles = [];
+    private $priorArt;
 
     private $maxFileSize = 10 * 1024 * 1024;
     public $errors = [];
 
-    public function __construct($title, $description, $files, $contributors)
+    public function __construct($title, $description, $files, $contributors, $priorArt = null)
     {
         $this->title = $title;
         $this->description = $description;
         $this->files = $files;
         $this->contributors = $contributors;
+        $this->priorArt = $priorArt;
     }
 
     public function submitDisclosure()
@@ -31,7 +33,7 @@ class Disclosure extends disclosureModel
             return false;
         }
 
-        $this->setDisclosure($this->title, $this->description, $this->contributors, $this->uploadedFiles);
+        $this->setDisclosure($this->title, $this->description, $this->contributors, $this->uploadedFiles, $this->priorArt);
 
         if (!empty($this->errors)) {
             return false;
