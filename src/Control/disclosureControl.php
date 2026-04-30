@@ -8,6 +8,7 @@ class Disclosure extends disclosureModel
     private $files;
     private $uploadedFiles = [];
     private $priorArt;
+    private $companyNames = [];
 
     private $maxFileSize = 10 * 1024 * 1024;
     public $errors = [];
@@ -19,6 +20,10 @@ class Disclosure extends disclosureModel
         $this->files = $files;
         $this->contributors = $contributors;
         $this->priorArt = $priorArt;
+
+        if (isset($contributors['companyNames'])) {
+            $this->companyNames = $contributors['companyNames'];
+        }
     }
 
     public function submitDisclosure()
@@ -33,7 +38,7 @@ class Disclosure extends disclosureModel
             return false;
         }
 
-        $this->setDisclosure($this->title, $this->description, $this->contributors, $this->uploadedFiles, $this->priorArt);
+        $this->setDisclosure($this->title, $this->description, $this->contributors, $this->uploadedFiles, $this->priorArt, $this->companyNames);
 
         if (!empty($this->errors)) {
             return false;
@@ -101,36 +106,35 @@ class Disclosure extends disclosureModel
 
         foreach($this->files as $file)
         {
-        if ($file['error'] !== UPLOAD_ERR_OK) {
-            $this->errors['uploadError_' . $file['name']] = 'Upload failed for' . $file['name'];
-            continue;
-        }
-
-        if($file['size'] > $this->maxFileSize)
-            {
-                $this->errors['size_' . $file['name']] = $file['name'] . 'is too large';
+            if ($file['error'] !== UPLOAD_ERR_OK) {
+                $this->errors['uploadError_' . $file['name']] = 'Upload failed for ' . $file['name'];
                 continue;
             }
 
-        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+            if($file['size'] > $this->maxFileSize)
+            {
+                $this->errors['size_' . $file['name']] = $file['name'] . ' is too large';
+                continue;
+            }
 
-        if (!in_array($ext, $allowedExt)) {
-            $this->errors['badExt_' . $file['name']] = 'Invalid file type:' . $file['name'];
-            continue;
-        }
+            $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
-        $name = preg_replace("/[^\w-]/", "_", pathinfo($file['name'], PATHINFO_FILENAME));
-        $unique = $name . "_" . bin2hex(random_bytes(4)) . "." . $ext;
+            if (!in_array($ext, $allowedExt)) {
+                $this->errors['badExt_' . $file['name']] = 'Invalid file type: ' . $file['name'];
+                continue;
+            }
 
-        $path = $dir . $unique;
+            $name = preg_replace("/[^\w-]/", "_", pathinfo($file['name'], PATHINFO_FILENAME));
+            $unique = $name . "_" . bin2hex(random_bytes(4)) . "." . $ext;
 
-        if (!move_uploaded_file($file['tmp_name'], $path)) {
-            $this->errors['uploadFail_' . $file['name']] = 'Could not save: ' . $file['name'];
-        }
-        else
-        {
-            $this->uploadedFiles[] = $path;
-        }
+            $path = $dir . $unique;
+
+            if (!move_uploaded_file($file['tmp_name'], $path)) {
+                $this->errors['uploadFail_' . $file['name']] = 'Could not save: ' . $file['name'];
+            }
+            else{
+                $this->uploadedFiles[] = $path;
+            }
         }
     }
 }

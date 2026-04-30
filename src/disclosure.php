@@ -1,7 +1,6 @@
-<?php 
+<?php
 
-if($_SERVER["REQUEST_METHOD"] == "POST")
-{
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'];
     $description = $_POST['description'];
     $reformattedfiles = [];
@@ -11,27 +10,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         'desc' => !empty($_POST['prior_art_desc']) ? $_POST['prior_art_desc'] : null
     ];
 
-    if (!empty($_FILES['files']['name'][0]))
-        {
-            foreach($_FILES['files']['name'] as $i => $name)
-                {
-                    $reformattedfiles[] = [
-                        'name' => $_FILES['files']['name'][$i],
-                        'type' => $_FILES['files']['type'][$i],
-                        'tmp_name' => $_FILES['files']['tmp_name'][$i],
-                        'error' => $_FILES['files']['error'][$i],
-                        'size' => $_FILES['files']['size'][$i],
-                    ];
-                }
+    if (!empty($_FILES['files']['name'][0])) {
+        foreach ($_FILES['files']['name'] as $i => $name) {
+            $reformattedfiles[] = [
+                'name' => $_FILES['files']['name'][$i],
+                'type' => $_FILES['files']['type'][$i],
+                'tmp_name' => $_FILES['files']['tmp_name'][$i],
+                'error' => $_FILES['files']['error'][$i],
+                'size' => $_FILES['files']['size'][$i],
+            ];
         }
+    }
 
     $contributors = [
         'ContributorIDs' => $_POST['ContributorIDs'] ?? [],
-        'contributionPercentages' => $_POST['contributionPercentages'] ?? []
+        'contributionPercentages' => $_POST['contributionPercentages'] ?? [],
+        'companyNames' => $_POST['companyNames'] ?? []
     ];
 
-    try
-    {
+    try {
         include "config/config.php";
         include "model/disclosureModel.php";
         include "control/disclosureControl.php";
@@ -39,8 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
         $disclosure = new Disclosure($title, $description, $reformattedfiles, $contributors, $priorArt);
 
-        if($disclosure->submitDisclosure() === false)
-        {
+        if ($disclosure->submitDisclosure() === false) {
             $_SESSION['errorsDisclosure'] = $disclosure->errors;
             header("Location: ../public/invention_disclosure/disclosure.php?submit=failed");
             exit();
@@ -48,13 +44,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
         header("Location: ../public/invention_disclosure/disclosure.php?submit=success");
         exit();
-    }
-    catch (Exception $e) {
+    } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
-}
-else
-{
+} else {
     header("Location: ../public/invention_disclosure/disclosure.php");
     exit();
 }
