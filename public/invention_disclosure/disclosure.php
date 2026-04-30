@@ -88,7 +88,7 @@ include "../../src/view/disclosureView.php";
 
                                 <input type="text" name="contributionPercentages[]" placeholder="%" style="flex:1; padding:5px;">
 
-                                <input type="text" name="externalCompanies[]" placeholder="External Company (optional)" style="flex:2; padding:5px;">
+                                <input type="text" name="companyNames[]" placeholder="External Company (optional)" style="flex:2; padding:5px;">
 
                                 <button type="button" onclick="removeRow(this)">-</button>
                             </div>
@@ -101,7 +101,7 @@ include "../../src/view/disclosureView.php";
 
                     <div class="upload-container">
                         <label class="upload-box" id="uploadBox">
-                            <input type="file" id="fileInput" name="file" hidden>
+                            <input type="file" id="fileInput" name="files[]" multiple hidden>
                             <i class="fas fa-cloud-upload-alt"></i>
                             <span id="uploadText">Upload Files</span>
                         </label>

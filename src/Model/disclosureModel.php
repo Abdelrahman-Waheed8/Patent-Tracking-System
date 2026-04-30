@@ -39,11 +39,9 @@ class disclosureModel extends DBH
         $stmtVault->execute();
         $evidenceID = $pdo->lastInsertId();
 
-        if(!empty($files))
-        {
+        if (!empty($files)) {
             $stmtDoc = $pdo->prepare("INSERT INTO document (evidence_ID, filePath, docType) VALUES (:ev_id, :f_path, :ext)");
-            foreach($files as $path)
-            {
+            foreach ($files as $path) {
                 $ext = pathinfo($path, PATHINFO_EXTENSION);
                 $stmtDoc->bindParam(":ev_id", $evidenceID);
                 $stmtDoc->bindParam(":f_path", $path);
@@ -63,9 +61,11 @@ class disclosureModel extends DBH
             VALUES (:userId, :company)
         ");
 
+
+
         $ids = $contributors['ContributorIDs'] ?? [];
         $percentages = $contributors['contributionPercentages'] ?? [];
-        $companies = $contributors['externalCompanies'] ?? [];
+        $companies = $contributors['companyNames'] ?? [];
 
         $invalidUsers = [];
 

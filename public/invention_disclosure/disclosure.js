@@ -1,21 +1,19 @@
 // ================= Sidebar Toggle =================
 function toggleSidebar() {
-  document.querySelector('.container').classList.toggle('closed');
+  document.querySelector(".container").classList.toggle("closed");
 }
 
 window.toggleSidebar = toggleSidebar;
 
-
 // ================= Active Menu =================
 let links = document.querySelectorAll(".menu a");
 
-links.forEach(link => {
+links.forEach((link) => {
   link.addEventListener("click", function () {
-    links.forEach(l => l.classList.remove("active"));
+    links.forEach((l) => l.classList.remove("active"));
     this.classList.add("active");
   });
 });
-
 
 // ================= Contributors Dynamic =================
 function addContributor() {
@@ -31,7 +29,7 @@ function addContributor() {
   row.innerHTML = `
     <input type="text" name="ContributorIDs[]" placeholder="Contributor ID" style="flex:2; padding:5px;">
     <input type="text" name="contributionPercentages[]" placeholder="%" style="flex:1; padding:5px;">
-    <input type="text" name="externalCompanies[]" placeholder="External Company (optional)" style="flex:2; padding:5px;">
+    <input type="text" name="companyNames[]" placeholder="External Company (optional)" style="flex:2; padding:5px;">
     <button type="button" onclick="removeRow(this)" 
         style="background:#ff4d4d;color:white;border:none;padding:5px 10px;cursor:pointer;">
         -
@@ -47,7 +45,6 @@ function removeRow(btn) {
 
 window.addContributor = addContributor;
 window.removeRow = removeRow;
-
 
 // ================= External Agreement Toggle =================
 function applyExternalAgreementIfChecked() {
@@ -79,7 +76,6 @@ function applyExternalAgreementIfChecked() {
 }
 
 window.applyExternalAgreementIfChecked = applyExternalAgreementIfChecked;
-
 
 // ================= File Upload =================
 const fileInput = document.getElementById("fileInput");
