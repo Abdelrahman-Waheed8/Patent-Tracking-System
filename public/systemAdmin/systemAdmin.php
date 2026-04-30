@@ -1,3 +1,8 @@
+<?php
+include "../../src/config/config_session.php";
+include "../../src/view/adminView.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,34 +32,41 @@
         </nav>
         <div class="structure_page">
             <section>
-                <form action="">
+                <form action="../../src/admin.php" method="POST">
+
                     <div class="first_name">
-    <label for="first_name">First Name</label>
-    <input type="text" id="first_name">
-</div>
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="fname">
+                </div>
 
-<div class="last_name">
-    <label for="last_name">Last Name</label>
-    <input type="text" id="last_name">
-</div>
+                <div class="last_name">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="lname">
+                </div>
 
-<div class="email">
-    <label for="email">Email</label>
-    <input type="email" id="email">
-</div>
+                <div class="email">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
 
-<div class="password">
-    <label for="password">Password</label>
-    <input type="password" id="password">
-</div>
-<select id="role">
-    <option value="" disabled selected hidden>Select Role</option>
-    <option value="ip">IP Counsel</option>
-    <option value="examiner">Examiner</option>
-</select>
-                    <button type="button" onclick="addUser()">
-                        <i class="fas fa-user"></i>create account
-                    </button>
+                <div class="password">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <select id="role" name="role">
+                    <option value="" disabled selected hidden>Select Role</option>
+                    <option value="IP Counsel">IP Counsel</option>
+                    <option value="Examiner">Examiner</option>
+                </select>
+                <button type="submit" onclick="addUser()">
+                    <i class="fas fa-user"></i>create account
+                </button>
+
+                <?php
+                $adminView = new adminView();
+                $adminView->displayErrorcreateUser();
+                ?>
+
 
             </form>
             </section>

@@ -20,15 +20,6 @@ function addUser() {
   let email = document.getElementById("email").value;
   let role = document.getElementById("role").value;
 
-  if (!firstName || !lastName || !email || !role) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Validation Error',
-      text: 'Please fill in all required fields correctly.',
-    });
-    return;
-  }
-
   let user = {
     firstName: firstName,
     lastName: lastName,
@@ -37,13 +28,6 @@ function addUser() {
   };
 
   users.push(user);
-  Swal.fire({
-    icon: 'success',
-    title: 'Success!',
-    text: 'Account created successfully.',
-    showConfirmButton: false,
-    timer: 1500
-  });
   renderUsers();
 
   // Clear form fields
