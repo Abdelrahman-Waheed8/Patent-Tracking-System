@@ -14,9 +14,9 @@ class signupModel extends DBH{
         return $result;
     }
 
-    protected function setUser($email, $password, $firstname, $lastname)
+    protected function setUser($email, $password, $firstname, $lastname, $role = 'Inventor')
     {
-        $query= "INSERT INTO user (Email, pwd_hash, `Role`, first_name, last_name) VALUES (:email,:hashedpwd,'Inventor', :first_name, :last_name);";
+        $query= "INSERT INTO user (Email, pwd_hash, `Role`, first_name, last_name) VALUES (:email,:hashedpwd,:rol, :first_name, :last_name);";
 
         $pwdhash = password_hash($password, PASSWORD_DEFAULT);
 
@@ -25,6 +25,7 @@ class signupModel extends DBH{
         $stmt->bindParam(":hashedpwd", $pwdhash);
         $stmt->bindParam(":first_name",$firstname);
         $stmt->bindParam(":last_name",$lastname);
+        $stmt->bindParam(":rol",$role);
         $stmt->execute();
 
         $stmt = null;

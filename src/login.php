@@ -33,7 +33,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             {
                 header("Location: ../public/dashboard/dashboard.php");
                 die();
-            } else {
+            } 
+            else if($userData["Role"] == "Admin")
+            {
+                header("Location: ../public/systemAdmin/systemAdmin.php");
+                die();
+            }
+            else {
                 header("Location: ../public/index.php");
             }
         } catch (PDOException $e) {
