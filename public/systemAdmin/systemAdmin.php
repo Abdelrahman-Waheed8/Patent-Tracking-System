@@ -58,7 +58,7 @@ include "../../src/view/adminView.php";
                     <option value="IP Counsel">IP Counsel</option>
                     <option value="Examiner">Examiner</option>
                 </select>
-                <button type="submit" onclick="addUser()">
+                <button type="submit">
                     <i class="fas fa-user"></i>create account
                 </button>
 
