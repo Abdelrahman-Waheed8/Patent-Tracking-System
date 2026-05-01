@@ -28,7 +28,7 @@ include "../../src/view/disclosureView.php";
                 <li><a href="../inventors/inventors.php"><i class="fas fa-user-astronaut"></i>inventors</a></li>
                 <li><a href="./disclosure.php" class="active"><i class="fas fa-lightbulb"></i> Disclosure</a></li>
                 <li><a href="../patent/patent.php"><i class="fas fa-file"></i> Patents</a></li>
-                <li><a href="../renewal/renewal.php"><i class="fas fa-sync"></i> Renewals</a></li>
+                <li><a href="../renewals/renewals.php"><i class="fas fa-sync"></i> Renewals</a></li>
                 <li><a href="../licensing/licensing.php"><i class="fas fa-handshake"></i> Licensing</a></li>
                 <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
@@ -65,7 +65,8 @@ include "../../src/view/disclosureView.php";
 
             <section class="content">
 
-                <form action="../../src/disclosure.php" class="disclosure-form" enctype="multipart/form-data" method="POST">
+                <form action="../../src/disclosure.php" class="disclosure-form" enctype="multipart/form-data"
+                    method="POST">
 
                     <h2>Invention Disclosure</h2>
 
@@ -91,11 +92,14 @@ include "../../src/view/disclosureView.php";
 
                         <div id="contributors-list">
                             <div class="contributor-row" style="display:flex; gap:10px; margin-bottom:10px;">
-                                <input type="text" name="ContributorIDs[]" placeholder="Contributor ID" style="flex:2; padding:5px;">
+                                <input type="text" name="ContributorIDs[]" placeholder="Contributor ID"
+                                    style="flex:2; padding:5px;">
 
-                                <input type="text" name="contributionPercentages[]" placeholder="%" style="flex:1; padding:5px;">
+                                <input type="text" name="contributionPercentages[]" placeholder="%"
+                                    style="flex:1; padding:5px;">
 
-                                <input type="text" name="companyNames[]" placeholder="External Company (optional)" style="flex:2; padding:5px;">
+                                <input type="text" name="companyNames[]" placeholder="External Company (optional)"
+                                    style="flex:2; padding:5px;">
 
                                 <button type="button" onclick="removeRow(this)">-</button>
                             </div>
