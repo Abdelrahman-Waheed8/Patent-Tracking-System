@@ -2,7 +2,7 @@
 
 class examinerModel extends DBH {
 
-    // جلب الطلبات المعلقة
+    
     protected function getPendingDisclosures() {
         $pdo = $this->connect();
 
@@ -25,7 +25,7 @@ class examinerModel extends DBH {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // تحديث الحالة
+    
     protected function updateStatus($discID, $status) {
         $pdo = $this->connect();
 
