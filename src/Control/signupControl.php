@@ -29,9 +29,6 @@ class SignupControl extends signupModel{
         if (!empty($this->errors)) {
             return false; 
         }
-        
-        $this->setUser($this->email, $this->password , $this->firstname, $this->lastname);
-        return true;
     }
 
     private function emptyinput() {
@@ -63,5 +60,6 @@ class SignupControl extends signupModel{
     if (!preg_match("/^[a-zA-Z]*$/", $this->firstname) || !preg_match("/^[a-zA-Z]*$/", $this->lastname)) {
         $this->errors["invalid_name"] = "Names must only contain letters!";
     }
-}
+    }
+
 }

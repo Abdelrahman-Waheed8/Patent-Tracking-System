@@ -2,8 +2,8 @@
 if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         // Grabbing userdata from the form
-        $email = $_POST["email"];
-        $pwd = $_POST["password"];
+        $email = trim($_POST["email"]);
+        $password = trim($_POST["password"]);
 
 
         try {
@@ -11,37 +11,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             include "config/config.php";
             include "model/loginModel.php";
             include "control/loginControl.php";
+            include "view/loginView.php";
             include "config/config_session.php";
             
-            $login = new loginControl($email,$pwd);
+            $login = new loginControl($email,$password);
+            $view = new loginView();
 
-            // Running error handlers
             $userData = $login->login();
-
+            
+            // Running error handlers
             if ($userData === false) {
-            // Grab the errors from the class and put them in the session
-            $_SESSION["errorslogin"] = $login->errors;
-            header("Location: ../public/index.php?login=failed");
+            $errors = $login->errors;
+            $view->sendJsonResponseError($errors);
             exit();
             }
 
             $_SESSION["user_id"] = $userData["usr_ID"];
             $_SESSION["firstname"] = $userData["first_name"];
+            $_SESSION["role"] = $userData["Role"];
 
-            // Directs you to the page based on role
-            if($userData["Role"] == "Inventor")
-            {
-                header("Location: ../public/dashboard/dashboard.php");
-                die();
-            } 
-            else if($userData["Role"] == "Admin")
-            {
-                header("Location: ../public/systemAdmin/systemAdmin.php");
-                die();
-            }
-            else {
-                header("Location: ../public/index.php");
-            }
+            $redirect = $login->checkRole($userData["Role"]);
+            $view->sendJsonResponse("success", $redirect);
+            exit();
         } catch (PDOException $e) {
             echo "Query Failed" . $e->getMessage() ;
         }

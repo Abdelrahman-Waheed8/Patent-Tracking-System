@@ -1,18 +1,23 @@
 <?php
 class loginView
 {
-    public function displayErrorslogin()
+    public function sendJsonResponseError($errors)
     {
+        if(!empty($errors))
+            header('Content-Type: application/json');
+            echo json_encode([
+        "status" => "error",
+        "message" => implode("<br>", $errors)
+    ]);
+        
+    }
 
-        if(isset($_SESSION["errorslogin"]))
-            {
-                $errors = $_SESSION["errorslogin"];
-                foreach ($errors as $error) {
-                echo '<p class="error-message">' . $error . '</p>';
-            }
-
-            // Clear the errors so they don't show up again on refresh
-            unset($_SESSION["errorslogin"]);
-            }
+    public function sendJsonResponse($status, $url)
+    {
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $status,
+            'redirect' => $url
+        ]);
     }
 }
