@@ -1,8 +1,5 @@
 <?php
-include "../src/view/signupView.php";
-include "../src/view/loginView.php";
 include "../src/config/config_session.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +18,7 @@ include "../src/config/config_session.php";
 
   <!-- REGISTER -->
   <div class="form-container sign-up">
-    <form action="../src/signup.php" method = "POST">
+    <form id="signup-form" class="signup" action="../src/signup.php" method = "POST">
       <h1>Create Account</h1>
       <p class="error-message"></p>
       <input id="signup-email" type="email" placeholder="Email" name = "email">
@@ -35,15 +32,12 @@ include "../src/config/config_session.php";
 
   <!-- LOGIN -->
   <div class="form-container sign-in">
-    <form action="../src/login.php" method="POST">
+    <form id="login-form" class="login" action="../src/login.php" method="POST">
       <h1>Login</h1>
-      <?php
-            $view = new loginView();
-            $view->displayErrorslogin();
-        ?>
-      <input type="email" placeholder="Email" name = "email">
-      <input type="password" placeholder="Password" name = "password">
-      <button name ="submit">Login</button>
+      <p class="error-message"></p>
+      <input id="login-email" type="email" placeholder="Email" name = "email">
+      <input id="login-pwd" type="password" placeholder="Password" name = "password">
+      <button id="login-submit" name ="submit">Login</button>
     </form>
   </div>
 

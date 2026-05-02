@@ -1,18 +1,20 @@
 <?php
 class loginView
 {
-    public function displayErrorslogin()
+    public function displayErrorlogin($errors)
     {
-
-        if(isset($_SESSION["errorslogin"]))
+        if(!empty($errors))
             {
-                $errors = $_SESSION["errorslogin"];
-                foreach ($errors as $error) {
-                echo '<p class="error-message">' . $error . '</p>';
+                foreach($errors as $error)
+                {
+                    echo $error . "<br>";
+                }
             }
+        
+    }
 
-            // Clear the errors so they don't show up again on refresh
-            unset($_SESSION["errorslogin"]);
-            }
+    public function displaySuccess()
+    {
+        echo "success";
     }
 }
