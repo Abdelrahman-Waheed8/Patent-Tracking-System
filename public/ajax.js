@@ -45,16 +45,30 @@ $(document).ready(function() {
             var email = $("#login-email").val();
             var password = $("#login-pwd").val();
 
-            $(".login .error-message").load("../src/login.php", {
-                email: email,
-                password: password
-            }, function(responseText)
-                {
-                    if(responseText.includes("success") && isFinalSubmit)
-                    {
-                        window.location.href = "../public/dashboard/dashboard.php";
-                    }
-                });
-        }
-    }
-});
+            $.ajax({
+                url: "../src/login.php",
+                type: "POST",
+                data: {
+                    email: email,
+                    password: password
+                },
+                dataType: "json",
+                success: function(data) {
+
+                    if(data.status === "success") {
+                // ALWAYS clear errors on success
+                $(".login .error-message").html("");
+
+                if(isFinalSubmit) {
+                    window.location.href = data.redirect;
+                }
+
+            } else if (data.status === "error") {
+                $(".login .error-message").html(data.message);
+            }
+
+            },
+        
+    });
+}
+    }})

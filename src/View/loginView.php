@@ -1,20 +1,23 @@
 <?php
 class loginView
 {
-    public function displayErrorlogin($errors)
+    public function sendJsonResponseError($errors)
     {
         if(!empty($errors))
-            {
-                foreach($errors as $error)
-                {
-                    echo $error . "<br>";
-                }
-            }
+            header('Content-Type: application/json');
+            echo json_encode([
+        "status" => "error",
+        "message" => implode("<br>", $errors)
+    ]);
         
     }
 
-    public function displaySuccess()
+    public function sendJsonResponse($status, $url)
     {
-        echo "success";
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => $status,
+            'redirect' => $url
+        ]);
     }
 }

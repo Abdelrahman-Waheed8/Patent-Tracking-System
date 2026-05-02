@@ -60,5 +60,6 @@ class SignupControl extends signupModel{
     if (!preg_match("/^[a-zA-Z]*$/", $this->firstname) || !preg_match("/^[a-zA-Z]*$/", $this->lastname)) {
         $this->errors["invalid_name"] = "Names must only contain letters!";
     }
-}
+    }
+
 }

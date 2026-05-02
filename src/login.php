@@ -2,8 +2,8 @@
 if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         // Grabbing userdata from the form
-        $email = $_POST["email"];
-        $password = $_POST["password"];
+        $email = trim($_POST["email"]);
+        $password = trim($_POST["password"]);
 
 
         try {
@@ -22,14 +22,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             // Running error handlers
             if ($userData === false) {
             $errors = $login->errors;
-            $view->displayErrorlogin($errors);
+            $view->sendJsonResponseError($errors);
             exit();
             }
 
             $_SESSION["user_id"] = $userData["usr_ID"];
             $_SESSION["firstname"] = $userData["first_name"];
+            $_SESSION["role"] = $userData["Role"];
 
-            $view->displaySuccess();
+            $redirect = $login->checkRole($userData["Role"]);
+            $view->sendJsonResponse("success", $redirect);
             exit();
         } catch (PDOException $e) {
             echo "Query Failed" . $e->getMessage() ;

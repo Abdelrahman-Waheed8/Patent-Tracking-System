@@ -16,12 +16,11 @@ class loginControl extends loginModel{
         $this->emptyinput();
         $this->invalidEmail();
         
-        $user = $this->getuser($this->email);
-        
         if (!empty($this->errors)) {
-        return false;
-        }
-
+            return false;
+            }
+        
+            $user = $this->getuser($this->email);
         if(!$user)
             {
                 $this->errors["login_failed"] = "Invalid Credentials!";
@@ -39,7 +38,7 @@ class loginControl extends loginModel{
 
     private function emptyinput()
     {
-        if (empty($this->email) || empty($this->pwd)) {
+        if ($this->email === "" || $this->pwd === "") {
             $this->errors["empty_input"] = "Fill in all fields!";
         }
     }
@@ -50,4 +49,23 @@ class loginControl extends loginModel{
         }
     }
 
+    public function checkRole($role)
+    {
+        $redirect = "";
+        switch ($role) {
+            case "Inventor":
+                $redirect = "../public/dashboard/dashboard.php";
+                break;
+            case "IP Counsel":
+                $redirect = "../public/dashboard/dashboard.php";
+                break;
+            case "Examiner":
+                $redirect = "../public/dashboard/dashboard.php";
+                break;
+            case "Admin":
+                $redirect = "../public/systemAdmin/systemAdmin.php";
+                break;
+        }
+        return $redirect;
+    }
 }
