@@ -29,9 +29,6 @@ class SignupControl extends signupModel{
         if (!empty($this->errors)) {
             return false; 
         }
-        
-        $this->setUser($this->email, $this->password , $this->firstname, $this->lastname);
-        return true;
     }
 
     private function emptyinput() {

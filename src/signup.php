@@ -2,9 +2,9 @@
 if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         // Grabbing userdata from the form
-        $repeatedpwd = $_POST["repeatedpassword"];
+        $repeatedpassword = $_POST["repeatedpassword"];
         $email = $_POST["email"];
-        $pwd = $_POST["password"];
+        $password = $_POST["password"];
         $firstname = $_POST["fname"];
         $lastname = $_POST["lname"];
 
@@ -16,26 +16,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             include "control/signupControl.php";
             include "config/config_session.php";
             
-            $signup = new SignupControl($email,$pwd,$repeatedpwd,$firstname,$lastname);
+            $signup = new SignupControl($email,$password,$repeatedpassword,$firstname,$lastname);
 
             // Running error handlers
             if ($signup->signup() === false) {
-            // Grab the errors from the class and put them in the session
-            $_SESSION["errorsignup"] = $signup->errors;
-            header("Location: ../public/index.php?signup=failed");
-            exit();
+                $errors = $signup->errors;
+                foreach($errors as $error)
+                    {
+                        echo $error . '<br>';
+                    }
+                exit();
             }
 
-            // Returning back to front page
-            header("Location: ../public/index.php?signup=success");
+            if($_POST['isLive'] === 'true')
+                {
+                    exit();
+                }
+
+            $signup->setUser($email, $password , $firstname, $lastname);
+            echo "success";
             die();
         } catch (PDOException $e) {
             echo "Query Failed" . $e->getMessage() ;
         }
         
-    }
-    else
-    {
-        header("Location: ../public/index.php");
-        exit();
     }

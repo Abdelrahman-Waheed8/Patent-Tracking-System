@@ -14,7 +14,7 @@ class signupModel extends DBH{
         return $result;
     }
 
-    protected function setUser($email, $password, $firstname, $lastname, $role = 'Inventor')
+    public function setUser($email, $password, $firstname, $lastname, $role = 'Inventor')
     {
         $query= "INSERT INTO user (Email, pwd_hash, `Role`, first_name, last_name) VALUES (:email,:hashedpwd,:rol, :first_name, :last_name);";
 

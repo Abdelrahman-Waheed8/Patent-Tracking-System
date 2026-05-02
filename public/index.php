@@ -9,26 +9,27 @@ include "../src/config/config_session.php";
 <head>
   <meta charset="UTF-8">
   <title>Auth UI</title>
+  <script src="https://code.jquery.com/jquery-4.0.0.min.js" 
+  integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" 
+  crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
+  <script src="ajax.js"></script>
 </head>
 <body>
 
-<div class="container <?php echo (isset($_GET['signup']) && $_GET['signup'] == 'failed') || isset($_SESSION['errorsignup']) ? 'active' : ''; ?>" id="container">
+<div class="container" id="container">
 
   <!-- REGISTER -->
   <div class="form-container sign-up">
     <form action="../src/signup.php" method = "POST">
       <h1>Create Account</h1>
-      <?php
-            $view = new signupView();
-            $view->displayErrorsignup();
-        ?>
-      <input type="email" placeholder="Email" name = "email">
-      <input type="text" placeholder="First Name" name = "fname">
-      <input type="text" placeholder="Last Name" name = "lname">
-      <input type="password" placeholder="Password" name = "password">
-      <input type="password" placeholder="Repeat Password" name = "repeatedpassword">
-      <button name ="submit">Sign Up</button>
+      <p class="error-message"></p>
+      <input id="signup-email" type="email" placeholder="Email" name = "email">
+      <input id="signup-fname" type="text" placeholder="First Name" name = "fname">
+      <input id="signup-lname" type="text" placeholder="Last Name" name = "lname">
+      <input id="signup-pwd" type="password" placeholder="Password" name = "password">
+      <input id="signup-repeatpwd" type="password" placeholder="Repeat Password" name = "repeatedpassword">
+      <button id="signup-submit" name ="submit">Sign Up</button>
     </form>
   </div>
 
