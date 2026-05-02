@@ -2,18 +2,20 @@
 
 class signupView
 {
-    public function displayErrorsignup()
+    public function displayErrorsignup($errors)
     {
-
-        if(isset($_SESSION["errorsignup"]))
+        if(!empty($errors))
             {
-                $errors = $_SESSION["errorsignup"];
-                foreach ($errors as $error) {
-                echo '<p class="error-message">' . $error . '</p>';
+                foreach($errors as $error)
+                {
+                    echo $error . "<br>";
+                }
             }
+        
+    }
 
-            // Clear the errors so they don't show up again on refresh
-            unset($_SESSION["errorsignup"]);
-            }
+    public function displaySuccess()
+    {
+        echo "success";
     }
 }

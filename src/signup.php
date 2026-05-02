@@ -15,16 +15,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             include "model/signupModel.php";
             include "control/signupControl.php";
             include "config/config_session.php";
+            include "view/signupView.php";
             
             $signup = new SignupControl($email,$password,$repeatedpassword,$firstname,$lastname);
+            $view = new signupView();
 
             // Running error handlers
             if ($signup->signup() === false) {
-                $errors = $signup->errors;
-                foreach($errors as $error)
-                    {
-                        echo $error . '<br>';
-                    }
+                $view->displayErrorsignup($signup->errors);
                 exit();
             }
 
@@ -34,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 }
 
             $signup->setUser($email, $password , $firstname, $lastname);
-            echo "success";
+            $view->displaySuccess();
             die();
         } catch (PDOException $e) {
             echo "Query Failed" . $e->getMessage() ;
