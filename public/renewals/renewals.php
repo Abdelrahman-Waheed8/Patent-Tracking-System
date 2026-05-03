@@ -104,6 +104,7 @@ $userData = $controller->filterData($_SESSION["user_id"])
                         <th>Patent</th>
                         <th>GrantDate</th>
                         <th>Status</th>
+                        <th>Deadline</th>
                         <th>Days Left</th>
                         <th>Actions</th>
                     </tr>

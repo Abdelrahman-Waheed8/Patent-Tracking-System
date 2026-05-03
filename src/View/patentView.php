@@ -13,6 +13,8 @@ class patentView extends patentControl
                 echo "<td>" . $row["number"] . "</td>";
                 echo "<td>" . $row["grantDate"] . "</td>";
                 echo "<td>" . $row["status"] . "</td>";
+                echo "<td>" . $row["deadline"] . "</td>";
+                echo "<td>" . $row["daysLeft"] . "</td>";
                 echo "</tr>";
             }
     }
