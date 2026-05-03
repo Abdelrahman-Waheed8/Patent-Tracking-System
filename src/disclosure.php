@@ -10,6 +10,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'desc' => !empty($_POST['prior_art_desc']) ? $_POST['prior_art_desc'] : null
     ];
 
+    $jurisdictionalType = $_POST['jurisdictional_type'] ?? null;
+    $scope = $_POST['scope'] ?? null;
+
+    
+    
+
+
     if (!empty($_FILES['files']['name'][0])) {
         foreach ($_FILES['files']['name'] as $i => $name) {
             $reformattedfiles[] = [
@@ -34,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         include "control/disclosureControl.php";
         include "config/config_session.php";
 
-        $disclosure = new Disclosure($title, $description, $reformattedfiles, $contributors, $priorArt);
+        $disclosure = new Disclosure($title, $description, $reformattedfiles, $contributors, $priorArt, $jurisdictionalType, $scope);
 
         if ($disclosure->submitDisclosure() === false) {
             $_SESSION['errorsDisclosure'] = $disclosure->errors;

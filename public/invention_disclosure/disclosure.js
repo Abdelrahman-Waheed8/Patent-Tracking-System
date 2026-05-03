@@ -99,3 +99,17 @@ if (fileInput) {
     }
   });
 }
+
+function toggleFields() {
+  const isNational = document.getElementById("is_national").checked;
+  const nationalDiv = document.getElementById("national_section");
+  const internationalDiv = document.getElementById("international_section");
+
+  if (isNational) {
+    nationalDiv.style.display = "block";
+    internationalDiv.style.display = "none";
+  } else {
+    nationalDiv.style.display = "none";
+    internationalDiv.style.display = "block";
+  }
+}
