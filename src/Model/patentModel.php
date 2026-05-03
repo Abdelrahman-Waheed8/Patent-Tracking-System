@@ -14,17 +14,17 @@ class patentModel extends DBH
             d.Title AS Invention_Title,
             pa.appNum AS Application_Number,
             oi.ContributionPercentage
-            FROM 
+        FROM 
             patent p
-            JOIN 
+        JOIN 
             grantedpatents gp ON p.Patent_ID = gp.Patent_ID
-            JOIN 
+        JOIN 
             patentapplication pa ON gp.AppID = pa.AppID
-            JOIN 
+        JOIN 
             disclosure d ON pa.disc_ID = d.disc_ID
-            JOIN 
+        JOIN 
             ownershipofinvention oi ON d.disc_ID = oi.disc_ID
-            WHERE 
+        WHERE 
             oi.usr_ID = :uid;";
 
         $stmt = $pdo->prepare($query);

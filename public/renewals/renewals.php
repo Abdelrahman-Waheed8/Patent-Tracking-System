@@ -4,6 +4,9 @@ include "../../src/config/config.php";
 include "../../src/model/patentModel.php";
 include "../../src/control/patentControl.php";
 include "../../src/view/patentView.php";
+
+$controller = new patentControl();
+$userData = $controller->filterData($_SESSION["user_id"])
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +102,7 @@ include "../../src/view/patentView.php";
                     <tr>
                         <th>ID</th>
                         <th>Patent</th>
-                        <th>Renewal</th>
+                        <th>GrantDate</th>
                         <th>Status</th>
                         <th>Days Left</th>
                         <th>Actions</th>

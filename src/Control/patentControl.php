@@ -1,10 +1,8 @@
 <?php
-
 class patentControl extends patentModel
 {
-    public function filterData()
+    public function filterData($uid)
     {
-        $uid = $_SESSION["user_id"];
         $result = $this->viewPatent($uid);
 
         $filtered = [];
@@ -13,9 +11,9 @@ class patentControl extends patentModel
             {
             $filtered[] = [
                 "id" => htmlspecialchars($row["Patent_ID"]),
-                "number" => htmlspecialchars($row["Number"]),
+                "number" => htmlspecialchars($row["Patent_Number"]),
                 "grantDate" => htmlspecialchars($row["GrantDate"]),
-                "status" => htmlspecialchars($row["Status"]),
+                "status" => htmlspecialchars($row["Patent_Status"]),
             ];
             }
         

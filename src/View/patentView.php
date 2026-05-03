@@ -4,7 +4,7 @@ class patentView extends patentControl
 {
     public function displayContent()
     {
-        $result = $this->filterData();
+        $result = $this->filterData($_SESSION["user_id"]);
 
         foreach ($result as $row)
             {
