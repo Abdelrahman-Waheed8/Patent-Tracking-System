@@ -89,8 +89,7 @@ class disclosureModel extends DBH
             $stmt4->bindParam(":percentage", $percentage);
             $stmt4->execute();
 
-        if(!empty($priorArt['link']) || !empty($priorArt['desc']))
-            {
+            if (!empty($priorArt['link']) || !empty($priorArt['desc'])) {
                 $stmtPrior = $pdo->prepare("INSERT INTO prior_art (disc_ID, `Description`, link) VALUES (:disc_id, :descr, :link)");
                 $stmtPrior->bindParam(":disc_id", $newId);
                 $stmtPrior->bindParam(":link", $priorArt['link']);
@@ -98,7 +97,7 @@ class disclosureModel extends DBH
                 $stmtPrior->execute();
             }
 
-        
+
 
             if (!empty($company)) {
                 $stmtAgreement->bindParam(":userId", $userId);
@@ -106,6 +105,19 @@ class disclosureModel extends DBH
                 $stmtAgreement->execute();
             }
         }
+
+
+        $appNum = 'APP' . str_pad($newId, 6, '0', STR_PAD_LEFT);
+        $status = "pending";
+
+        $stmt5 = $pdo->prepare("
+            insert into patentapplication (disc_ID, appNum, FilingDate, Status) VALUES (:disc_id, :app_num, :filing_date, :status)
+        ");
+        $stmt5->bindParam(":disc_id", $newId);
+        $stmt5->bindParam(":app_num", $appNum);
+        $stmt5->bindParam(":filing_date", $dateRow['FilingDate']);
+        $stmt5->bindParam(":status", $status);
+        $stmt5->execute();
     }
 
     public function userExists($userId)
