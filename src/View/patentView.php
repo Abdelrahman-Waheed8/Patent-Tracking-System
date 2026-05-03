@@ -6,7 +6,7 @@ class patentView extends patentControl
     {
         $result = $this->filterData($_SESSION["user_id"]);
 
-        foreach ($result as $row)
+        foreach ($result['list'] as $row)
             {
                 echo "<tr>";
                 echo "<td>" . $row["id"] . "</td>";
@@ -17,5 +17,26 @@ class patentView extends patentControl
                 echo "<td>" . $row["daysLeft"] . "</td>";
                 echo "</tr>";
             }
+    }
+
+    public function displayCardTotal()
+    {
+        $result = $this->filterData($_SESSION["user_id"]);
+
+        echo "<h1 id='total-patents'>". $result['summary']['total'] ."</h1>";
+    }
+
+    public function displayCardOverDue()
+    {
+        $result = $this->filterData($_SESSION["user_id"]);
+
+        echo "<h1 id='due-soon'>". $result['summary']['overdue'] ."</h1>";
+    }
+
+    public function displayCardDueSoon()
+    {
+        $result = $this->filterData($_SESSION["user_id"]);
+
+        echo "<h1 id='overdue'>". $result['summary']['dueSoon'] ."</h1>";
     }
 }

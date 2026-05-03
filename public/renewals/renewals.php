@@ -68,7 +68,10 @@ $userData = $controller->filterData($_SESSION["user_id"])
                         <i class="fas fa-file-alt"></i>
                         <span>Total Patents</span>
                     </div>
-                    <h1 id="total-patents">0</h1>
+                    <?php
+                    $view = new patentView();
+                    $view->displayCardTotal();
+                    ?>
                     <p>Patents requiring renewal</p>
                 </div>
 
@@ -77,7 +80,10 @@ $userData = $controller->filterData($_SESSION["user_id"])
                         <i class="fas fa-clock"></i>
                         <span>Due Soon</span>
                     </div>
-                    <h1 id="due-soon">0</h1>
+                    <?php
+                    $view = new patentView();
+                    $view->displayCardDueSoon();
+                    ?>
                     <p>Due within 30 days</p>
                 </div>
 
@@ -86,7 +92,10 @@ $userData = $controller->filterData($_SESSION["user_id"])
                         <i class="fas fa-exclamation-triangle"></i>
                         <span>Overdue</span>
                     </div>
-                    <h1 id="overdue">0</h1>
+                    <?php
+                    $view = new patentView();
+                    $view->displayCardOverDue();
+                    ?>
                     <p>Overdue renewals</p>
                 </div>
             </div>
@@ -106,7 +115,6 @@ $userData = $controller->filterData($_SESSION["user_id"])
                         <th>Status</th>
                         <th>Deadline</th>
                         <th>Days Left</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>

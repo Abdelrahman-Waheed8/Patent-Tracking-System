@@ -4,11 +4,12 @@ class patentControl extends patentModel
     public function calculateMaitenanceWindows($grantDateString)
     {
         $grantDate = new DateTime($grantDateString);
+        $now = new DateTime();
         
         $endDate = new DateTime($grantDateString);
         $endDate->modify("+42 months");
 
-        $difference = $endDate->diff($grantDate);
+        $difference = $now->diff($endDate);
         $deadline  = [
             "deadline" => $endDate->format('Y-m-d'),
             "daysleft" => $difference->format("%R%a")
@@ -21,15 +22,34 @@ class patentControl extends patentModel
     public function filterData($uid)
     {
         $result = $this->viewPatent($uid);
-        $count = $result->rowCount();
 
-        $filtered = [];
+        $filtered = [
+            'summary' => [
+                'total' => 0,
+                'dueSoon' => 0,
+                'overdue' => 0
+            ],
+            'list' => []
+        ];
 
         while($row = $result->fetch(PDO::FETCH_ASSOC))
             {
             $renewal = $this->calculateMaitenanceWindows($row["GrantDate"]);
+            $daysleft = $renewal["daysleft"];
 
-            $filtered[] = [
+            $filtered['summary']['total']++;
+
+            if($daysleft < 0)
+            {
+                $filtered['summary']['overdue']++;
+            }
+
+            if($daysleft > 0 && $daysleft <= 30)
+                {
+                    $filtered['summary']['dueSoon']++;
+                }
+
+            $filtered['list'][] = [
                 "id" => htmlspecialchars($row["Patent_ID"]),
                 "number" => htmlspecialchars($row["Patent_Number"]),
                 "grantDate" => htmlspecialchars($row["GrantDate"]),
