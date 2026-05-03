@@ -12,6 +12,7 @@ include "../../src/view/disclosureView.php";
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="disclosure.css">
+    <script src="disclosure.js"></script>
 
     <title>IP System</title>
 </head>
@@ -257,7 +258,7 @@ include "../../src/view/disclosureView.php";
 
     </div>
 
-    <script src="disclosure.js"></script>
+    
 </body>
 
 </html>
