@@ -1,5 +1,9 @@
 <?php
 include "../../src/config/config_session.php";
+include "../../src/config/config.php";
+include "../../src/model/patentModel.php";
+include "../../src/control/patentControl.php";
+include "../../src/view/patentView.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,6 +94,24 @@ include "../../src/config/config_session.php";
                 </div>
 
                 <div id="renewals-table" class="table-container">
+                <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Patent</th>
+                        <th>Renewal</th>
+                        <th>Status</th>
+                        <th>Days Left</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $view = new patentView();
+                    $view->displayContent();
+                    ?>
+                </tbody>
+                </table>
                 </div>
             </div>
         </main>
@@ -181,7 +203,7 @@ include "../../src/config/config_session.php";
         </div>
     </div>
 
-    <script src="./renewals.js"></script>
+    <!-- <script src="./renewals.js"></script> -->
 </body>
 
 </html>
