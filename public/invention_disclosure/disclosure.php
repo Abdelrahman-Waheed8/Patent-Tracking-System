@@ -191,16 +191,16 @@ include "../../src/view/disclosureView.php";
                             <label style="display: block; margin-bottom: 10px; font-weight: 600;">Select Regions:</label>
 
                             <label style="display: block; margin-bottom: 10px; cursor: pointer; padding: 5px; background: #f0fdf4; border-radius: 4px;">
-                                <input type="checkbox" name="world" value="all" style="accent-color: teal;"> <b>Whole World</b>
+                                <input type="checkbox" name="world" value="world" style="accent-color: teal;"> <b>Whole World</b>
                             </label>
 
                             <p style="margin: 10px 0 5px; font-size: 0.9em; color: #666;">Or select Continents:</p>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                                <label style="cursor: pointer;"><input type="checkbox" name="continents" value="africa"> Africa</label>
-                                <label style="cursor: pointer;"><input type="checkbox" name="continents" value="europe"> Europe</label>
-                                <label style="cursor: pointer;"><input type="checkbox" name="continents" value="asia"> Asia</label>
-                                <label style="cursor: pointer;"><input type="checkbox" name="continents" value="north_america"> North America</label>
-                                <label style="cursor: pointer;"><input type="checkbox" name="continents" value="south_america"> South America</label>
+                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]" value="africa"> Africa</label>
+                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]" value="europe"> Europe</label>
+                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]" value="asia"> Asia</label>
+                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]" value="north_america"> North America</label>
+                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]" value="south_america"> South America</label>
                             </div>
                         </div>
                     </div>

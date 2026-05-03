@@ -2,7 +2,7 @@
 
 class disclosureModel extends DBH
 {
-    protected function setDisclosure($title, $description, $contributors, $files, $priorArt, $jurisdictionalType, $scope)
+    protected function setDisclosure($title, $description, $contributors, $files, $priorArt, $companyNames, $jurisdictionalType, $scope)
     {
         $pdo = $this->connect();
 
@@ -123,15 +123,14 @@ class disclosureModel extends DBH
 
 
 
-        $name = $scope . ' Patent Office';
         $countryCodeValue = "#" . $scope;
 
         $stmt6 = $pdo->prepare("
-            INSERT INTO jursidiction (JurisdictionalType, name, countryCode) VALUES (:jurisdictional_type, :name, :country_code)
+            INSERT INTO jursidiction (JurisdictionalType, name, countryCode) VALUES (:jurisdictional_type, :scope, :country_code)
         ");
         
         $stmt6->bindParam(":jurisdictional_type", $jurisdictionalType);
-        $stmt6->bindParam(":name", $name);
+        $stmt6->bindParam(":scope", $scope);
         $stmt6->bindParam(":country_code", $countryCodeValue);
         $stmt6->execute();
     }

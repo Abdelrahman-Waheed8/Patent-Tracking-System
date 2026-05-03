@@ -64,6 +64,20 @@ class Disclosure extends disclosureModel
             $this->errors['titleLength'] = "Title too long (max 255)";
         }
 
+        if (!isset($this->jurisdictionalType)) {
+            $this->errors['jurisdictionalType'] = "Invalid jurisdictional type";
+        }
+
+        if ($this->jurisdictionalType === 'international') {
+            if (!isset($this->scope)) {
+                $this->errors['scope'] = "Scope is required for international disclosures";
+            }
+        } else {
+            if (empty($this->scope)) {
+                $this->errors['scope'] = "Country/Region is required for non-international disclosures";
+            }
+        }
+
         if (
             !isset($this->contributors['ContributorIDs']) ||
             !is_array($this->contributors['ContributorIDs']) ||

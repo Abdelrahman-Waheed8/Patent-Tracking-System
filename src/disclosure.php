@@ -4,17 +4,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'];
     $description = $_POST['description'];
     $reformattedfiles = [];
-    $priorArt = 
-    [
-        'link' => !empty($_POST['prior_art_link']) ? $_POST['prior_art_link'] : null ,
-        'desc' => !empty($_POST['prior_art_desc']) ? $_POST['prior_art_desc'] : null
-    ];
+    $priorArt =
+        [
+            'link' => !empty($_POST['prior_art_link']) ? $_POST['prior_art_link'] : null,
+            'desc' => !empty($_POST['prior_art_desc']) ? $_POST['prior_art_desc'] : null
+        ];
 
     $jurisdictionalType = $_POST['jurisdictional_type'] ?? null;
-    $scope = $_POST['scope'] ?? null;
 
-    
-    
+    $consistents = $_POST['continents'] ?? [];
+
+    if ($jurisdictionalType === 'international') {
+        if (isset($_POST['world'])) {
+            $scope =  $_POST['world'];
+        } else {
+            if (isset($_POST['continents'])) {
+                $scope = '';
+                foreach ($consistents as $continent) {
+                    $scope .= $continent . ',';
+                }
+            }
+        }
+    } else {
+        $scope = $_POST['scope'] ?? null;
+    }
+
+
 
 
     if (!empty($_FILES['files']['name'][0])) {
