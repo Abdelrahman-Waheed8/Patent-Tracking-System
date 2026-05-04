@@ -48,6 +48,31 @@ class examinerModel extends DBH
         $stmt->bindParam(":status", $status);
         $stmt->bindParam(":id", $discID);
 
+        $queryGetAppNumber = "SELECT appNum, AppID FROM patentapplication WHERE disc_ID = :id;" ;
+        $stmt2 = $pdo->prepare($queryGetAppNumber);
+        $stmt2->bindParam(":id",$discID);
+        $stmt2->execute();
+        $patentApp = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+        
+        if ($status === "approved")
+            {
+                $queryPatent = "INSERT INTO Patent (`Number`, GrantDate, `Status`) VALUES
+                (:appnum, NOW(), 'Active');" ;
+
+                $stmt3 = $pdo->prepare($queryPatent);
+                $stmt3->bindParam(":appnum", $patentApp["appNum"]);
+                $stmt3->execute();
+
+                $patentID = $pdo->lastInsertId();
+
+                $queryGrantedPatent = "INSERT INTO grantedpatents () VALUES (:pid, :appid);";
+                $stmt4= $pdo->prepare($queryGrantedPatent);
+                $stmt4->bindParam(":pid",$patentID);
+                $stmt4->bindParam(":appid",$patentApp["AppID"]);
+                $stmt4->execute();
+            }
+
         return $stmt->execute();
     }
 }
