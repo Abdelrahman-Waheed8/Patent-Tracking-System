@@ -57,8 +57,8 @@ class examinerModel extends DBH
         
         if ($status === "approved")
             {
-                $queryPatent = "INSERT INTO Patent (`Number`, GrantDate, `Status`) VALUES
-                (:appnum, NOW(), 'Active');" ;
+                $queryPatent = "INSERT INTO Patent (`Number`, GrantDate, `Status`, Expiration) VALUES
+                (:appnum, NOW(), 'Active', DATE_ADD(NOW(), INTERVAL 42 MONTH));" ;
 
                 $stmt3 = $pdo->prepare($queryPatent);
                 $stmt3->bindParam(":appnum", $patentApp["appNum"]);

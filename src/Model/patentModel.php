@@ -33,4 +33,18 @@ class patentModel extends DBH
 
         return $stmt;
     }   
+
+    public function patentFee()
+    {
+        $pdo = $this->connect();
+        $query = "INSERT INTO feeschedule (currencyCode, baseAmount, dueDate) VALUES
+        ('USD', 1000.00, :dueD);";
+
+        $grantDate = new DateTime();
+        $dueDate = $grantDate->modify("+42 months");
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":dueD", $dueDate);
+        $stmt->execute();
+
+    }
 }

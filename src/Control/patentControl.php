@@ -62,4 +62,6 @@ class patentControl extends patentModel
 
         return $filtered;
     }
+
+    
 }
