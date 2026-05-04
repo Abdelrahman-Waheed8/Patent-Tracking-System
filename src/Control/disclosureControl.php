@@ -10,16 +10,23 @@ class Disclosure extends disclosureModel
     private $priorArt;
     private $companyNames = [];
 
+    private $jurisdictionalType;
+    
+
+    private $scope;
+
     private $maxFileSize = 10 * 1024 * 1024;
     public $errors = [];
 
-    public function __construct($title, $description, $files, $contributors, $priorArt = null)
+    public function __construct($title, $description, $files, $contributors, $priorArt = null, $jurisdictionalType = null, $scope = null)
     {
         $this->title = $title;
         $this->description = $description;
         $this->files = $files;
         $this->contributors = $contributors;
         $this->priorArt = $priorArt;
+        $this->jurisdictionalType = $jurisdictionalType ?? null;
+        $this->scope = $scope ?? null;
 
         if (isset($contributors['companyNames'])) {
             $this->companyNames = $contributors['companyNames'];
@@ -30,7 +37,7 @@ class Disclosure extends disclosureModel
     {
         $this->validateFields();
 
-        if(empty($this->errors)){
+        if (empty($this->errors)) {
             $this->handleUpload();
         }
 
@@ -38,7 +45,7 @@ class Disclosure extends disclosureModel
             return false;
         }
 
-        $this->setDisclosure($this->title, $this->description, $this->contributors, $this->uploadedFiles, $this->priorArt, $this->companyNames);
+        $this->setDisclosure($this->title, $this->description, $this->contributors, $this->uploadedFiles, $this->priorArt, $this->companyNames, $this->jurisdictionalType, $this->scope);
 
         if (!empty($this->errors)) {
             return false;
@@ -55,6 +62,20 @@ class Disclosure extends disclosureModel
 
         if (strlen($this->title) > 255) {
             $this->errors['titleLength'] = "Title too long (max 255)";
+        }
+
+        if (!isset($this->jurisdictionalType)) {
+            $this->errors['jurisdictionalType'] = "Invalid jurisdictional type";
+        }
+
+        if ($this->jurisdictionalType === 'international') {
+            if (!isset($this->scope)) {
+                $this->errors['scope'] = "Scope is required for international disclosures";
+            }
+        } else {
+            if (empty($this->scope)) {
+                $this->errors['scope'] = "Country/Region is required for non-international disclosures";
+            }
         }
 
         if (
@@ -104,15 +125,13 @@ class Disclosure extends disclosureModel
             return false;
         }
 
-        foreach($this->files as $file)
-        {
+        foreach ($this->files as $file) {
             if ($file['error'] !== UPLOAD_ERR_OK) {
                 $this->errors['uploadError_' . $file['name']] = 'Upload failed for ' . $file['name'];
                 continue;
             }
 
-            if($file['size'] > $this->maxFileSize)
-            {
+            if ($file['size'] > $this->maxFileSize) {
                 $this->errors['size_' . $file['name']] = $file['name'] . ' is too large';
                 continue;
             }
@@ -131,8 +150,7 @@ class Disclosure extends disclosureModel
 
             if (!move_uploaded_file($file['tmp_name'], $path)) {
                 $this->errors['uploadFail_' . $file['name']] = 'Could not save: ' . $file['name'];
-            }
-            else{
+            } else {
                 $this->uploadedFiles[] = $path;
             }
         }

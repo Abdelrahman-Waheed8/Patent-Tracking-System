@@ -2,7 +2,7 @@
 
 class disclosureModel extends DBH
 {
-    protected function setDisclosure($title, $description, $contributors, $files, $priorArt)
+    protected function setDisclosure($title, $description, $contributors, $files, $priorArt, $companyNames, $jurisdictionalType, $scope)
     {
         $pdo = $this->connect();
 
@@ -118,7 +118,36 @@ class disclosureModel extends DBH
         $stmt5->bindParam(":filing_date", $dateRow['FilingDate']);
         $stmt5->bindParam(":status", $status);
         $stmt5->execute();
+
+        $patentAppID = $pdo->lastInsertId();
+
+
+
+        $countryCodeValue = "#" . $scope;
+
+        $stmt6 = $pdo->prepare("
+            INSERT INTO jursidiction (JurisdictionalType, name, countryCode) VALUES (:jurisdictional_type, :scope, :country_code)
+        ");
+        
+        $stmt6->bindParam(":jurisdictional_type", $jurisdictionalType);
+        $stmt6->bindParam(":scope", $scope);
+        $stmt6->bindParam(":country_code", $countryCodeValue);
+        $stmt6->execute();
+
+        $jurisdictionID = $pdo->lastInsertId();
+
+        
+
+
+        $stmt7 = $pdo->prepare("
+        INSERT INTO coverdterritory (PatentAppID, JurisdictionalID) VALUES (:patentAppID, :jurisdiction_id)");
+        $stmt7->bindParam(":patentAppID", $patentAppID);
+        $stmt7->bindParam(":jurisdiction_id", $jurisdictionID);
+        $stmt7->execute();
     }
+
+
+
 
     public function userExists($userId)
     {

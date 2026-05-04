@@ -1,9 +1,24 @@
+function toggleFields() {
+  const isNational = document.getElementById("is_national").checked;
+  const nationalDiv = document.getElementById("national_section");
+  const internationalDiv = document.getElementById("international_section");
+
+  if (isNational) {
+    nationalDiv.style.display = "block";
+    internationalDiv.style.display = "none";
+  } else {
+    nationalDiv.style.display = "none";
+    internationalDiv.style.display = "block";
+  }
+}
+
+window.toggleSidebar = toggleSidebar;
+
 // ================= Sidebar Toggle =================
 function toggleSidebar() {
   document.querySelector(".container").classList.toggle("closed");
 }
 
-window.toggleSidebar = toggleSidebar;
 
 // ================= Active Menu =================
 let links = document.querySelectorAll(".menu a");
@@ -99,3 +114,5 @@ if (fileInput) {
     }
   });
 }
+
+

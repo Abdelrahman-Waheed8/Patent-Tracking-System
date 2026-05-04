@@ -60,7 +60,7 @@ class loginControl extends loginModel{
                 $redirect = "../public/dashboard/dashboard.php";
                 break;
             case "Examiner":
-                $redirect = "../public/dashboard/dashboard.php";
+                $redirect = "../public/examiner/examiner.php";
                 break;
             case "Admin":
                 $redirect = "../public/systemAdmin/systemAdmin.php";
