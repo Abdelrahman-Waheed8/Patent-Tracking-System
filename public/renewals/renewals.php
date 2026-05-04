@@ -114,7 +114,9 @@ $userData = $controller->filterData($_SESSION["user_id"])
                         <th>GrantDate</th>
                         <th>Status</th>
                         <th>Deadline</th>
+                        <th>DueDate</th>
                         <th>Days Left</th>
+                        <th>Estimated Fee</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -14,7 +14,18 @@ class patentView extends patentControl
                 echo "<td>" . $row["grantDate"] . "</td>";
                 echo "<td>" . $row["status"] . "</td>";
                 echo "<td>" . $row["deadline"] . "</td>";
+                echo "<td>" . $row["dueDate"] . "</td>";
                 echo "<td>" . $row["daysLeft"] . "</td>";
+                echo "<td>";
+                if (!empty($row["fees"]))
+                {
+                    echo "$" . $row["fees"]["USD"] . " / " . $row["fees"]["EGP"] . " EGP";
+                }
+                else
+                {
+                    echo "N/A"; // Or any other placeholder for when fees are not yet due
+                }
+                echo "</td>";
                 echo "</tr>";
             }
     }

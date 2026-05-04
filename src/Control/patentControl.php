@@ -6,18 +6,32 @@ class patentControl extends patentModel
         $grantDate = new DateTime($grantDateString);
         $now = new DateTime();
         
-        $endDate = new DateTime($grantDateString);
-        $endDate->modify("+42 months");
+        // Deadline is 3.5 years (42 months)
+        $deadlineDate = clone $grantDate;
+        $deadlineDate->modify("+42 months");
 
-        $difference = $now->diff($endDate);
-        $deadline  = [
-            "deadline" => $endDate->format('Y-m-d'),
+        // Due date is 1 month after deadline
+        $dueDate = clone $deadlineDate;
+        $dueDate->modify("+1 month");
+
+        $difference = $now->diff($deadlineDate);
+        $deadlineInfo = [
+            "deadline" => $deadlineDate->format('Y-m-d'),
+            "dueDate" => $dueDate->format('Y-m-d'),
             "daysleft" => $difference->format("%R%a")
         ];
 
-        return $deadline;
+        return $deadlineInfo;
     }
 
+    public function calculateFees($baseFeeUSD = 1000.00)
+    {
+        $exchangeRate = $this->getExchangeRate();
+        return [
+            'USD' => number_format($baseFeeUSD, 2),
+            'EGP' => number_format($baseFeeUSD * $exchangeRate, 2)
+        ];
+    }
 
     public function filterData($uid)
     {
@@ -34,8 +48,15 @@ class patentControl extends patentModel
 
         while($row = $result->fetch(PDO::FETCH_ASSOC))
             {
-            $renewal = $this->calculateMaitenanceWindows($row["GrantDate"]);
-            $daysleft = $renewal["daysleft"];
+            $maintenance = $this->calculateMaitenanceWindows($row["GrantDate"]);
+            $daysleft = $maintenance["daysleft"];
+            $fees = []; // Initialize fees as empty
+
+            // Only calculate fees if within payment period (due soon or overdue)
+            if ($daysleft <= 30)
+            {
+                $fees = $this->calculateFees(); // Assuming default maintenance fee
+            }
 
             $filtered['summary']['total']++;
 
@@ -54,8 +75,10 @@ class patentControl extends patentModel
                 "number" => htmlspecialchars($row["Patent_Number"]),
                 "grantDate" => htmlspecialchars($row["GrantDate"]),
                 "status" => htmlspecialchars($row["Patent_Status"]),
-                "deadline" => $renewal["deadline"],
-                "daysLeft" => $renewal["daysleft"]
+                "deadline" => $maintenance["deadline"],
+                "dueDate" => $maintenance["dueDate"],
+                "daysLeft" => $maintenance["daysleft"],
+                "fees" => $fees
             ];
             }
         

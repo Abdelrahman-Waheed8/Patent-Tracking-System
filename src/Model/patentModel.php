@@ -34,17 +34,45 @@ class patentModel extends DBH
         return $stmt;
     }   
 
-    public function patentFee()
+    public function getExchangeRate()
+    {
+        // For now, using a static rate as requested "only deal with usd and egp"
+        // In a real app, this could call an API.
+        return 48.50; // 1 USD = 48.50 EGP
+    }
+
+    public function patentFee($patentId, $baseAmountUSD)
     {
         $pdo = $this->connect();
-        $query = "INSERT INTO feeschedule (currencyCode, baseAmount, dueDate) VALUES
-        ('USD', 1000.00, :dueD);";
+        
+        // Calculate dates: Deadline is 3.5 years (42 months), Due Date is 1 month later (43 months)
+        $grantDate = new DateTime(); // Assuming current date as grant date for this example, or fetch from DB
+        $deadlineDate = clone $grantDate;
+        $deadlineDate->modify("+42 months");
+        
+        $dueDate = clone $deadlineDate;
+        $dueDate->modify("+1 month");
 
-        $grantDate = new DateTime();
-        $dueDate = $grantDate->modify("+42 months");
+        $exchangeRate = $this->getExchangeRate();
+        $amountEGP = $baseAmountUSD * $exchangeRate;
+
+        // Insert into feeschedule for both currencies
+        $query = "INSERT INTO feeschedule (currencyCode, baseAmount, dueDate) VALUES 
+                 ('USD', :amountUSD, :dueD),
+                 ('EGP', :amountEGP, :dueD);";
+        
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":dueD", $dueDate);
+        $stmt->bindValue(":amountUSD", $baseAmountUSD);
+        $stmt->bindValue(":amountEGP", $amountEGP);
+        $stmt->bindValue(":dueD", $dueDate->format('Y-m-d'));
         $stmt->execute();
 
+        $query2 = "INSER INTO patentfee (feeScheduleID,Patent_ID,status,fee Type,calculatedAmount)
+        VALUES (:feeID, :pid, 'Maintenance 3.5',:calculate);";
+        $feeid = $pdo->lastInsertId();
+        $stmt2 = $pdo->prepare($query2);
+        $stmt2->bindParam(":feeID", $feeid);
+        $stmt2->bindParam(":pid", $patentId);
+        $stmt2->bindParam(":calculate", $baseAmountUSD);
     }
 }
