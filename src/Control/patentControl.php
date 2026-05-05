@@ -49,13 +49,13 @@ class patentControl extends patentModel
         while($row = $result->fetch(PDO::FETCH_ASSOC))
             {
             $maintenance = $this->calculateMaitenanceWindows($row["GrantDate"]);
-            $daysleft = $maintenance["daysleft"];
-            $fees = []; // Initialize fees as empty
 
-            // Only calculate fees if within payment period (due soon or overdue)
+            $daysleft = $maintenance["daysleft"];
+            $fees = [];
+
             if ($daysleft <= 30)
             {
-                $fees = $this->calculateFees(); // Assuming default maintenance fee
+                $fees = $this->calculateFees();
             }
 
             $filtered['summary']['total']++;
@@ -84,6 +84,20 @@ class patentControl extends patentModel
         
 
         return $filtered;
+    }
+
+    public function processPayment($patentId, $transactionId, $uid) 
+    {
+        if (empty($patentId) || empty($transactionId)) {
+            return false;
+        }
+
+        // Ensure the fee record exists in the database before updating it
+        // We use 1000.00 as the default base fee as per our fee calculation logic
+        $this->patentFee($patentId, 1000.00);
+        $this->viewPatent($uid);
+
+        return $this->updatePaymentStatus($patentId, $transactionId);
     }
 
     

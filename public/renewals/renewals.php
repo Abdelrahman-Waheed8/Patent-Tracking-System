@@ -174,9 +174,18 @@ $userData = $controller->filterData($_SESSION["user_id"])
                         <strong>Estimated Fee</strong>
                         <span id="modal-estimated-fee"></span>
                     </div>
-                    <div class="btn-pay">
-                        <button>pay</button>
-                    </div>
+                    <form action="../../src/process_payment.php" method="POST" id="payment-form">
+                        <input type="hidden" name="patent_id" id="form-patent-id" value="">
+                        
+                        <div class="detail-item" id="transaction-container" style="display: none;">
+                            <strong>Transaction ID</strong>
+                            <input type="text" id="transaction-input" name="transaction_id" placeholder="Enter Transaction ID" style="padding: 5px; width: 150px;" required>
+                        </div>
+
+                        <div class="btn-pay">
+                            <button type="submit" id="pay-btn">Pay</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

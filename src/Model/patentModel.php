@@ -45,8 +45,27 @@ class patentModel extends DBH
     {
         $pdo = $this->connect();
         
+        // 1. Check if a fee record already exists for this patent to avoid duplicates
+        $checkQuery = "SELECT feeScheduleID FROM patentfee WHERE Patent_ID = :pid AND feeType = 'Maintenance 3.5'";
+        $checkStmt = $pdo->prepare($checkQuery);
+        $checkStmt->bindParam(":pid", $patentId);
+        $checkStmt->execute();
+        
+        if ($checkStmt->rowCount() > 0) {
+            return; // Fee record already exists, no need to insert again
+        }
+
+        // 2. Fetch the actual GrantDate from the patent table
+        $dateQuery = "SELECT GrantDate FROM patent WHERE Patent_ID = :pid";
+        $dateStmt = $pdo->prepare($dateQuery);
+        $dateStmt->bindParam(":pid", $patentId);
+        $dateStmt->execute();
+        $patent = $dateStmt->fetch(PDO::FETCH_ASSOC);
+        
+        $grantDateStr = $patent ? $patent['GrantDate'] : date('Y-m-d');
+        $grantDate = new DateTime($grantDateStr);
+        
         // Calculate dates: Deadline is 3.5 years (42 months), Due Date is 1 month later (43 months)
-        $grantDate = new DateTime(); // Assuming current date as grant date for this example, or fetch from DB
         $deadlineDate = clone $grantDate;
         $deadlineDate->modify("+42 months");
         
@@ -67,12 +86,39 @@ class patentModel extends DBH
         $stmt->bindValue(":dueD", $dueDate->format('Y-m-d'));
         $stmt->execute();
 
-        $query2 = "INSER INTO patentfee (feeScheduleID,Patent_ID,status,fee Type,calculatedAmount)
-        VALUES (:feeID, :pid, 'Maintenance 3.5',:calculate);";
+        $query2 = "INSERT INTO patentfee (feeScheduleID,Patent_ID,`status`,feeType,calculatedAmount)
+        VALUES (:feeID, :pid, 'pending' ,'Maintenance 3.5',:calculate);";
         $feeid = $pdo->lastInsertId();
         $stmt2 = $pdo->prepare($query2);
         $stmt2->bindParam(":feeID", $feeid);
         $stmt2->bindParam(":pid", $patentId);
         $stmt2->bindParam(":calculate", $baseAmountUSD);
+        $stmt2->execute();
+
+    }
+
+    public function updatePaymentStatus($patentId, $transactionId) 
+    {
+        $pdo = $this->connect();
+        $query = "UPDATE patentfee 
+                  SET `status` = 'Paid', transactionID = :txId 
+                  WHERE Patent_ID = :pid AND status != 'Paid'";
+        
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":txId", $transactionId);
+        $stmt->bindParam(":pid", $patentId);
+        $stmt->execute();
+
+        $query2 = "UPDATE patent SET `status` = 'Active' WHERE Patent_ID = :pid;";
+        $stmt2 = $pdo->prepare($query2);
+        $stmt2->bindParam(":pid", $patentId);
+        $stmt2->execute();
+
+        $query3 = "UPDATE patent SET Expiration = DATE_ADD(NOW(), INTERVAL 42 MONTH) WHERE Patent_ID = :pid;";
+        $stmt3 = $pdo->prepare($query3);
+        $stmt3->bindParam(":pid", $patentId);
+        $stmt3->execute();
+        // Return true if at least one row was updated (i.e., a record existed and was changed)
+        return $stmt->rowCount() > 0;
     }
 }
