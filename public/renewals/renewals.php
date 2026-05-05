@@ -117,6 +117,7 @@ $userData = $controller->filterData($_SESSION["user_id"])
                         <th>DueDate</th>
                         <th>Days Left</th>
                         <th>Estimated Fee</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -133,91 +134,22 @@ $userData = $controller->filterData($_SESSION["user_id"])
 
     <div id="alert-container" class="alert-container"></div>
 
-    <div id="payment-modal" class="modal-overlay">
+    <div id="view-patent-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Payment Details</h2>
+                <h2>Patent Details</h2>
                 <i class="fas fa-times close-modal"></i>
             </div>
-            <div class="modal-body">
-                <div class="payment-info">
-                    <div class="info-row">
-                        <label>Patent Number:</label>
-                        <span id="pay-patent-number"></span>
-                    </div>
-                    <div class="info-row">
-                        <label>Patent Title:</label>
-                        <span id="pay-patent-title"></span>
-                    </div>
-                    <div class="info-row">
-                        <label>Due Date:</label>
-                        <span id="pay-due-date"></span>
-                    </div>
-                    <div class="info-row">
-                        <label>Amount:</label>
-                        <span id="pay-amount" style="font-size: 18px; font-weight: bold; color: #28a745;"></span>
-                    </div>
-                    <div class="info-row">
-                        <label>Currency:</label>
-                        <span id="pay-currency">USD</span>
-                    </div>
-                    <div class="info-row">
-                        <label>Status:</label>
-                        <span id="pay-status"></span>
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn-secondary close-modal">Close</button>
-                    <button type="button" class="btn-primary" id="confirm-pay-btn">Confirm Payment</button>
-                </div>
+            <div class="modal-body" id="view-patent-details">
+                <!-- Details will be injected here by JS -->
+            </div>
+            <div class="form-actions" style="padding: 20px;">
+                <button type="button" class="btn-secondary close-modal">Close</button>
             </div>
         </div>
     </div>
 
-    <div id="renewal-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title">Add New Renewal</h2>
-                <i class="fas fa-times close-modal"></i>
-            </div>
-            <div class="modal-body">
-                <form id="renewal-form">
-                    <input type="hidden" id="renewal-id">
-                    <div class="form-group">
-                        <label for="patent-number">Patent Number</label>
-                        <input type="text" id="patent-number" placeholder="e.g., US1234567" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="patent-title">Patent Title</label>
-                        <input type="text" id="patent-title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="due-date">Due Date</label>
-                        <input type="date" id="due-date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="amount">Amount (USD)</label>
-                        <input type="number" id="amount" step="0.01" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select id="status">
-                            <option value="Upcoming">Upcoming</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Paid">Paid</option>
-                            <option value="Overdue">Overdue</option>
-                        </select>
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="btn-secondary close-modal">Cancel</button>
-                        <button type="submit" class="btn-primary">Save Renewal</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- <script src="./renewals.js"></script> -->
+    <script src="./renewals.js"></script>
 </body>
 
 </html>

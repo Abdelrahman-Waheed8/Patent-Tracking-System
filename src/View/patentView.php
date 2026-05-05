@@ -23,9 +23,10 @@ class patentView extends patentControl
                 }
                 else
                 {
-                    echo "N/A"; // Or any other placeholder for when fees are not yet due
+                    echo "N/A";
                 }
                 echo "</td>";
+                echo "<td><button class='review-btn' onclick='showModal(viewModal)'>Review<button></td>";
                 echo "</tr>";
             }
     }
