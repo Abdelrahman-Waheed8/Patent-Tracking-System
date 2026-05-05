@@ -179,6 +179,8 @@
     align-items: center;
     padding: 15px 20px;
     border-bottom: 1px solid #eee;
+    border-top-left-radius:10px ;
+    border-top-right-radius:10px ;
 }
 
 .modal-header h2 {
@@ -189,12 +191,12 @@
 
 .close-modal {
     cursor: pointer;
-    font-size: 20px;
+    font-size: 30px;
     color: #888;
 }
 
 .modal-body {
-    padding: 20px;
+    padding: 10px;
 }
 
 .form-actions {
@@ -243,4 +245,16 @@
 
 #view-patent-details .detail-item span {
     color: #555;
+}
+.btn-pay button{
+    background: #296d74;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    
+    width: 80px;           
+    text-align: center;
+    display: inline-block;
 }

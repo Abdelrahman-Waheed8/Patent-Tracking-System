@@ -106,27 +106,27 @@ $userData = $controller->filterData($_SESSION["user_id"])
                 </div>
 
                 <div id="renewals-table" class="table-container">
-                <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Patent</th>
-                        <th>GrantDate</th>
-                        <th>Status</th>
-                        <th>Deadline</th>
-                        <th>DueDate</th>
-                        <th>Days Left</th>
-                        <th>Estimated Fee</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Patent</th>
+                                <th>GrantDate</th>
+                                <th>Status</th>
+                                <th>Deadline</th>
+                                <th>DueDate</th>
+                                <th>Days Left</th>
+                                <th>Estimated Fee</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
                     $view = new patentView();
                     $view->displayContent();
                     ?>
-                </tbody>
-                </table>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
@@ -137,14 +137,47 @@ $userData = $controller->filterData($_SESSION["user_id"])
     <div id="view-patent-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Patent Details</h2>
-                <i class="fas fa-times close-modal"></i>
+                <h2>Patent Renewal Details</h2>
+                <span class="close-modal">&times;</span>
             </div>
-            <div class="modal-body" id="view-patent-details">
-                <!-- Details will be injected here by JS -->
-            </div>
-            <div class="form-actions" style="padding: 20px;">
-                <button type="button" class="btn-secondary close-modal">Close</button>
+            <div class="modal-body">
+                <div id="view-patent-details">
+                    <div class="detail-item">
+                        <strong>ID</strong>
+                        <span id="modal-patent-id"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Patent</strong>
+                        <span id="modal-patent-title"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Grant Date</strong>
+                        <span id="modal-grant-date"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Status</strong>
+                        <span id="modal-status"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Deadline</strong>
+                        <span id="modal-deadline"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Due Date</strong>
+                        <span id="modal-due-date"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Days Left</strong>
+                        <span id="modal-days-left"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Estimated Fee</strong>
+                        <span id="modal-estimated-fee"></span>
+                    </div>
+                    <div class="btn-pay">
+                        <button>pay</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
