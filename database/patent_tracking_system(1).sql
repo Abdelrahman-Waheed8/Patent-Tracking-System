@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2026 at 11:38 PM
+-- Generation Time: May 06, 2026 at 02:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,6 +62,14 @@ CREATE TABLE `coverdterritory` (
   `JurisdictionalID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `coverdterritory`
+--
+
+INSERT INTO `coverdterritory` (`PatentAppID`, `JurisdictionalID`) VALUES
+(22, 18),
+(23, 19);
+
 -- --------------------------------------------------------
 
 --
@@ -82,9 +90,9 @@ CREATE TABLE `disclosure` (
 --
 
 INSERT INTO `disclosure` (`disc_ID`, `Classification_ID`, `Title`, `Description`, `Unique_fgrPrint`, `FilingDate`) VALUES
-(6, NULL, 'Adaptive Power Optimization Method for IoT Devices using Machine Learning', 'Anything is a good thing', '29cc926ed20a3e7c3c22d2fe438314d6938061184ecd77942474543e991b66d9', '2026-04-28'),
-(7, NULL, 'Electrical Mechanism of Quantom', '1) unique\r\n2) cool\r\n3) wonderful', '54c8676b1e1e067e87d5fa3294a50bc91b25bca52559cf1c470fe5a7b5907587', '2026-04-28'),
-(8, NULL, 'Monomicro Services', 'So Advanced Technology', 'dd56c19ba6aaf68f121ef1aac86092c0ad6acbcda1be8b2079ec361e97bb25c5', '2026-04-28');
+(40, NULL, 'Flying car', 'SO Cool', 'b1aa1748af86c14c5ec2cb113408e93ea9db61e41b579a5098b3120847d5225b', '2026-05-04'),
+(41, NULL, 'Foldable Phones', 'good', '282db9d044e411602857bd668cfebbe96676ace15879aa9230436f3f205501f6', '2026-05-04'),
+(42, NULL, 'MongoDB', 'Dynamic Non-Relational Database', '02a91279e20f7da957f075a67069be26420d5700713b1450db218df9a1667909', '2026-05-04');
 
 -- --------------------------------------------------------
 
@@ -101,6 +109,15 @@ CREATE TABLE `document` (
   `UploadDate` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `document`
+--
+
+INSERT INTO `document` (`document_ID`, `evidence_ID`, `filePath`, `Version`, `docType`, `UploadDate`) VALUES
+(32, 32, 'uploads/_______________________________________Hybrid_Cloud___Enterprise_Branch_WAN________Cisco_Packet_Tracer_92591bc3.pdf', NULL, 'pdf', '2026-05-04 16:03:25'),
+(33, 33, 'uploads/_______________________________________Hybrid_Cloud___Enterprise_Branch_WAN________Cisco_Packet_Tracer_64866a08.pdf', NULL, 'pdf', '2026-05-04 16:07:56'),
+(34, 34, 'uploads/_______________________________________Hybrid_Cloud___Enterprise_Branch_WAN________Cisco_Packet_Tracer_ebc46d35.pdf', NULL, 'pdf', '2026-05-04 17:17:05');
+
 -- --------------------------------------------------------
 
 --
@@ -113,6 +130,15 @@ CREATE TABLE `evidence_vault` (
   `evidence_type` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `evidence_vault`
+--
+
+INSERT INTO `evidence_vault` (`evidence_ID`, `disc_ID`, `evidence_type`) VALUES
+(32, 40, 'Invention Documents'),
+(33, 41, 'Invention Documents'),
+(34, 42, 'Invention Documents');
+
 -- --------------------------------------------------------
 
 --
@@ -124,6 +150,17 @@ CREATE TABLE `external_agreements` (
   `usr_ID` int(11) DEFAULT NULL,
   `company_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `external_agreements`
+--
+
+INSERT INTO `external_agreements` (`id`, `usr_ID`, `company_name`) VALUES
+(40, 1, 'Apple'),
+(41, 1, 'Tesla'),
+(42, 2, 'Apple'),
+(43, 3, 'Meta'),
+(44, 1, 'Samsung');
 
 -- --------------------------------------------------------
 
@@ -186,6 +223,15 @@ CREATE TABLE `jursidiction` (
   `countryCode` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `jursidiction`
+--
+
+INSERT INTO `jursidiction` (`JurisdictionalID`, `JurisdictionalType`, `name`, `countryCode`) VALUES
+(17, 'national', 'Turkey', '#Turk'),
+(18, 'national', 'Afghanistan', '#Afgh'),
+(19, 'international', 'europe,asia,', '#euro');
+
 -- --------------------------------------------------------
 
 --
@@ -199,8 +245,18 @@ CREATE TABLE `licenseagreement` (
   `StartDate` date DEFAULT NULL,
   `Territory` varchar(100) DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
-  `IsExclusive` tinyint(1) DEFAULT NULL
+  `IsExclusive` tinyint(1) DEFAULT NULL,
+  `CompanyName` varchar(255) DEFAULT NULL,
+  `MinNetSalesClause` decimal(12,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `licenseagreement`
+--
+
+INSERT INTO `licenseagreement` (`LicenseID`, `Patent_ID`, `Type`, `StartDate`, `Territory`, `EndDate`, `IsExclusive`, `CompanyName`, `MinNetSalesClause`) VALUES
+(10, 8, 'Exclusive', '2026-05-06', 'Egypt', '2026-05-08', 1, 'Meta', NULL),
+(11, 9, 'Non-Exclusive', '2026-05-06', 'Betengan', '2026-08-28', 0, 'Open AI', NULL);
 
 -- --------------------------------------------------------
 
@@ -249,12 +305,13 @@ CREATE TABLE `ownershipofinvention` (
 --
 
 INSERT INTO `ownershipofinvention` (`disc_ID`, `usr_ID`, `ContributionPercentage`) VALUES
-(6, 2, 40.00),
-(6, 3, 60.00),
-(7, 1, 20.00),
-(7, 2, 50.00),
-(7, 3, 30.00),
-(8, 1, 100.00);
+(40, 1, 49.00),
+(40, 2, 51.00),
+(41, 1, 90.00),
+(41, 2, 10.00),
+(42, 1, 21.00),
+(42, 2, 30.00),
+(42, 3, 49.00);
 
 -- --------------------------------------------------------
 
@@ -270,6 +327,20 @@ CREATE TABLE `patent` (
   `Expiration` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `patent`
+--
+
+INSERT INTO `patent` (`Patent_ID`, `Number`, `GrantDate`, `Status`, `Expiration`) VALUES
+(2, 'EG44848', NULL, 'Active', NULL),
+(3, 'US888888888', NULL, 'Active', NULL),
+(4, 'US83383', NULL, 'Active', NULL),
+(5, 'U88833332', NULL, 'Active', NULL),
+(6, 'US-RC-100', NULL, 'Active', NULL),
+(7, 'Us839393', NULL, 'Active', NULL),
+(8, 'US849944', NULL, 'Active', NULL),
+(9, 'Ki9383838', NULL, 'Active', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -283,6 +354,15 @@ CREATE TABLE `patentapplication` (
   `FilingDate` date DEFAULT NULL,
   `Status` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `patentapplication`
+--
+
+INSERT INTO `patentapplication` (`AppID`, `disc_ID`, `appNum`, `FilingDate`, `Status`) VALUES
+(21, 40, 'APP000040', '2026-05-04', 'approved'),
+(22, 41, 'APP000041', '2026-05-04', 'pending'),
+(23, 42, 'APP000042', '2026-05-04', 'rejected');
 
 -- --------------------------------------------------------
 
@@ -326,6 +406,19 @@ CREATE TABLE `prior_art` (
   `Link` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `prior_art`
+--
+
+INSERT INTO `prior_art` (`Prior_ID`, `disc_ID`, `Description`, `Link`) VALUES
+(27, 40, 'Good', 'G3393993'),
+(28, 40, 'Good', 'G3393993'),
+(29, 41, 'good', 'good'),
+(30, 41, 'good', 'good'),
+(31, 42, 'Fair', 'T738338'),
+(32, 42, 'Fair', 'T738338'),
+(33, 42, 'Fair', 'T738338');
+
 -- --------------------------------------------------------
 
 --
@@ -339,8 +432,19 @@ CREATE TABLE `royaltypayment` (
   `Currency` varchar(3) DEFAULT NULL,
   `calculationMethod` varchar(100) DEFAULT NULL,
   `DistributionStatus` varchar(50) DEFAULT NULL,
-  `PmtDate` date DEFAULT NULL
+  `PmtDate` date DEFAULT NULL,
+  `NetSales` decimal(12,2) DEFAULT NULL,
+  `UnitsSold` int(11) DEFAULT NULL,
+  `RateValue` decimal(12,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `royaltypayment`
+--
+
+INSERT INTO `royaltypayment` (`royaltyID`, `LicenseID`, `Amount`, `Currency`, `calculationMethod`, `DistributionStatus`, `PmtDate`, `NetSales`, `UnitsSold`, `RateValue`) VALUES
+(8, 10, 100000.00, 'USD', 'Per Unit', 'Active', '2026-05-06', NULL, 2000, 50.00),
+(9, 11, 500.00, 'USD', 'Fixed', 'Active', '2026-05-06', NULL, NULL, 500.00);
 
 -- --------------------------------------------------------
 
@@ -363,9 +467,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`usr_ID`, `first_name`, `last_name`, `Email`, `Role`, `pwd_hash`, `2FA_Enabled`) VALUES
-(1, 'Ahmed', 'Waheed', 'ahmed@gmail.com', 'Inventor', '$2y$10$Yf87fQwWUL6vnPl7v2dJru9n6lRSlupmzHb.B9ehowI8Oyx0mPEkW', 0),
+(1, 'Ahmed', 'Waheed', 'ahmed@gmail.com', 'Examiner', '$2y$10$Yf87fQwWUL6vnPl7v2dJru9n6lRSlupmzHb.B9ehowI8Oyx0mPEkW', 0),
 (2, 'Mazen', 'Reda', 'mazen@gmail.com', 'Inventor', '$2y$10$CrdNUFZTJMxg5Y5m/tsD..9ABMg4pFRIHLt9QBv3YfF9nRGblBBKy', 0),
-(3, 'Sami', 'Mohammed', 'Sami@gmail.com', 'Inventor', '$2y$10$GtfKcVLbseCPWgLqnI8BW.bGUdPDyuvCk7IAuAZNFqSylNWb4.N/K', 0);
+(3, 'Sami', 'Mohammed', 'Sami@gmail.com', 'Inventor', '$2y$10$GtfKcVLbseCPWgLqnI8BW.bGUdPDyuvCk7IAuAZNFqSylNWb4.N/K', 0),
+(4, 'Abdulrahman', 'Waheed', 'Abdulrahman@gmail.com', 'Inventor', '$2y$10$2riXwHRlkT/KxGHA.XHuauAiCFViGQoQLOEr8fJtF3UVuE44Oqhfm', 0),
+(5, 'Abdulwahab', 'Reda', 'Abdulwahab@gmail.com', 'Admin', '$2y$10$qtVgV9YMyjtAgDCBCGMnwe0HfqzDq9chkI1eS3VNqaAE6a78VaKJW', 0),
+(6, 'Mazen', 'Reda', 'mazen1@gmail.com', 'Inventor', '$2y$10$WcNvMaee44pBicLQSXsi/.BvM5sPubMDnErFg2Ov7pjC9w2YSIWzq', 0);
 
 -- --------------------------------------------------------
 
@@ -576,25 +683,25 @@ ALTER TABLE `claim`
 -- AUTO_INCREMENT for table `disclosure`
 --
 ALTER TABLE `disclosure`
-  MODIFY `disc_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `disc_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `document`
 --
 ALTER TABLE `document`
-  MODIFY `document_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `document_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `evidence_vault`
 --
 ALTER TABLE `evidence_vault`
-  MODIFY `evidence_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `evidence_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `external_agreements`
 --
 ALTER TABLE `external_agreements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `feeschedule`
@@ -612,13 +719,13 @@ ALTER TABLE `ipc_classification`
 -- AUTO_INCREMENT for table `jursidiction`
 --
 ALTER TABLE `jursidiction`
-  MODIFY `JurisdictionalID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `JurisdictionalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `licenseagreement`
 --
 ALTER TABLE `licenseagreement`
-  MODIFY `LicenseID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `LicenseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `logs`
@@ -636,13 +743,13 @@ ALTER TABLE `officeaction`
 -- AUTO_INCREMENT for table `patent`
 --
 ALTER TABLE `patent`
-  MODIFY `Patent_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Patent_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `patentapplication`
 --
 ALTER TABLE `patentapplication`
-  MODIFY `AppID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `AppID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `patentfee`
@@ -660,19 +767,19 @@ ALTER TABLE `portfolio`
 -- AUTO_INCREMENT for table `prior_art`
 --
 ALTER TABLE `prior_art`
-  MODIFY `Prior_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Prior_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `royaltypayment`
 --
 ALTER TABLE `royaltypayment`
-  MODIFY `royaltyID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `royaltyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `usr_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `usr_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `workflow`
