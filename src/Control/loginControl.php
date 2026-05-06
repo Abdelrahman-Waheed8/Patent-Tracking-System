@@ -69,3 +69,5 @@ class loginControl extends loginModel{
         return $redirect;
     }
 }
+
+

@@ -22,7 +22,7 @@
                 </li>
                 <li><a href="../patent/patent.php"><i class="fas fa-file"></i> Patents</a></li>
                 <li><a href="../renewals/renewals.php"><i class="fas fa-sync"></i> Renewals</a></li>
-                <li><a href="./licensing.html" class="active"><i class="fas fa-handshake"></i> Licensing</a></li>
+                <li><a href="./licensing.php" class="active"><i class="fas fa-handshake"></i> Licensing</a></li>
                 <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
 
@@ -118,11 +118,11 @@
                     </div>
                     <div class="form-group">
                         <label for="license-company">Company</label>
-                        <input type="text" id="license-company" placeholder="e.g., Samsung" required>
+                        <input type="text" id="license-company" placeholder="e.g., Samsung">
                     </div>
                     <div class="form-group">
                         <label for="license-type">Type</label>
-                        <select id="license-type" required>
+                        <select id="license-type">
                             <option value="" disabled selected>Select type</option>
                             <option value="Exclusive">Exclusive</option>
                             <option value="Non-Exclusive">Non-Exclusive</option>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="form-group">
                         <label for="license-territory">Territory</label>
-                        <input type="text" id="license-territory" placeholder="e.g., USA, Global" required>
+                        <input type="text" id="license-territory" placeholder="e.g., USA, Global">
                     </div>
                     <div class="form-group">
                         <label for="license-revenue-model">Revenue Model</label>
@@ -138,16 +138,30 @@
                             <option value="" disabled selected>Select revenue model</option>
                             <option value="Fixed">Fixed</option>
                             <option value="Per Unit">Per Unit</option>
-                            <option value="Percentage">Percentage</option>
+                            <option value="Percentage">Net Sales %</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="license-revenue-value">Revenue Value</label>
-                        <input type="text" id="license-revenue-value" placeholder="e.g., 5% or 10000" required>
+                        <label for="license-revenue-value">Rate / Value</label>
+                        <input type="text" id="license-revenue-value" placeholder="e.g., 5 or 10000" required>
+                    </div>
+                    <div class="form-group net-sales-group hidden">
+                        <label for="license-net-sales">Net Sales (for Net Sales %)</label>
+                        <input type="number" step="0.01" id="license-net-sales" placeholder="e.g., 500000">
+                        <small class="helper-text">Leave blank to use a sample sales estimate for calculation.</small>
+                    </div>
+                    <div class="form-group units-sold-group hidden">
+                        <label for="license-units-sold">Units Sold (for Per Unit)</label>
+                        <input type="number" id="license-units-sold" placeholder="e.g., 2000">
+                        <small class="helper-text">Leave blank to use a sample quantity estimate.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="license-min-net-sales-clause">Min Net Sales Clause (optional)</label>
+                        <input type="number" step="0.01" id="license-min-net-sales-clause" placeholder="e.g., 100000">
                     </div>
                     <div class="form-group">
                         <label for="license-end-date">End Date</label>
-                        <input type="date" id="license-end-date" required>
+                        <input type="date" id="license-end-date">
                     </div>
                     <div class="form-actions">
                         <button type="button" class="btn-secondary close-modal">Cancel</button>
@@ -174,11 +188,11 @@
                     </div>
                     <div class="form-group">
                         <label for="edit-license-company">Company</label>
-                        <input type="text" id="edit-license-company" required>
+                        <input type="text" id="edit-license-company">
                     </div>
                     <div class="form-group">
                         <label for="edit-license-type">Type</label>
-                        <select id="edit-license-type" required>
+                        <select id="edit-license-type">
                             <option value="Exclusive">Exclusive</option>
                             <option value="Non-Exclusive">Non-Exclusive</option>
                         </select>
@@ -193,23 +207,37 @@
                     </div>
                     <div class="form-group">
                         <label for="edit-license-territory">Territory</label>
-                        <input type="text" id="edit-license-territory" required>
+                        <input type="text" id="edit-license-territory">
                     </div>
                     <div class="form-group">
                         <label for="edit-license-revenue-model">Revenue Model</label>
                         <select id="edit-license-revenue-model" required>
                             <option value="Fixed">Fixed</option>
                             <option value="Per Unit">Per Unit</option>
-                            <option value="Percentage">Percentage</option>
+                            <option value="Percentage">Net Sales %</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="edit-license-revenue-value">Revenue Value</label>
+                        <label for="edit-license-revenue-value">Rate / Value</label>
                         <input type="text" id="edit-license-revenue-value" required>
+                    </div>
+                    <div class="form-group net-sales-group hidden">
+                        <label for="edit-license-net-sales">Net Sales (for Net Sales %)</label>
+                        <input type="number" step="0.01" id="edit-license-net-sales">
+                        <small class="helper-text">Leave blank to use a sample sales estimate for calculation.</small>
+                    </div>
+                    <div class="form-group units-sold-group hidden">
+                        <label for="edit-license-units-sold">Units Sold (for Per Unit)</label>
+                        <input type="number" id="edit-license-units-sold">
+                        <small class="helper-text">Leave blank to use a sample quantity estimate.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-license-min-net-sales-clause">Min Net Sales Clause (optional)</label>
+                        <input type="number" step="0.01" id="edit-license-min-net-sales-clause">
                     </div>
                     <div class="form-group">
                         <label for="edit-license-end-date">End Date</label>
-                        <input type="date" id="edit-license-end-date" required>
+                        <input type="date" id="edit-license-end-date">
                     </div>
                     <div class="form-actions">
                         <button type="button" class="btn-secondary close-modal">Cancel</button>
