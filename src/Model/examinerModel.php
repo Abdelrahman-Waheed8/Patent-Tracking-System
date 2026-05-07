@@ -56,7 +56,6 @@ class examinerModel extends DBH
 
         
         
-
         return $stmt->execute();
     }
 }
