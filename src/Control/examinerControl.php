@@ -8,7 +8,7 @@ class ExaminerController extends examinerModel {
 
     public function processDecision($discID, $decision) {
 
-        $allowedStatuses = ['approved', 'rejected', 'pending'];
+        $allowedStatuses = ['Legal_Review', 'rejected', 'pending'];
 
         if (!in_array($decision, $allowedStatuses)) {
             return false;

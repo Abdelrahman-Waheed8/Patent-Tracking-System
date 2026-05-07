@@ -110,7 +110,7 @@ include "../../src/examiner.php";
                 <div id="review-details" style="padding:25px;"></div>
 
                 <div class="decision-buttons" style="padding:0 25px 25px;">
-                    <button type="submit" class="approve-btn" onclick="setStatus('approved')">
+                    <button type="submit" class="approve-btn" onclick="setStatus('Legal_Review')">
                         Approve
                     </button>
                     <button type="submit" class="reject-btn" onclick="setStatus('rejected')">
