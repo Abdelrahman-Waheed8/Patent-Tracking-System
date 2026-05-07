@@ -80,4 +80,40 @@ class examinerModel extends DBH
 
         return $stmt->execute();
     }
+
+    public function documentExaminer($userID, $action, $type, $description, $patentID = null, $discID = null)
+    {
+        $pdo = $this->connect();
+
+        $query = "INSERT INTO logs (usr_ID, `Action`, `TimeStamp`, `type`, `Description`)
+                  VALUES (:usr_ID, :actn, NOW(), :tp, :dsc);";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":usr_ID", $userID);
+        $stmt->bindParam(":tp", $type);
+        $stmt->bindParam(":actn", $action);
+        $stmt->bindParam(":dsc", $description);
+        $stmt->execute();
+
+        if($patentID && $description)
+            {
+                $query2 = "INSERT INTO prior_art (disc_ID, `Description`, Link) 
+                           VALUES (:discID, :dsc, :lnk);";
+                $stmt2 = $pdo->prepare($query2);
+                $stmt2->bindParam(":discID", $discID);
+                $stmt2->bindParam(":dsc", $description);
+                $stmt2->bindParam(":lnk", $patentID);
+                $stmt2->execute();
+            }
+    }
+
+    public function checkPatent($patentID)
+    {
+        $pdo = $this->connect();
+
+        $stmt = $pdo->prepare("SELECT * FROM patent WHERE Patent_ID = :pID");
+        $stmt->bindParam(":pID", $patentID);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

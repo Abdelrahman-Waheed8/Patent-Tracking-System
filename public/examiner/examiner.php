@@ -1,5 +1,6 @@
 <?php 
 include "../../src/examiner.php"; 
+include "../../src/view/examinerView.php";
 ?>
 
 <!DOCTYPE html>
@@ -138,22 +139,20 @@ include "../../src/examiner.php";
                 
                 <div style="padding:25px;">
                     <div class="detail-item" style="margin-bottom: 15px;">
-                        <label for="rejection_reason" style="font-weight: bold; display: block; margin-bottom: 5px;">Primary Reason for Rejection:</label>
-                        <select name="rejection_reason" id="rejection_reason" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" required>
-                            <option value="">Select a reason...</option>
-                            <option value="Incomplete Documentation">Incomplete Documentation</option>
-                            <option value="Lacks Novelty">Lacks Novelty</option>
-                            <option value="Already Patented">Already Patented</option>
-                            <option value="Non-Patentable Subject Matter">Non-Patentable Subject Matter</option>
-                            <option value="Other">Other</option>
-                        </select>
+                        <label for="prior-art" style="font-weight: bold; display: block; margin-bottom: 5px;">Prior art refrence</label>
+                        <input type="text" name="prior-art" placeholder="Ex: Patent ID" style="width: 100%; font-weight: bold; display: block; margin-bottom: 5px;">
                     </div>
                     
                     <div class="detail-item">
-                        <label for="additional_comments" style="font-weight: bold; display: block; margin-bottom: 5px;">Additional Comments / Detailed Explanation:</label>
-                        <textarea name="additional_comments" id="additional_comments" rows="5" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; resize: vertical;" placeholder="Provide details for the rejection..." required></textarea>
+                        <label for="additional_comments" style="font-weight: bold; display: block; margin-bottom: 5px;">Reason For Rejection:</label>
+                        <textarea name="additional_comments" id="additional_comments" rows="5" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; resize: vertical;" placeholder="Provide details for the rejection..."></textarea>
                     </div>
                 </div>
+
+                <?php
+                $view = new ExaminerView();
+                $view->displayErrors();
+                ?>
 
                 <div class="decision-buttons" style="padding:0 25px 25px;">
                     <button type="submit" class="reject-btn">

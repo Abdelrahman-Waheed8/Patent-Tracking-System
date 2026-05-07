@@ -23,4 +23,18 @@ class ExaminerView
             ";
         }
     }
+
+    public function displayErrors()
+    {
+        if (isset($_SESSION['errorsExaminer']) && !empty($_SESSION['errorsExaminer'])) {
+            echo "<div class='error-messages'>";
+            foreach ($_SESSION['errorsExaminer'] as $error) {
+                echo "<p>$error</p>";
+            }
+            echo "</div>";
+
+            // Clear errors after displaying
+            unset($_SESSION['errorsExaminer']);
+        }
+    }
 }
