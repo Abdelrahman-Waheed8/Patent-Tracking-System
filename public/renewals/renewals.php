@@ -1,5 +1,12 @@
 <?php
 include "../../src/config/config_session.php";
+include "../../src/config/config.php";
+include "../../src/model/patentModel.php";
+include "../../src/control/patentControl.php";
+include "../../src/view/patentView.php";
+
+$controller = new patentControl();
+$userData = $controller->filterData($_SESSION["user_id"])
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +68,10 @@ include "../../src/config/config_session.php";
                         <i class="fas fa-file-alt"></i>
                         <span>Total Patents</span>
                     </div>
-                    <h1 id="total-patents">0</h1>
+                    <?php
+                    $view = new patentView();
+                    $view->displayCardTotal();
+                    ?>
                     <p>Patents requiring renewal</p>
                 </div>
 
@@ -70,7 +80,10 @@ include "../../src/config/config_session.php";
                         <i class="fas fa-clock"></i>
                         <span>Due Soon</span>
                     </div>
-                    <h1 id="due-soon">0</h1>
+                    <?php
+                    $view = new patentView();
+                    $view->displayCardDueSoon();
+                    ?>
                     <p>Due within 30 days</p>
                 </div>
 
@@ -79,7 +92,10 @@ include "../../src/config/config_session.php";
                         <i class="fas fa-exclamation-triangle"></i>
                         <span>Overdue</span>
                     </div>
-                    <h1 id="overdue">0</h1>
+                    <?php
+                    $view = new patentView();
+                    $view->displayCardOverDue();
+                    ?>
                     <p>Overdue renewals</p>
                 </div>
             </div>
@@ -90,6 +106,27 @@ include "../../src/config/config_session.php";
                 </div>
 
                 <div id="renewals-table" class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Patent</th>
+                                <th>GrantDate</th>
+                                <th>Status</th>
+                                <th>Deadline</th>
+                                <th>DueDate</th>
+                                <th>Days Left</th>
+                                <th>Estimated Fee</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                    $view = new patentView();
+                    $view->displayContent();
+                    ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
@@ -97,86 +134,59 @@ include "../../src/config/config_session.php";
 
     <div id="alert-container" class="alert-container"></div>
 
-    <div id="payment-modal" class="modal-overlay">
+    <div id="view-patent-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Payment Details</h2>
-                <i class="fas fa-times close-modal"></i>
+                <h2>Patent Renewal Details</h2>
+                <span class="close-modal">&times;</span>
             </div>
             <div class="modal-body">
-                <div class="payment-info">
-                    <div class="info-row">
-                        <label>Patent Number:</label>
-                        <span id="pay-patent-number"></span>
+                <div id="view-patent-details">
+                    <div class="detail-item">
+                        <strong>ID</strong>
+                        <span id="modal-patent-id"></span>
                     </div>
-                    <div class="info-row">
-                        <label>Patent Title:</label>
-                        <span id="pay-patent-title"></span>
+                    <div class="detail-item">
+                        <strong>Patent</strong>
+                        <span id="modal-patent-title"></span>
                     </div>
-                    <div class="info-row">
-                        <label>Due Date:</label>
-                        <span id="pay-due-date"></span>
+                    <div class="detail-item">
+                        <strong>Grant Date</strong>
+                        <span id="modal-grant-date"></span>
                     </div>
-                    <div class="info-row">
-                        <label>Amount:</label>
-                        <span id="pay-amount" style="font-size: 18px; font-weight: bold; color: #28a745;"></span>
+                    <div class="detail-item">
+                        <strong>Status</strong>
+                        <span id="modal-status"></span>
                     </div>
-                    <div class="info-row">
-                        <label>Currency:</label>
-                        <span id="pay-currency">USD</span>
+                    <div class="detail-item">
+                        <strong>Deadline</strong>
+                        <span id="modal-deadline"></span>
                     </div>
-                    <div class="info-row">
-                        <label>Status:</label>
-                        <span id="pay-status"></span>
+                    <div class="detail-item">
+                        <strong>Due Date</strong>
+                        <span id="modal-due-date"></span>
                     </div>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn-secondary close-modal">Close</button>
-                    <button type="button" class="btn-primary" id="confirm-pay-btn">Confirm Payment</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <div class="detail-item">
+                        <strong>Days Left</strong>
+                        <span id="modal-days-left"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Estimated Fee</strong>
+                        <span id="modal-estimated-fee"></span>
+                    </div>
+                    <form action="../../src/process_payment.php" method="POST" id="payment-form">
+                        <input type="hidden" name="patent_id" id="form-patent-id" value="">
+                        
+                        <div class="detail-item" id="transaction-container" style="display: none;">
+                            <strong>Transaction ID</strong>
+                            <input type="text" id="transaction-input" name="transaction_id" placeholder="Enter Transaction ID" style="padding: 5px; width: 150px;" required>
+                        </div>
 
-    <div id="renewal-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title">Add New Renewal</h2>
-                <i class="fas fa-times close-modal"></i>
-            </div>
-            <div class="modal-body">
-                <form id="renewal-form">
-                    <input type="hidden" id="renewal-id">
-                    <div class="form-group">
-                        <label for="patent-number">Patent Number</label>
-                        <input type="text" id="patent-number" placeholder="e.g., US1234567" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="patent-title">Patent Title</label>
-                        <input type="text" id="patent-title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="due-date">Due Date</label>
-                        <input type="date" id="due-date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="amount">Amount (USD)</label>
-                        <input type="number" id="amount" step="0.01" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select id="status">
-                            <option value="Upcoming">Upcoming</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Paid">Paid</option>
-                            <option value="Overdue">Overdue</option>
-                        </select>
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="btn-secondary close-modal">Cancel</button>
-                        <button type="submit" class="btn-primary">Save Renewal</button>
-                    </div>
-                </form>
+                        <div class="btn-pay">
+                            <button type="submit" id="pay-btn">Pay</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
