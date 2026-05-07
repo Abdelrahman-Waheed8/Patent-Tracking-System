@@ -113,11 +113,54 @@ include "../../src/examiner.php";
                     <button type="submit" class="approve-btn" onclick="setStatus('Legal_Review')">
                         Approve
                     </button>
-                    <button type="submit" class="reject-btn" onclick="setStatus('rejected')">
+                    <button type="button" class="reject-btn" onclick="openRejectModal()">
                         Reject
                     </button>
                     <button type="submit" class="revision-btn" onclick="setStatus('pending')">
                         Need Revision
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Rejection Reason Modal -->
+    <div class="modal-overlay" id="reject-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Rejection Reason</h2>
+                <i class="fas fa-times close-modal" onclick="closeRejectModal()"></i>
+            </div>
+
+            <form action="../../src/examiner.php" method="POST">
+                <input type="hidden" name="disc_id" id="reject_disc_id">
+                <input type="hidden" name="status" value="rejected">
+                
+                <div style="padding:25px;">
+                    <div class="detail-item" style="margin-bottom: 15px;">
+                        <label for="rejection_reason" style="font-weight: bold; display: block; margin-bottom: 5px;">Primary Reason for Rejection:</label>
+                        <select name="rejection_reason" id="rejection_reason" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd;" required>
+                            <option value="">Select a reason...</option>
+                            <option value="Incomplete Documentation">Incomplete Documentation</option>
+                            <option value="Lacks Novelty">Lacks Novelty</option>
+                            <option value="Already Patented">Already Patented</option>
+                            <option value="Non-Patentable Subject Matter">Non-Patentable Subject Matter</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <label for="additional_comments" style="font-weight: bold; display: block; margin-bottom: 5px;">Additional Comments / Detailed Explanation:</label>
+                        <textarea name="additional_comments" id="additional_comments" rows="5" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; resize: vertical;" placeholder="Provide details for the rejection..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="decision-buttons" style="padding:0 25px 25px;">
+                    <button type="submit" class="reject-btn">
+                        Confirm Rejection
+                    </button>
+                    <button type="button" class="revision-btn" onclick="closeRejectModal()">
+                        Cancel
                     </button>
                 </div>
             </form>

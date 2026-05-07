@@ -97,6 +97,24 @@ function closeModal() {
   modal.classList.remove("active");
 }
 
+function openRejectModal() {
+  const rejectModal = document.getElementById("reject-modal");
+  const rejectDiscId = document.getElementById("reject_disc_id");
+  
+  if (rejectModal && rejectDiscId) {
+    rejectDiscId.value = currentId;
+    rejectModal.classList.add("active");
+    closeModal(); // Close the main review modal
+  }
+}
+
+function closeRejectModal() {
+  const rejectModal = document.getElementById("reject-modal");
+  if (rejectModal) {
+    rejectModal.classList.remove("active");
+  }
+}
+
 function setStatus(status) {
   const statusInput = document.getElementById("status_input");
   if (statusInput) {

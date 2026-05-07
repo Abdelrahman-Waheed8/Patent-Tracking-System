@@ -54,8 +54,30 @@ class examinerModel extends DBH
         $stmt2->execute();
         $patentApp = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-        
-        
+        $officeActionType = "";
+        switch($status)
+        {
+            case "approved" :
+                $officeActionType = "Approved";
+                break;
+            case "Legal_Review":
+                $officeActionType = "Legal Review";
+                break;
+            case "rejected":
+                $officeActionType = "Rejected";
+                break;
+            default:
+                $officeActionType = "Initial Review";
+                break;
+        }
+
+        $stmt3 = $pdo->prepare("INSERT INTO officeaction (AppID, DateReceived, Deadline, `Type`, `Status`) 
+        VALUES (:AppID, NOW(), DATE_ADD(NOW(), INTERVAL 3 MONTH), :tp, :sts)");
+        $stmt3->bindParam(":AppID", $patentApp['AppID']);
+        $stmt3->bindParam(":sts", $status);
+        $stmt3->bindParam(":tp", $officeActionType);
+        $stmt3->execute();
+
         return $stmt->execute();
     }
 }
