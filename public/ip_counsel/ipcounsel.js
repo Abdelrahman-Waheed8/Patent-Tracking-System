@@ -54,6 +54,7 @@
                 html += '<div class="ipc-actions">';
                 html += '<form id="reject-form" action="../../src/ipcounsel.php" method="POST">';
                 html += `<input type="hidden" name="argument_disc_id" value="${discId}">`;
+                html += `<input type="hidden" name="argument_disc_id" value="${appId}">`;
                 html += '<div><label><input type="radio" name="ipc_action" value="accept"> Accept rejection</label></div>';
                 html += '<div><label><input type="radio" name="ipc_action" value="argue" checked> Argue with examiner</label></div>';
                 html += '<div id="argument-wrap" style="margin-top:8px;">';
@@ -84,25 +85,6 @@
                 });
 
                 cancelBtn.addEventListener('click', function(){ hideModal(); });
-
-            } else if(statusText.includes('legal_review') || statusText.includes('legal-review') || statusText.includes('legal review')){
-                // Legal review modal: show details and Accept/Cancel
-                let html = detailsHtml;
-                html += '<div style="margin-top:12px; text-align:right;">';
-                // include hidden inputs so the POST contains required data
-                html += '<form id="legal-form" action="../../src/ipcounsel.php" method="POST">';
-                html += `<input type="hidden" name="argument_disc_id" value="${discId}">`;
-                html += `<input type="hidden" name="ipc_action" value="accept">`;
-                html += '<button type="submit" id="accept-legal" class="btn primary">Accept</button> ';
-                html += '<button type="button" id="cancel-legal" class="btn">Cancel</button>';
-                html += '</form>';
-                html += '</div>';
-
-                showModal(html);
-
-                document.getElementById('cancel-legal').addEventListener('click', hideModal);
-                // Let the submit button perform a normal POST; no custom event that prevents navigation is needed.
-
 
             } else {
                 // Fallback: just show details with cancel

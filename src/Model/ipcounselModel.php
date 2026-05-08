@@ -5,31 +5,35 @@ class IPcounselModel extends DBH
     public function fetchTable()
     {
         $pdo = $this->connect();
-        $query = "SELECT * FROM patentapplication WHERE `Status` IN ('rejected', 'Legal_Review') GROUP BY AppID;";
+        $query = "SELECT * FROM patentapplication WHERE `Status` = 'rejected' GROUP BY AppID;";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getRejectionDetails($appID)
+    public function getRejectionDetails()
     {
         $pdo = $this->connect();
         $query = "SELECT 
+                    pa.AppID, 
+                    pa.disc_ID,
+                    pa.appNum, 
+                    pa.Status AS ApplicationStatus, 
+                    d.Title, 
+                    d.Description AS DisclosureDescription, 
                     oa.ActionID, 
                     oa.DateReceived, 
                     oa.Deadline, 
                     oa.Type AS OfficeActionType, 
                     oa.Status AS OfficeActionStatus,
-                    l.Description AS RejectionReason,
-                    l.Timestamp AS RejectionLogDate,
-                    pa.appNum,
-                    pa.Status AS ApplicationStatus
-                  FROM officeaction oa
-                  JOIN patentapplication pa ON oa.AppID = pa.AppID
-                  LEFT JOIN logs l ON l.Action = 'Rejection' AND l.type = CAST(pa.AppID AS CHAR)
-                  WHERE pa.AppID = :appID;";
+                    pr.Description AS RejectionReason
+                  FROM patentapplication pa
+                  JOIN disclosure d ON pa.disc_ID = d.disc_ID
+                  LEFT JOIN officeaction oa ON pa.AppID = oa.AppID
+                  LEFT JOIN prior_art pr ON pa.disc_ID = pr.disc_ID
+                  WHERE pa.Status = 'rejected'
+                  ORDER BY pa.AppID DESC;";
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':appID', $appID, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

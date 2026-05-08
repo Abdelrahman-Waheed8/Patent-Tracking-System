@@ -61,6 +61,25 @@ include "../../src/view/ipcounselView.php";
                         </tbody>
                 </table>
             </section>
+
+            <section id="rejection-section">
+                <h2>Rejection Details</h2>
+                <table id="rejection-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Application Number</th>
+                            <th>Rejection Reason</th>
+                            <th>Deadline</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rejection_body">
+                    <?php
+                        $view->showRejectedApps();
+                    ?>
+                    </tbody>
+                </table>
+            </section>
         </div>
     </div>
     <!-- Review Modal -->

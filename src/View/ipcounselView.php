@@ -31,4 +31,18 @@ class IPcounselView extends IpcounselControl
             unset($_SESSION['errorIpcounsel']);
         }
     }
+
+    public function showRejectedApps()
+    {
+        $rejections = $this->getRejectionDetails();
+        foreach ($rejections as $row) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($row['Title']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['appNum']) . "</td>";
+            $reason = !empty($row['RejectionReason']) ? htmlspecialchars($row['RejectionReason']) : 'No reason specified';
+            echo "<td>" . $reason . "</td>";
+            echo "<td>" . htmlspecialchars($row['Deadline']) . "</td>";
+            echo "</tr>";
+        }
+    }
 }
