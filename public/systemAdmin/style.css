@@ -80,7 +80,24 @@ h6 {
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     margin: 10px;
 }
+.logout {
+    margin-top: auto;
+    margin: 20px 10px;
+    padding: 10px;
+    border: 1px solid #e74c3c;
+    background: transparent;
+    color: #e74c3c;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
+.logout:hover {
+    background: #e74c3c;
+    color: white;
+}
+.logout-btn{
+    text-decoration: none;
+}
 /* FORM */
 form {
     display: grid;

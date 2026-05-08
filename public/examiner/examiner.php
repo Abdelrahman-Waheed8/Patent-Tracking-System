@@ -23,11 +23,11 @@ include "../../src/view/examinerView.php";
                 <h2>Examiner Panel</h2>
             </div>
             <div class="right">
-                <i class="fas fa-bell icon-btn"></i>
-                <div class="user icon-btn">
-                    <i class="fas fa-user"></i>
-                    <i class="fas fa-chevron-down small"></i>
-                </div>
+                <a class="logout-btn" href="../index.php">
+                    <button class="logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </a>
             </div>
         </nav>
 
@@ -51,13 +51,10 @@ include "../../src/view/examinerView.php";
                     <tbody>
                         <?php if(!empty($allRequests)): ?>
                         <?php foreach($allRequests as $row): ?>
-                        <tr data-id="<?= $row['disc_ID'] ?>" 
-                            data-title="<?= htmlspecialchars($row['Title']) ?>"
-                            data-desc="<?= htmlspecialchars($row['Description']) ?>" 
-                            data-appnum="<?= $row['appNum'] ?>"
-                            data-date="<?= $row['FilingDate'] ?>" 
-                            data-status="<?= $row['Status'] ?>"
-                            data-inventors="<?= htmlspecialchars($row['Inventors'] ?? '') ?>" 
+                        <tr data-id="<?= $row['disc_ID'] ?>" data-title="<?= htmlspecialchars($row['Title']) ?>"
+                            data-desc="<?= htmlspecialchars($row['Description']) ?>" data-appnum="<?= $row['appNum'] ?>"
+                            data-date="<?= $row['FilingDate'] ?>" data-status="<?= $row['Status'] ?>"
+                            data-inventors="<?= htmlspecialchars($row['Inventors'] ?? '') ?>"
                             data-companies="<?= htmlspecialchars($row['ExternalCompanies'] ?? '') ?>"
                             data-jurisdictions="<?= htmlspecialchars($row['Jurisdictions'] ?? '') ?>"
                             data-files="<?= htmlspecialchars($row['FilePaths'] ?? '') ?>">
@@ -136,16 +133,21 @@ include "../../src/view/examinerView.php";
             <form action="../../src/examiner.php" method="POST">
                 <input type="hidden" name="disc_id" id="reject_disc_id">
                 <input type="hidden" name="status" value="rejected">
-                
+
                 <div style="padding:25px;">
                     <div class="detail-item" style="margin-bottom: 15px;">
-                        <label for="prior-art" style="font-weight: bold; display: block; margin-bottom: 5px;">Prior art refrence</label>
-                        <input type="text" name="prior-art" placeholder="Ex: Patent ID" style="width: 100%; font-weight: bold; display: block; margin-bottom: 5px;">
+                        <label for="prior-art" style="font-weight: bold; display: block; margin-bottom: 5px;">Prior art
+                            refrence</label>
+                        <input type="text" name="prior-art" placeholder="Ex: Patent ID"
+                            style="width: 100%; font-weight: bold; display: block; margin-bottom: 5px;">
                     </div>
-                    
+
                     <div class="detail-item">
-                        <label for="additional_comments" style="font-weight: bold; display: block; margin-bottom: 5px;">Reason For Rejection:</label>
-                        <textarea name="additional_comments" id="additional_comments" rows="5" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; resize: vertical;" placeholder="Provide details for the rejection..."></textarea>
+                        <label for="additional_comments"
+                            style="font-weight: bold; display: block; margin-bottom: 5px;">Reason For Rejection:</label>
+                        <textarea name="additional_comments" id="additional_comments" rows="5"
+                            style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; resize: vertical;"
+                            placeholder="Provide details for the rejection..."></textarea>
                     </div>
                 </div>
 
@@ -169,4 +171,5 @@ include "../../src/view/examinerView.php";
     <script src="examiner.js"></script>
 
 </body>
+
 </html>

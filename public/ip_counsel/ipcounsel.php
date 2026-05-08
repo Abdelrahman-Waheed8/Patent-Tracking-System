@@ -29,11 +29,12 @@ include "../../src/view/ipcounselView.php";
             </div>
 
             <div class="right">
-                <i class="fas fa-bell icon-btn"></i>
-
                 <div class="user icon-btn">
-                    <i class="fas fa-user"></i>
-                    <i class="fas fa-chevron-down small"></i>
+                    <a class="logout-btn" href="../index.php">
+                        <button class="logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </a>
                 </div>
             </div>
 
@@ -74,7 +75,7 @@ include "../../src/view/ipcounselView.php";
         </div>
     </div>
     <script>
-    
+
     </script>
     <script src="./ipcounsel.js"></script>
 </body>
