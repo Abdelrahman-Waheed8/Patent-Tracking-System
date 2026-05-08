@@ -17,4 +17,18 @@ class IPcounselView extends IpcounselControl
                     </tr>";
             }
     }
+
+    public function displayErrors()
+    {
+        if (isset($_SESSION['errorIpcounsel']) && !empty($_SESSION['errorIpcounsel'])) {
+            echo "<div class='error-messages'>";
+            foreach ($_SESSION['errorIpcounsel'] as $error) {
+                echo "<p>$error</p>";
+            }
+            echo "</div>";
+
+            // Clear errors after displaying
+            unset($_SESSION['errorIpcounsel']);
+        }
+    }
 }

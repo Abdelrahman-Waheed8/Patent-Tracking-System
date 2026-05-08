@@ -51,16 +51,15 @@
                 // Rejected modal: show details, radio actions and textarea for argument
                 let html = detailsHtml;
                 html += '<div class="ipc-actions">';
-                html += '<form id="reject-form">';
+                html += '<form id="reject-form" action="../../src/ipcounsel.php" method="POST">';
                 html += '<div><label><input type="radio" name="ipc_action" value="accept"> Accept rejection</label></div>';
-                html += '<div><label><input type="radio" name="ipc_action" value="amend"> Amend</label></div>';
                 html += '<div><label><input type="radio" name="ipc_action" value="argue" checked> Argue with examiner</label></div>';
                 html += '<div id="argument-wrap" style="margin-top:8px;">';
                 html += '<label for="argument_text">State why the examiner is wrong:</label><br>';
                 html += '<textarea id="argument_text" name="argument_text" rows="4" style="width:100%" placeholder="Type your argument here..."></textarea>';
                 html += '</div>';
                 html += '<div style="margin-top:10px; text-align:right;">';
-                html += '<button type="button" id="submit-argument" class="btn primary">Submit Argument</button> ';
+                html += '<button type="submit" id="submit-argument" class="btn primary">Submit Argument</button> ';
                 html += '<button type="button" id="cancel-review" class="btn">Cancel</button>';
                 html += '</div>';
                 html += '</form></div>';
@@ -98,8 +97,10 @@
                 // Legal review modal: show details and Accept/Cancel
                 let html = detailsHtml;
                 html += '<div style="margin-top:12px; text-align:right;">';
-                html += '<button type="button" id="accept-legal" class="btn primary">Accept</button> ';
+                html += '<form action="../../src/ipcounsel.php" method="POST">';
+                html += '<button type="submit" id="accept-legal" class="btn primary">Accept</button> ';
                 html += '<button type="button" id="cancel-legal" class="btn">Cancel</button>';
+                html += '</form>';
                 html += '</div>';
 
                 showModal(html);
