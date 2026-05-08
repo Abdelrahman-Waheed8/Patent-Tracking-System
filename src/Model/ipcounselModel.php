@@ -64,13 +64,7 @@ class IPcounselModel extends DBH
                 $stmt2 = $pdo->prepare($query2);
                 $stmt2->bindParam(":ud", $uid);
                 $stmt2->bindParam(":actn", $action);
-                $stmt2->bindParam(":desciption", $description);
                 $stmt2->execute();
-
-                $query3 = "UPDATE patentapplication SET `Status` = 'rejected' WHERE disc_ID = :disc;";
-                $stmt3 = $pdo->prepare($query3);
-                $stmt3->bindParam(":disc", $discID);
-                $stmt3->execute();
         }
     }
 }

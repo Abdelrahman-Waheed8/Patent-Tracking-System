@@ -44,6 +44,7 @@
 
             const cells = row.querySelectorAll('td');
             const appId = cells[0] ? cells[0].textContent.trim() : '';
+            const discId = cells[1] ? cells[1].textContent.trim() : '';
             const statusText = (cells[4] ? cells[4].textContent.trim() : (btn.dataset.status||'')).toLowerCase();
             const detailsHtml = buildDetailsFromRow(row);
 
@@ -52,6 +53,7 @@
                 let html = detailsHtml;
                 html += '<div class="ipc-actions">';
                 html += '<form id="reject-form" action="../../src/ipcounsel.php" method="POST">';
+                html += `<input type="hidden" name="argument_disc_id" value="${discId}">`;
                 html += '<div><label><input type="radio" name="ipc_action" value="accept"> Accept rejection</label></div>';
                 html += '<div><label><input type="radio" name="ipc_action" value="argue" checked> Argue with examiner</label></div>';
                 html += '<div id="argument-wrap" style="margin-top:8px;">';
@@ -83,21 +85,14 @@
 
                 cancelBtn.addEventListener('click', function(){ hideModal(); });
 
-                submitBtn.addEventListener('click', function(){
-                    const action = forms.querySelector('input[name="ipc_action"]:checked').value;
-                    const argument = (argumentText && argumentText.value) ? argumentText.value.trim() : '';
-                    // Emit custom event with details for backend integration
-                    const detail = { applicationId: appId, action: action, argument: argument };
-                    document.dispatchEvent(new CustomEvent('ipcounsel:rejected_review', { detail }));
-                    console.log('ipcounsel:rejected_review', detail);
-                    hideModal();
-                });
-
             } else if(statusText.includes('legal_review') || statusText.includes('legal-review') || statusText.includes('legal review')){
                 // Legal review modal: show details and Accept/Cancel
                 let html = detailsHtml;
                 html += '<div style="margin-top:12px; text-align:right;">';
-                html += '<form action="../../src/ipcounsel.php" method="POST">';
+                // include hidden inputs so the POST contains required data
+                html += '<form id="legal-form" action="../../src/ipcounsel.php" method="POST">';
+                html += `<input type="hidden" name="argument_disc_id" value="${discId}">`;
+                html += `<input type="hidden" name="ipc_action" value="accept">`;
                 html += '<button type="submit" id="accept-legal" class="btn primary">Accept</button> ';
                 html += '<button type="button" id="cancel-legal" class="btn">Cancel</button>';
                 html += '</form>';
@@ -106,12 +101,8 @@
                 showModal(html);
 
                 document.getElementById('cancel-legal').addEventListener('click', hideModal);
-                document.getElementById('accept-legal').addEventListener('click', function(){
-                    const detail = { applicationId: appId, action: 'accept' };
-                    document.dispatchEvent(new CustomEvent('ipcounsel:legal_accept', { detail }));
-                    console.log('ipcounsel:legal_accept', detail);
-                    hideModal();
-                });
+                // Let the submit button perform a normal POST; no custom event that prevents navigation is needed.
+
 
             } else {
                 // Fallback: just show details with cancel

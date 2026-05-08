@@ -23,6 +23,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 header("Location: ../public/ip_counsel/ipcounsel.php?action=error");
                 exit();
             }
+
+        exit();
     }
     else
     {

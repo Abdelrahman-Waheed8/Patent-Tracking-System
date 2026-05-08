@@ -8,7 +8,7 @@ class IpcounselControl extends IPcounselModel
     private $discID;
     public $errors = [];
 
-    public function __counstruct($uid,$action,$discID, $description = null)
+    public function __construct($uid=null,$action=null,$discID=null, $description = null)
     {
         $this->uid = $uid;
         $this->action = $action;
@@ -45,9 +45,10 @@ class IpcounselControl extends IPcounselModel
 
     private function validateInput()
     {
-        if(empty($this->action) || empty($this->description))
+        // Require at least an action and a disclosure identifier. Description is optional (used when arguing).
+        if(empty($this->action) || empty($this->discID))
         {
-            $this->errors["empty"] = "Fill in all fields";
+            $this->errors["empty"] = "Action or Disclosure ID missing";
             return false;
         }
         return true;
@@ -55,18 +56,22 @@ class IpcounselControl extends IPcounselModel
 
     private function StoreIpCounsel()
     {
+        // Store the action; description is optional.
         if(empty($this->description))
-            {
-                $this->storeAction($this->uid,$this->action, $this->discID);
-                return true;
-            }
-        $this->storeAction($this->uid,$this->action, $this->discID,$this->description);
+        {
+            $this->storeAction($this->uid, $this->action, $this->discID);
+        }
+        else
+        {
+            $this->storeAction($this->uid, $this->action, $this->discID, $this->description);
+        }
+        return true;
     }
 
     public function submitIpCounselAction()
     {
-        if(!$this->validateInput())
-        {
+        // Validate required inputs (action and disclosure id). Description may be empty for some actions.
+        if(!$this->validateInput()){
             return false;
         }
         $this->StoreIpCounsel();
