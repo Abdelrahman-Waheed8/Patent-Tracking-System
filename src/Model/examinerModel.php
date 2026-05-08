@@ -116,4 +116,16 @@ class examinerModel extends DBH
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getLegalReview()
+    {
+        $pdo = $this->connect();
+
+        $sql = ";";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

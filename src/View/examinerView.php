@@ -1,6 +1,6 @@
 <?php
 
-class ExaminerView
+class ExaminerView extends ExaminerController
 {
     public function renderTable($patents)
     {
@@ -37,4 +37,18 @@ class ExaminerView
             unset($_SESSION['errorsExaminer']);
         }
     }
+
+    public function showLegalReview()
+    {
+        $legalreview = $this->getLegalReview();
+        foreach ($legalreview as $row) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($row['Title']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['appNum']) . "</td>";
+            $reason = !empty($row['RejectionReason']) ? htmlspecialchars($row['RejectionReason']) : 'No reason specified';
+            echo "<td>" . $reason . "</td>";
+            echo "<td>" . htmlspecialchars($row['Deadline']) . "</td>";
+            echo "</tr>";
+        }
+    } 
 }
