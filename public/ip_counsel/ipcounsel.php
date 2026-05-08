@@ -1,3 +1,10 @@
+<?php
+include "../../src/config/config_session.php";
+include "../../src/config/config.php";
+include "../../src/model/ipcounselModel.php";
+include "../../src/control/ipcounselControl.php";
+include "../../src/view/ipcounselView.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,59 +41,23 @@
 
         <!-- Content -->
         <div class="content-wrapper">
-                        <!-- Cards -->
-<div class="cards">
-    <div class="card">
-        <div class="card-top">
-            <i class="fas fa-hourglass-half"></i>
-            <span>Pending Review</span>
-        </div>
-        <h1 id="pending-review-patents">0</h1>
-        <p>Waiting for examiner review</p>
-    </div>
-
-    <div class="card">
-        <div class="card-top">
-            <i class="fas fa-check-circle"></i>
-            <span>Active Patents</span>
-        </div>
-        <h1 id="active-patents">0</h1>
-        <p>Approved and active</p>
-    </div>
-
-    <div class="card">
-        <div class="card-top">
-            <i class="fas fa-ban"></i>
-            <span>Rejected</span>
-        </div>
-        <h1 id="rejected-patents">0</h1>
-        <p>Applications rejected</p>
-    </div>
-
-    <div class="card">
-        <div class="card-top">
-            <i class="fas fa-sync-alt"></i>
-            <span>Upcoming Renewals</span>
-        </div>
-        <h1 id="upcoming-renewals-patents">0</h1>
-        <p>Expiring soon</p>
-    </div>
-</div>
-            <div class="header-actions">
-                <h2>Pending Patent Reviews</h2>
-            </div>
             <section>
                 <table id="examiner-table">
                     <thead>
                         <tr>
-                            <th>TITLE</th>
-                            <th>INVENTOR</th>
-                            <th>STATUS</th>
-                            <th>ACTION</th>
+                            <th>Application ID</th>
+                            <th>Disclosure ID</th>
+                            <th>Application Number</th>
+                            <th>Filing Date</th>
+                            <th>Status</th>
+                            <th></th>
                         </tr>
                         <thead>
                         <tbody id="table_body">
-
+                            <?php
+                            $view = new IPcounselView();
+                            $view->ViewTable();
+                            ?>
                         </tbody>
                 </table>
             </section>
@@ -102,6 +73,9 @@
             <div id="review-details"></div>
         </div>
     </div>
+    <script>
+    
+    </script>
     <script src="./ipcounsel.js"></script>
 </body>
 
