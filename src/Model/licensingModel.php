@@ -1,33 +1,7 @@
 <?php
 
-class licensingModel extends Dbh
+class licensingModel extends DBH
 {
-    protected function ensureLicensingSchema(): void
-    {
-        $pdo = $this->connect();
-        $tableColumns = [
-            'licenseagreement' => [
-                'CompanyName' => "ALTER TABLE licenseagreement ADD COLUMN CompanyName VARCHAR(255) DEFAULT NULL",
-                'MinNetSalesClause' => "ALTER TABLE licenseagreement ADD COLUMN MinNetSalesClause DECIMAL(12,2) DEFAULT NULL"
-            ],
-            'royaltypayment' => [
-                'NetSales' => "ALTER TABLE royaltypayment ADD COLUMN NetSales DECIMAL(12,2) DEFAULT NULL",
-                'UnitsSold' => "ALTER TABLE royaltypayment ADD COLUMN UnitsSold INT DEFAULT NULL",
-                'RateValue' => "ALTER TABLE royaltypayment ADD COLUMN RateValue DECIMAL(12,2) DEFAULT NULL"
-            ]
-        ];
-
-        foreach ($tableColumns as $table => $columns) {
-            foreach ($columns as $column => $sql) {
-                $stmt = $pdo->prepare("SELECT COUNT(*) c FROM information_schema.columns WHERE table_schema = DATABASE() AND table_name = ? AND column_name = ?");
-                $stmt->execute([$table, $column]);
-                $exists = (int)($stmt->fetch(PDO::FETCH_ASSOC)['c'] ?? 0);
-                if ($exists === 0) {
-                    $pdo->exec($sql);
-                }
-            }
-        }
-    }
 
     protected function parseNumber(string $value): float
     {
@@ -110,8 +84,6 @@ class licensingModel extends Dbh
 
     protected function getAllLicenses(): array
     {
-        $this->ensureLicensingSchema();
-
         $sql = "SELECT
                     la.LicenseID AS id,
                     p.Number AS patent_number,
@@ -142,7 +114,6 @@ class licensingModel extends Dbh
 
     protected function insertLicense(array $data): bool
     {
-        $this->ensureLicensingSchema();
         $pdo = $this->connect();
         $pdo->beginTransaction();
 
@@ -169,7 +140,9 @@ class licensingModel extends Dbh
             $netSales = $this->parseNumber($data['net_sales']);
             $unitsSold = (int)$this->parseNumber($data['units_sold']);
             $amount = $this->calculateRoyaltyAmount($data['revenue_model'], $rateValue, $netSales, $unitsSold);
-            $distributionStatus = $this->determineDistributionStatus($data['end_date'], $data['min_net_sales_clause'], $netSales);
+            $distributionStatus = ($data['request_status'] ?? 'Pending') === 'Pending'
+                ? 'Pending'
+                : $this->determineDistributionStatus($data['end_date'], $data['min_net_sales_clause'], $netSales);
 
             $insertRoyalty = $pdo->prepare(
                 "INSERT INTO royaltypayment (LicenseID, Amount, Currency, calculationMethod, DistributionStatus, PmtDate, NetSales, UnitsSold, RateValue)
@@ -197,7 +170,6 @@ class licensingModel extends Dbh
 
     protected function updateLicense(array $data): bool
     {
-        $this->ensureLicensingSchema();
         $pdo = $this->connect();
         $pdo->beginTransaction();
 
@@ -282,6 +254,65 @@ class licensingModel extends Dbh
     {
         $stmt = $this->connect()->prepare("DELETE FROM licenseagreement WHERE LicenseID = ?");
         return $stmt->execute([$id]);
+    }
+
+    // Approve/reject helpers: manage distribution status and checks
+    protected function getLicenseById(int $id): ?array
+    {
+        $stmt = $this->connect()->prepare("SELECT LicenseID, Patent_ID, IsExclusive, Type FROM licenseagreement WHERE LicenseID = ? LIMIT 1");
+        $stmt->execute([$id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ?: null;
+    }
+
+    protected function hasLicenseWithExclusive(int $patentId, int $excludeLicenseId = 0): bool
+    {
+        $sql = "SELECT COUNT(1) AS cnt FROM licenseagreement WHERE Patent_ID = ? AND IsExclusive = 1";
+        if ($excludeLicenseId > 0) {
+            $sql .= " AND LicenseID != ?";
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$patentId, $excludeLicenseId]);
+        } else {
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$patentId]);
+        }
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row && (int)$row['cnt'] > 0;
+    }
+
+    protected function hasLicenseWithNonExclusive(int $patentId, int $excludeLicenseId = 0): bool
+    {
+        $sql = "SELECT COUNT(1) AS cnt FROM licenseagreement WHERE Patent_ID = ? AND IsExclusive = 0";
+        if ($excludeLicenseId > 0) {
+            $sql .= " AND LicenseID != ?";
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$patentId, $excludeLicenseId]);
+        } else {
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$patentId]);
+        }
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row && (int)$row['cnt'] > 0;
+    }
+
+    protected function updateDistributionStatus(int $licenseId, string $status): bool
+    {
+        $pdo = $this->connect();
+        $findRoyalty = $pdo->prepare(
+            "SELECT royaltyID FROM royaltypayment WHERE LicenseID = ? ORDER BY royaltyID DESC LIMIT 1"
+        );
+        $findRoyalty->execute([$licenseId]);
+        $existing = $findRoyalty->fetch(PDO::FETCH_ASSOC);
+
+        if ($existing) {
+            $update = $pdo->prepare("UPDATE royaltypayment SET DistributionStatus = ? WHERE royaltyID = ?");
+            return $update->execute([$status, (int)$existing['royaltyID']]);
+        }
+
+        $insert = $pdo->prepare(
+            "INSERT INTO royaltypayment (LicenseID, Amount, Currency, calculationMethod, DistributionStatus, PmtDate) VALUES (?, 0, 'USD', 'Fixed', ?, CURDATE())"
+        );
+        return $insert->execute([$licenseId, $status]);
     }
 
     protected function buildSummaryAndAlerts(array $records): array

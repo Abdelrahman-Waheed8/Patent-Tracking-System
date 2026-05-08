@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 header('Content-Type: application/json; charset=utf-8');
@@ -31,6 +32,18 @@ try {
 
     if ($method === 'POST' && $action === 'update') {
         $result = $controller->updateLicenseRecord($_POST);
+        respond($result['success'] ? 200 : 422, $result);
+    }
+
+    if ($method === 'POST' && $action === 'approve') {
+        $id = (int)($_POST['id'] ?? 0);
+        $result = $controller->approveLicenseById($id);
+        respond($result['success'] ? 200 : 422, $result);
+    }
+
+    if ($method === 'POST' && $action === 'reject') {
+        $id = (int)($_POST['id'] ?? 0);
+        $result = $controller->rejectLicenseById($id);
         respond($result['success'] ? 200 : 422, $result);
     }
 
