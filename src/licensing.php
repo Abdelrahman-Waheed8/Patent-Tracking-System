@@ -25,6 +25,12 @@ try {
         respond(200, $controller->listLicensesPayload());
     }
 
+    if ($method === 'GET' && $action === 'checkPatent') {
+        $pn = $_GET['patent_number'] ?? '';
+        $result = $controller->checkPatentExists($pn);
+        respond($result['success'] ? 200 : 404, $result);
+    }
+
     if ($method === 'POST' && $action === 'create') {
         $result = $controller->createLicense($_POST);
         respond($result['success'] ? 201 : 422, $result);

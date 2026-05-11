@@ -118,7 +118,11 @@ class licensingModel extends DBH
         $pdo->beginTransaction();
 
         try {
-            $patentId = $this->getOrCreatePatentId($pdo, $data['patent_number']);
+            // expect controller to have verified existence and provided patent_id
+            $patentId = $data['patent_id'] ?? $this->getPatentIdByNumber($data['patent_number']);
+            if ($patentId === null) {
+                throw new Exception('Patent not found');
+            }
             $isExclusive = strcasecmp($data['license_type'], 'Exclusive') === 0 ? 1 : 0;
 
             $insertAgreement = $pdo->prepare(
@@ -174,7 +178,11 @@ class licensingModel extends DBH
         $pdo->beginTransaction();
 
         try {
-            $patentId = $this->getOrCreatePatentId($pdo, $data['patent_number']);
+            // use provided patent_id if available; otherwise resolve, but do not create
+            $patentId = $data['patent_id'] ?? $this->getPatentIdByNumber($data['patent_number']);
+            if ($patentId === null) {
+                throw new Exception('Patent not found');
+            }
             $isExclusive = strcasecmp($data['license_type'], 'Exclusive') === 0 ? 1 : 0;
 
             $updateAgreement = $pdo->prepare(

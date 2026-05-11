@@ -189,6 +189,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  async function checkPatentExistsOnServer(patentNumber) {
+    if (!patentNumber) {
+      return { success: false, message: "Patent number is required" };
+    }
+
+    try {
+      const resp = await fetch(
+        `${API_URL}?action=checkPatent&patent_number=${encodeURIComponent(
+          patentNumber,
+        )}`,
+      );
+      const payload = await resp.json();
+      return payload;
+    } catch (e) {
+      return { success: false, message: "Unable to verify patent" };
+    }
+  }
+
+  function showInputError(elId, message) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    el.textContent = message || "";
+    el.style.display = message ? "block" : "none";
+  }
+
   initRevenueToggle("license-revenue-model", "add-license-form");
   initRevenueToggle("edit-license-revenue-model", "edit-license-form");
 
@@ -205,9 +230,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   addForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    const patentInput = document.getElementById("license-patent");
+    const patentNumber = patentInput.value.trim();
+    showInputError("license-patent-error", "");
+
     try {
+      // Verify patent exists first
+      const check = await checkPatentExistsOnServer(patentNumber);
+      if (!check.success) {
+        showInputError(
+          "license-patent-error",
+          check.message || "Patent not found",
+        );
+        return;
+      }
+
+      const patentId = check.patent_id;
+
       await postAction("create", {
-        patent_number: document.getElementById("license-patent").value.trim(),
+        patent_number: patentNumber,
+        patent_id: patentId,
         company: document.getElementById("license-company").value.trim(),
         license_type: document.getElementById("license-type").value,
         territory: document.getElementById("license-territory").value.trim(),
@@ -234,11 +276,26 @@ document.addEventListener("DOMContentLoaded", () => {
   editForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     try {
+      const patentNumber = document
+        .getElementById("edit-license-patent")
+        .value.trim();
+      showInputError("edit-license-patent-error", "");
+
+      const check = await checkPatentExistsOnServer(patentNumber);
+      if (!check.success) {
+        showInputError(
+          "edit-license-patent-error",
+          check.message || "Patent not found",
+        );
+        return;
+      }
+
+      const patentId = check.patent_id;
+
       await postAction("update", {
         id: document.getElementById("edit-license-id").value,
-        patent_number: document
-          .getElementById("edit-license-patent")
-          .value.trim(),
+        patent_number: patentNumber,
+        patent_id: patentId,
         company: document.getElementById("edit-license-company").value.trim(),
         license_type: document.getElementById("edit-license-type").value,
         status: document.getElementById("edit-license-status").value,
