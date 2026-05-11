@@ -383,3 +383,7 @@ td button:hover {
     pointer-events: none;
     user-select: none;
 }
+        
+.logout-btn{
+    text-decoration: none;
+}

@@ -26,6 +26,8 @@ include "../../src/view/adminView.php";
                         document history</a></li>
                 <li><a href="../categories/categories.html" class="active"><i
                             class="fa-solid fa-layer-group"></i>Categories</a></li>
+                <li><a href="../categories/categories.html" class="active"><i
+                            class="fa-solid fa-chart-column"></i>Report</a></li>
             </ul>
 
 
@@ -36,7 +38,6 @@ include "../../src/view/adminView.php";
             </a>
         </div>
         <div class="container">
-            <!-- Navbar -->
             <nav class="panel-header">
                 <div class="left">
                     <i class="fas fa-list icon-btn" onclick="toggleSidebar()"></i>
