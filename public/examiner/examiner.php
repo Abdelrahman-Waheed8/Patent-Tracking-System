@@ -94,6 +94,30 @@ include "../../src/view/examinerView.php";
                     </tbody>
                 </table>
             </section>
+
+
+            <div class="header-actions">
+                <h2>Legal_Review</h2>
+            </div>
+            <section>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>App number</th>
+                            <th>Filing Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <?php
+
+                        ?>
+                    </tbody>
+                </table>
+            </section>
         </div>
     </div>
 

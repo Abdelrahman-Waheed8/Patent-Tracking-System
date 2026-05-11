@@ -128,4 +128,5 @@ class examinerModel extends DBH
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 }
