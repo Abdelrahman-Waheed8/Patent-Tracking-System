@@ -40,12 +40,31 @@ class disclosureModel extends DBH
         $evidenceID = $pdo->lastInsertId();
 
         if (!empty($files)) {
-            $stmtDoc = $pdo->prepare("INSERT INTO document (evidence_ID, filePath, docType) VALUES (:ev_id, :f_path, :ext)");
-            foreach ($files as $path) {
+
+            $stmtVersion = $pdo->prepare("SELECT MAX(Version) as max_version FROM document WHERE original_name = :orig_name");
+            $stmtDoc = $pdo->prepare("INSERT INTO document (evidence_ID, filePath, docType, original_name, Version) VALUES (:ev_id, :f_path, :ext, :orig_name, :version)");
+
+            foreach ($files as $file) {
+                $path = $file['path'];
+                $originalFullName = $file['original_name'];
+
+                $pathInfo = pathinfo($originalFullName);
+                $fileName = $pathInfo['filename'];
+
+                $cleanFileName = preg_replace('/_v\d+$/', '', $fileName);
+
+                $stmtVersion->bindParam(":orig_name", $cleanFileName );
+                $stmtVersion->execute();
+                $result = $stmtVersion->fetch(PDO::FETCH_ASSOC);
+                
+                $newVersion = ($result && $result['max_version'] !== null) ? (int)$result['max_version'] + 1 : 1;
+
                 $ext = pathinfo($path, PATHINFO_EXTENSION);
                 $stmtDoc->bindParam(":ev_id", $evidenceID);
                 $stmtDoc->bindParam(":f_path", $path);
                 $stmtDoc->bindParam(":ext", $ext);
+                $stmtDoc->bindParam(":orig_name",  $cleanFileName );
+                $stmtDoc->bindParam(":version", $newVersion);
                 $stmtDoc->execute();
             }
         }
@@ -145,7 +164,6 @@ class disclosureModel extends DBH
         $stmt7->bindParam(":jurisdiction_id", $jurisdictionID);
         $stmt7->execute();
     }
-
 
 
 
