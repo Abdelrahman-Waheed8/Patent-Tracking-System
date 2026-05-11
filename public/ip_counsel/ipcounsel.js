@@ -54,7 +54,7 @@
                 html += '<div class="ipc-actions">';
                 html += '<form id="reject-form" action="../../src/ipcounsel.php" method="POST">';
                 html += `<input type="hidden" name="argument_disc_id" value="${discId}">`;
-                html += `<input type="hidden" name="argument_disc_id" value="${appId}">`;
+                html += `<input type="hidden" name="argument_app_id" value="${appId}">`;
                 html += '<div><label><input type="radio" name="ipc_action" value="accept"> Accept rejection</label></div>';
                 html += '<div><label><input type="radio" name="ipc_action" value="argue" checked> Argue with examiner</label></div>';
                 html += '<div id="argument-wrap" style="margin-top:8px;">';

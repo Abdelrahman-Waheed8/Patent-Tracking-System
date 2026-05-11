@@ -56,15 +56,22 @@ class IPcounselModel extends DBH
                 $stmt4->bindParam(":disc", $discID);
                 $stmt4->execute();
 
+                $query6 = "SELECT AppID FROM patentapplication WHERE disc_ID = :discID;";
+                $stmt6 = $pdo->prepare($query6);
+                $stmt6->bindParam(":discID", $discID);
+                $stmt6->execute();
+                $appIDRow = $stmt6->fetch(PDO::FETCH_ASSOC);
+                $appID = $appIDRow['AppID'];
+
                 $query5 = "INSERT INTO officeaction (AppID, DateReceived, Deadline, `Type`, `Status`)
-                           VALUES ((SELECT AppID FROM patentapplication WHERE disc_ID = :discID), NOW(), DATE_ADD(NOW(), INTERVAL 3 MONTH), 'Legal Review', 'Legal_Review');";
+                           VALUES (:appid, NOW(), DATE_ADD(NOW(), INTERVAL 3 MONTH), 'Legal Review', 'Legal_Review');";
                 $stmt5 = $pdo->prepare($query5);
-                $stmt5->bindParam(":discID", $discID);
+                $stmt5->bindParam(":appid", $appID);
                 $stmt5->execute();
             }
         else {
                 $query2 = "INSERT INTO logs (usr_ID, `Action`, `Timestamp`, `type`, `description`)
-                          VALUES (:ud, :actn, NOW(), 'Accept Examiner Rejection', 'Accepted Rejection');";
+                           VALUES (:ud, :actn, NOW(), 'Accept Examiner Rejection', 'Accepted Rejection');";
                 $stmt2 = $pdo->prepare($query2);
                 $stmt2->bindParam(":ud", $uid);
                 $stmt2->bindParam(":actn", $action);
