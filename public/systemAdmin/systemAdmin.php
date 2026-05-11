@@ -26,8 +26,8 @@ include "../../src/view/adminView.php";
                         document history</a></li>
                 <li><a href="../categories/categories.html" class="active"><i
                             class="fa-solid fa-layer-group"></i>Categories</a></li>
-                <li><a href="../categories/categories.html" class="active"><i
-                            class="fa-solid fa-chart-column"></i>Report</a></li>
+                <li><a href="../report/report.php" class="active"><i class="fa-solid fa-chart-column"></i>Report</a>
+                </li>
             </ul>
 
 
