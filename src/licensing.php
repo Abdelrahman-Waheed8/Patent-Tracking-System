@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 header('Content-Type: application/json; charset=utf-8');
@@ -22,6 +23,12 @@ $controller = new License();
 try {
     if ($method === 'GET' && $action === 'list') {
         respond(200, $controller->listLicensesPayload());
+    }
+
+    if ($method === 'GET' && $action === 'checkPatent') {
+        $pn = $_GET['patent_number'] ?? '';
+        $result = $controller->checkPatentExists($pn);
+        respond($result['success'] ? 200 : 404, $result);
     }
 
     if ($method === 'POST' && $action === 'create') {
