@@ -24,7 +24,6 @@ if(!isset($_SESSION["user_id"]))
 
     <div class="container">
 
-        <!-- Sidebar -->
         <div class="sidebar">
             <h2 class="logo">IP System</h2>
 
@@ -36,7 +35,6 @@ if(!isset($_SESSION["user_id"]))
                 <li><a href="../patent/patent.php"><i class="fas fa-file"></i> Patents</a></li>
                 <li><a href="../renewals/renewals.php"><i class="fas fa-sync"></i> Renewals</a></li>
                 <li><a href="../licensing/licensing.php"><i class="fas fa-handshake"></i> Licensing</a></li>
-                <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
 
 
@@ -47,10 +45,8 @@ if(!isset($_SESSION["user_id"]))
             </a>
         </div>
 
-        <!-- Main Content -->
         <div class="page_structure">
 
-            <!-- Navbar -->
             <nav class="panel-header">
                 <div class="left">
                     <i class="fas fa-list icon-btn" onclick="toggleSidebar()"></i>
@@ -75,7 +71,6 @@ if(!isset($_SESSION["user_id"]))
                 $inventorview->displaySessionInfo();
             ?>
 
-            <!-- Cards -->
             <div class="cards">
                 <div class="card">
                     <div class="card-top">
@@ -114,7 +109,6 @@ if(!isset($_SESSION["user_id"]))
                 </div>
             </div>
 
-            <!-- Deadlines -->
             <div class="deadlines-box">
                 <div class="deadlines-header">
                     <h3>Upcoming Deadlines</h3>
@@ -123,7 +117,6 @@ if(!isset($_SESSION["user_id"]))
                 <div class="deadline-list">
                 </div>
             </div>
-            <!-- Quick Actions --->
             <div class="quick_action">
                 <div class="title_quick">
                     <h3>Quick Actions</h3>

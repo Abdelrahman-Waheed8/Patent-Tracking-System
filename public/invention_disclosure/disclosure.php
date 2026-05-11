@@ -31,7 +31,6 @@ include "../../src/view/disclosureView.php";
                 <li><a href="../patent/patent.php"><i class="fas fa-file"></i> Patents</a></li>
                 <li><a href="../renewals/renewals.php"><i class="fas fa-sync"></i> Renewals</a></li>
                 <li><a href="../licensing/licensing.php"><i class="fas fa-handshake"></i> Licensing</a></li>
-                <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
 
             <a class="logout-btn" href="../index.php">
@@ -87,25 +86,34 @@ include "../../src/view/disclosureView.php";
                         <input type="text" name="prior_art_desc">
                     </div>
 
-                    <div style="margin-top: 20px; padding: 25px; border: 1px solid #e0e0e0; border-radius: 12px; background-color: #f9f9f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; box-shadow: 0 4px 6px rgba(0,0,0,0.05); max-width: 500px;">
+                    <div
+                        style="margin-top: 20px; padding: 25px; border: 1px solid #e0e0e0; border-radius: 12px; background-color: #f9f9f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; box-shadow: 0 4px 6px rgba(0,0,0,0.05); max-width: 500px;">
 
                         <div class="input-group" style="margin-bottom: 15px;">
-                            <label style="display: block; margin-bottom: 10px; color: #333; font-size: 16px;"><b>Disclosure Scope:</b></label>
+                            <label style="display: block; margin-bottom: 10px; color: #333; font-size: 16px;"><b>Disclosure
+                                    Scope:</b></label>
 
                             <div style="display: flex; gap: 20px; align-items: center;">
                                 <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
-                                    <input type="radio" id="is_national" name="jurisdictional_type" value="national" onclick="toggleFields()" style="accent-color: teal; transform: scale(1.1);"> National
+                                    <input type="radio" id="is_national" name="jurisdictional_type" value="national"
+                                        onclick="toggleFields()" style="accent-color: teal; transform: scale(1.1);">
+                                    National
                                 </label>
 
                                 <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
-                                    <input type="radio" id="is_international" name="jurisdictional_type" value="international" onclick="toggleFields()" style="accent-color: teal; transform: scale(1.1);"> International
+                                    <input type="radio" id="is_international" name="jurisdictional_type"
+                                        value="international" onclick="toggleFields()"
+                                        style="accent-color: teal; transform: scale(1.1);"> International
                                 </label>
                             </div>
                         </div>
 
-                        <div id="national_section" style="display: none; margin-top: 20px; padding: 15px; background: #fff; border-radius: 8px; border-left: 4px solid teal;">
-                            <label for="country" style="display: block; margin-bottom: 8px; font-weight: 600;">Select Country:</label>
-                            <select name="scope" id="country" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; outline: none;">
+                        <div id="national_section"
+                            style="display: none; margin-top: 20px; padding: 15px; background: #fff; border-radius: 8px; border-left: 4px solid teal;">
+                            <label for="country" style="display: block; margin-bottom: 8px; font-weight: 600;">Select
+                                Country:</label>
+                            <select name="scope" id="country"
+                                style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; outline: none;">
                                 <option value="Afghanistan">Afghanistan</option>
                                 <option value="Albania">Albania</option>
                                 <option value="Algeria">Algeria</option>
@@ -188,20 +196,29 @@ include "../../src/view/disclosureView.php";
                             </select>
                         </div>
 
-                        <div id="international_section" style="display: none; margin-top: 20px; padding: 15px; background: #fff; border-radius: 8px; border-left: 4px solid teal;">
-                            <label style="display: block; margin-bottom: 10px; font-weight: 600;">Select Regions:</label>
+                        <div id="international_section"
+                            style="display: none; margin-top: 20px; padding: 15px; background: #fff; border-radius: 8px; border-left: 4px solid teal;">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600;">Select
+                                Regions:</label>
 
-                            <label style="display: block; margin-bottom: 10px; cursor: pointer; padding: 5px; background: #f0fdf4; border-radius: 4px;">
-                                <input type="checkbox" name="world" value="world" style="accent-color: teal;"> <b>Whole World</b>
+                            <label
+                                style="display: block; margin-bottom: 10px; cursor: pointer; padding: 5px; background: #f0fdf4; border-radius: 4px;">
+                                <input type="checkbox" name="world" value="world" style="accent-color: teal;"> <b>Whole
+                                    World</b>
                             </label>
 
                             <p style="margin: 10px 0 5px; font-size: 0.9em; color: #666;">Or select Continents:</p>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]" value="africa"> Africa</label>
-                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]" value="europe"> Europe</label>
-                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]" value="asia"> Asia</label>
-                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]" value="north_america"> North America</label>
-                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]" value="south_america"> South America</label>
+                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]"
+                                        value="africa"> Africa</label>
+                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]"
+                                        value="europe"> Europe</label>
+                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]" value="asia">
+                                    Asia</label>
+                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]"
+                                        value="north_america"> North America</label>
+                                <label style="cursor: pointer;"><input type="checkbox" name="continents[]"
+                                        value="south_america"> South America</label>
                             </div>
                         </div>
                     </div>
@@ -258,7 +275,7 @@ include "../../src/view/disclosureView.php";
 
     </div>
 
-    
+
 </body>
 
 </html>

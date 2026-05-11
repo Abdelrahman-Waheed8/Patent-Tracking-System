@@ -12,7 +12,6 @@
 
 <body>
     <div class="container">
-        <!-- Sidebar -->
         <div class="sidebar">
             <h2 class="logo">IP System</h2>
 
@@ -24,7 +23,6 @@
                 <li><a href="./patent.php" class="active"><i class="fas fa-file"></i> Patents</a></li>
                 <li><a href="../renewals/renewals.php"><i class="fas fa-sync"></i> Renewals</a></li>
                 <li><a href="../licensing/licensing.php"><i class="fas fa-handshake"></i> Licensing</a></li>
-                <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
             <a class="logout-btn" href="../index.php">
                 <button class="logout">
@@ -33,10 +31,8 @@
                 </button>
             </a>
         </div>
-        <!-- Main Content -->
         <div class="page_structure">
 
-            <!-- Navbar -->
             <nav class="panel-header">
                 <div class="left">
                     <i class="fas fa-list icon-btn" onclick="toggleSidebar()"></i>
@@ -55,7 +51,6 @@
                     </div>
                 </div>
             </nav>
-            <!-- Cards -->
             <div class="cards">
                 <div class="card">
                     <div class="card-top">
@@ -96,7 +91,6 @@
             <div id="patents-table"></div>
         </div>
     </div>
-    <!-- Modal for viewing patent details -->
     <div id="view-patent-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -104,7 +98,6 @@
                 <i class="fas fa-times close-modal"></i>
             </div>
             <div class="modal-body" id="view-patent-details">
-                <!-- Details will be injected here by JS -->
             </div>
             <div class="form-actions" style="padding: 20px;">
                 <button type="button" class="btn-secondary close-modal">Close</button>
