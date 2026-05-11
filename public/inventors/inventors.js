@@ -3,7 +3,6 @@
     document.querySelector('.container').classList.toggle('closed');
   }
 
-// بيانات الاختراعات الأولية (إذا لم يكن هناك شيء في localStorage)
 const initialInventions = [
     {
         id: "INV-2024-001",
@@ -52,7 +51,6 @@ const initialInventions = [
     }
 ];
 
-// تحميل البيانات من localStorage أو استخدام البيانات الأولية
 let inventionsData = JSON.parse(localStorage.getItem('inventions')) || initialInventions;
 
 function saveInventions() {
@@ -127,39 +125,29 @@ function generateInventionsTable() {
     tableContainer.innerHTML = html;
 }
 
-// تهيئة الصفحة عند التحميل
 document.addEventListener('DOMContentLoaded', () => {
     generateInventionsTable();
 
-    // عناصر DOM
     const addInventionBtn = document.querySelector('.right .btn-primary');
     const tableContainer = document.getElementById('inventions-table');
 
-    // نوافذ Modal
     const addModal = document.getElementById('add-invention-modal');
     const editModal = document.getElementById('edit-invention-modal');
     const viewModal = document.getElementById('view-invention-modal');
     
-    // نماذج
     const addInventionForm = document.getElementById('add-invention-form');
     const editInventionForm = document.getElementById('edit-invention-form');
 
-    // دالة لفتح نافذة
     function openModal(modal) {
         modal.classList.add('active');
     }
-
-    // دالة لإغلاق جميع النوافذ
     function closeModal() {
         document.querySelectorAll('.modal-overlay.active').forEach(modal => {
             modal.classList.remove('active');
         });
     }
 
-    // فتح نافذة الإضافة
     addInventionBtn.addEventListener('click', () => openModal(addModal));
-
-    // إغلاق النوافذ
     document.querySelectorAll('.close-modal').forEach(btn => {
         btn.addEventListener('click', closeModal);
     });
@@ -172,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // إضافة اختراع جديد
     addInventionForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const newInvention = {
@@ -191,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addInventionForm.reset();
     });
 
-    // تعديل اختراع
     editInventionForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const inventionId = document.getElementById('edit-inv-id').value;
@@ -212,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // تفعيل أيقونات الإجراءات في الجدول
     tableContainer.addEventListener('click', (e) => {
         const target = e.target;
         const row = target.closest('tr');
@@ -221,8 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const inventionId = row.dataset.id;
         const invention = inventionsData.find(inv => inv.id === inventionId);
         if (!invention) return;
-
-        // حذف
         if (target.classList.contains('fa-trash')) {
             if (confirm(`Are you sure you want to delete invention ${inventionId}?`)) {
                 inventionsData = inventionsData.filter(inv => inv.id !== inventionId);
@@ -230,8 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 generateInventionsTable();
             }
         }
-
-        // تعديل
         if (target.classList.contains('fa-edit')) {
             document.getElementById('edit-inv-id').value = invention.id;
             document.getElementById('edit-inv-title').value = invention.title;
@@ -240,8 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('edit-inv-field').value = invention.field;
             openModal(editModal);
         }
-
-        // عرض
         if (target.classList.contains('fa-eye')) {
             const detailsContainer = document.getElementById('view-invention-details');
             detailsContainer.innerHTML = `

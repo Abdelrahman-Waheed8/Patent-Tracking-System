@@ -11,14 +11,92 @@ html, body {
     background-color: #f1f3f5;
 
 }
-
-/* ================= Layout ================= */
+.containerAll{
+    display: flex;
+    flex-direction: row;
+}
 .container {
     display: flex;
-    min-height: 100vh;
     flex-direction: column;
+    min-height: 100vh;
+    margin-left: 15vw;
+    width: calc(100% - 15vw);
 }
-/* Navbar */
+.sidebar {
+    background-color: #353f48;
+    width: 15vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+}
+.container.closed .sidebar {
+    transform: translateX(-100%);
+}
+.container.closed .page_structure {
+    margin-left: 0;
+    width: 100%;
+}
+
+.logo {
+    background-color: #03353b;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+
+.menu {
+    list-style: none;
+    padding: 0 10px;
+}
+
+.menu li {
+    margin: 15px 0;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.menu a:hover,
+.menu a.active {
+    background-color: #296d74;
+}
+
+.logout {
+    margin-top: auto;
+    margin: 20px 10px;
+    padding: 10px;
+    border: 1px solid #e74c3c;
+    background: transparent;
+    color: #e74c3c;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
 .panel-header {
     background-color: #296d74;
     color: white;
@@ -81,14 +159,12 @@ h6 {
     margin: 10px;
 }
 
-/* FORM */
 form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
-/* خلي العناصر تاخد صف كامل */
 .email,
 .password,
 select,
@@ -96,7 +172,7 @@ button {
     grid-column: span 2;
 }
 
-/* INPUT GROUP */
+
 form div {
     display: flex;
     flex-direction: column;
@@ -129,7 +205,6 @@ select:focus {
     box-shadow: 0 0 0 2px rgba(41,109,116,0.2);
 }
 
-/* BUTTON */
 button {
     background-color: #296d74;
     color: white;
@@ -148,7 +223,7 @@ button {
 button:hover {
     background-color: #1f555a;
 }
-/* Table */
+
 .card {
     background-color: #fff;
     padding: 20px;
@@ -223,7 +298,6 @@ td button:hover {
     color: #dc3545;
 }
 
-/* ================= Modal ================= */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -232,7 +306,7 @@ td button:hover {
     height: 100%;
     background-color: rgba(0,0,0,0.5);
     z-index: 999;
-    display: none; /* Hidden by default */
+    display: none; 
 }
 
 .modal {
@@ -246,7 +320,7 @@ td button:hover {
     z-index: 1000;
     width: 90%;
     max-width: 500px;
-    display: none; /* Hidden by default */
+    display: none; 
     flex-direction: column;
 }
 
@@ -268,7 +342,7 @@ td button:hover {
 }
 
 #editForm {
-    grid-template-columns: 1fr; /* Single column for modal form */
+    grid-template-columns: 1fr;
 }
 
 .modal-footer {
@@ -304,7 +378,6 @@ td button:hover {
     background-color: #1f555a;
 }
 
-/* When modal is open */
 .container.blurred {
     filter: blur(5px);
     pointer-events: none;

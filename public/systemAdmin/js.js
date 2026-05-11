@@ -12,8 +12,7 @@ let users = [
     role: "ip"
   }
 ];
-let currentUserIndex = null; // To track which user is being edited
-
+let currentUserIndex = null;
 function addUser() {
   let firstName = document.getElementById("first_name").value;
   let lastName = document.getElementById("last_name").value;
