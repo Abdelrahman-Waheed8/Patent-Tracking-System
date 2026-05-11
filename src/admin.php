@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         include "view/adminView.php";
 
         try {
-            $admin = new adminControl($fname,$lname,$email,$pwd,$role);
+            $admin = new Admin($fname,$lname,$email,$pwd,$role);
 
             if($admin->createUser() == false)
                 {

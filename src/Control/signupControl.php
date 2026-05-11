@@ -56,7 +56,6 @@ class SignupControl extends signupModel{
     }
 
     private function invalidName() {
-    // This allows ONLY letters. No spaces, no numbers.
     if (!preg_match("/^[a-zA-Z]*$/", $this->firstname) || !preg_match("/^[a-zA-Z]*$/", $this->lastname)) {
         $this->errors["invalid_name"] = "Names must only contain letters!";
     }

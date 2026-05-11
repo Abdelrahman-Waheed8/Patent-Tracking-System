@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $argument_disc_id = $_POST["argument_disc_id"];
         $argument_text = $_POST["argument_text"];
 
-        $control = new IpcounselControl($_SESSION["user_id"],$action,$argument_disc_id, $argument_text);
+        $control = new Ipcounsel($_SESSION["user_id"],$action,$argument_disc_id, $argument_text);
         if($control->submitIpCounselAction())
             {
                 header("Location: ../public/ip_counsel/ipcounsel.php?action=success");

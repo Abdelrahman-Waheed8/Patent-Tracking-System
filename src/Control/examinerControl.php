@@ -1,6 +1,6 @@
 <?php
 
-class ExaminerController extends examinerModel {
+class Examiner extends examinerModel {
     private $uid;
     private $patentID;
     private $action;

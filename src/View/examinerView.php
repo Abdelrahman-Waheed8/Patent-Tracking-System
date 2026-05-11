@@ -1,6 +1,6 @@
 <?php
 
-class ExaminerView extends ExaminerController
+class ExaminerView extends Examiner
 {
     public function renderTable($patents)
     {

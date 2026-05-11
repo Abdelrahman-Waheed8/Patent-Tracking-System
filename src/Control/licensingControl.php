@@ -1,6 +1,6 @@
 <?php
 
-class licensingControl extends licensingModel
+class License extends licensingModel
 {
     public $errors = [];
 

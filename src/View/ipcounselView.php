@@ -1,6 +1,6 @@
 <?php
 
-class IPcounselView extends IpcounselControl
+class IPcounselView extends Ipcounsel
 {
     public function ViewTable()
     {

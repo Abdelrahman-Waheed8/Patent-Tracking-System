@@ -5,7 +5,7 @@ include "model/examinerModel.php";
 include "control/examinerControl.php";
 include "config/config_session.php";
 
-$controller1 = new ExaminerController();
+$controller1 = new Examiner();
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['disc_id'], $_POST['status'])) {
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['disc_id'], $_POST['st
     $priorArt = $_POST['prior-art'];
     $comments = $_POST['additional_comments'];
     
-    $controller = new ExaminerController($_SESSION['user_id'], $decision ,$priorArt, $comments, $discID);
+    $controller = new Examiner($_SESSION['user_id'], $decision ,$priorArt, $comments, $discID);
 
     if($controller->SubmitExaminerAction())
         {

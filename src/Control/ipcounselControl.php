@@ -1,6 +1,6 @@
 <?php
 
-class IpcounselControl extends IPcounselModel
+class Ipcounsel extends IPcounselModel
 {
     private $uid;
     private $action;
