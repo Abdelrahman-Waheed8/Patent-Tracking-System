@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 header('Content-Type: application/json; charset=utf-8');
@@ -24,6 +25,12 @@ try {
         respond(200, $controller->listLicensesPayload());
     }
 
+    if ($method === 'GET' && $action === 'checkPatent') {
+        $pn = $_GET['patent_number'] ?? '';
+        $result = $controller->checkPatentExists($pn);
+        respond($result['success'] ? 200 : 404, $result);
+    }
+
     if ($method === 'POST' && $action === 'create') {
         $result = $controller->createLicense($_POST);
         respond($result['success'] ? 201 : 422, $result);
@@ -31,6 +38,18 @@ try {
 
     if ($method === 'POST' && $action === 'update') {
         $result = $controller->updateLicenseRecord($_POST);
+        respond($result['success'] ? 200 : 422, $result);
+    }
+
+    if ($method === 'POST' && $action === 'approve') {
+        $id = (int)($_POST['id'] ?? 0);
+        $result = $controller->approveLicenseById($id);
+        respond($result['success'] ? 200 : 422, $result);
+    }
+
+    if ($method === 'POST' && $action === 'reject') {
+        $id = (int)($_POST['id'] ?? 0);
+        $result = $controller->rejectLicenseById($id);
         respond($result['success'] ? 200 : 422, $result);
     }
 

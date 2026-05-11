@@ -17,6 +17,12 @@ class License extends licensingModel
             return false;
         }
 
+        // ensure a patent is provided either as an existing patent id or a patent number
+        if (((int)($payload['patent_id'] ?? 0) <= 0) && trim((string)($payload['patent_number'] ?? '')) === '') {
+            $this->errors[] = "Patent is required";
+            return false;
+        }
+
         $required = ['revenue_model', 'revenue_value'];
         foreach ($required as $field) {
             if (trim((string)($payload[$field] ?? '')) === '') {
@@ -26,6 +32,21 @@ class License extends licensingModel
         }
 
         return true;
+    }
+
+    public function checkPatentExists(string $patentNumber): array
+    {
+        $pn = trim($patentNumber);
+        if ($pn === '') {
+            return ['success' => false, 'message' => 'Patent number is required'];
+        }
+
+        $id = $this->getPatentIdByNumber($pn);
+        if ($id === null) {
+            return ['success' => false, 'message' => 'Patent not found'];
+        }
+
+        return ['success' => true, 'patent_id' => $id];
     }
 
     private function getDefaultString(string $value, string $fallback): string
@@ -92,7 +113,18 @@ class License extends licensingModel
             return ['success' => false, 'message' => $this->errors[0] ?? 'Validation failed'];
         }
 
+        // Determine patent id (allow frontend to pass patent_id after verification)
+        $patentId = (int)($payload['patent_id'] ?? 0);
+        if ($patentId <= 0) {
+            $patentNum = trim((string)($payload['patent_number'] ?? ''));
+            $patentId = $this->getPatentIdByNumber($patentNum);
+            if ($patentId === null) {
+                return ['success' => false, 'message' => 'Patent not found'];
+            }
+        }
+
         $data = $this->normalizePayload($payload);
+        $data['patent_id'] = $patentId;
         $this->insertLicense($data);
         return ['success' => true, 'message' => 'License created successfully'];
     }
@@ -103,7 +135,17 @@ class License extends licensingModel
             return ['success' => false, 'message' => $this->errors[0] ?? 'Validation failed'];
         }
 
+        $patentId = (int)($payload['patent_id'] ?? 0);
+        if ($patentId <= 0) {
+            $patentNum = trim((string)($payload['patent_number'] ?? ''));
+            $patentId = $this->getPatentIdByNumber($patentNum);
+            if ($patentId === null) {
+                return ['success' => false, 'message' => 'Patent not found'];
+            }
+        }
+
         $data = $this->normalizePayload($payload, true);
+        $data['patent_id'] = $patentId;
         $this->updateLicense($data);
         return ['success' => true, 'message' => 'License updated successfully'];
     }
@@ -116,5 +158,46 @@ class License extends licensingModel
 
         $this->deleteLicense($id);
         return ['success' => true, 'message' => 'License deleted successfully'];
+    }
+
+    public function approveLicenseById(int $id): array
+    {
+        if ($id <= 0) {
+            return ['success' => false, 'message' => 'Invalid license id'];
+        }
+
+        $license = $this->getLicenseById($id);
+        if (!$license) {
+            return ['success' => false, 'message' => 'License not found'];
+        }
+
+
+        // If there is any existing non-exclusive license for the same patent, block approval
+        if ($this->hasLicenseWithNonExclusive((int)$license['Patent_ID'], $id)) {
+            return ['success' => false, 'message' => 'Cannot approve — a non-exclusive license already exists for this patent'];
+        }
+
+        // If trying to approve an Exclusive license but another Exclusive exists -> reject
+        if ((int)$license['IsExclusive'] === 1 && $this->hasLicenseWithExclusive((int)$license['Patent_ID'], $id)) {
+            return ['success' => false, 'message' => 'An exclusive license already exists for this patent'];
+        }
+
+        $ok = $this->updateDistributionStatus($id, 'Active');
+        return $ok ? ['success' => true, 'message' => 'License approved'] : ['success' => false, 'message' => 'Failed to update license status'];
+    }
+
+    public function rejectLicenseById(int $id): array
+    {
+        if ($id <= 0) {
+            return ['success' => false, 'message' => 'Invalid license id'];
+        }
+
+        $license = $this->getLicenseById($id);
+        if (!$license) {
+            return ['success' => false, 'message' => 'License not found'];
+        }
+
+        $ok = $this->updateDistributionStatus($id, 'Rejected');
+        return $ok ? ['success' => true, 'message' => 'License rejected'] : ['success' => false, 'message' => 'Failed to update license status'];
     }
 }
