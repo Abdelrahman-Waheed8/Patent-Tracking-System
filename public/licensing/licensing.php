@@ -114,7 +114,7 @@
                 <form id="add-license-form">
                     <div class="form-group">
                         <label for="license-patent">Patent</label>
-                        <input type="text" id="license-patent" required>
+                        <input type="text" id="license-patent" placeholder="e.g., US12345B2" required>
                         <small id="license-patent-error" class="input-error" style="color:red;display:none;"></small>
                     </div>
                     <div class="form-group">
@@ -185,7 +185,7 @@
                     <input type="hidden" id="edit-license-id">
                     <div class="form-group">
                         <label for="edit-license-patent">Patent</label>
-                        <input type="text" id="edit-license-patent" required>
+                        <input type="text" id="edit-license-patent" placeholder="e.g., US12345B2" required>
                         <small id="edit-license-patent-error" class="input-error" style="color:red;display:none;"></small>
                     </div>
                     <div class="form-group">
