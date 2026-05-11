@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="categories.css">
+
+    <title>Technical Categorization Engine</title>
+</head>
+
+<body>
+
+    <nav class="panel-header">
+
+        <div class="left">
+                <i class="fa-solid fa-arrow-left" onclick="goBack()"></i>
+            <h6>Categories</h6>
+        </div>
+
+        <div class="right">
+
+            <i class="fas fa-bell icon-btn"></i>
+
+            <div class="user icon-btn">
+                <i class="fas fa-user"></i>
+                <i class="fas fa-chevron-down small"></i>
+            </div>
+
+        </div>
+
+    </nav>
+
+    <div class="cards">
+        <div class="card" data-target="ai-section">
+            <i class="fas fa-robot"></i>
+
+            <h3>Artificial Intelligence</h3>
+
+            <p>
+                IPC classification for AI and machine learning inventions.
+            </p>
+        </div>
+        <div class="card" data-target="web-section">
+            <i class="fas fa-globe"></i>
+
+            <h3>Web Technologies</h3>
+
+            <p>
+                Web systems, cloud platforms, and online services.
+            </p>
+        </div>
+
+        <div class="card" data-target="security-section">
+            <i class="fas fa-shield-halved"></i>
+
+            <h3>Cyber Security</h3>
+
+            <p>
+                Security protocols, encryption, and cyber defense.
+            </p>
+        </div>
+
+        <div class="card" data-target="data-section">
+            <i class="fas fa-chart-line"></i>
+
+            <h3>Data Science</h3>
+
+            <p>
+                Big data processing and analytical systems.
+            </p>
+        </div>
+
+        <div class="card" data-target="iot-section">
+            <i class="fas fa-microchip"></i>
+
+            <h3>Internet of Things</h3>
+
+            <p>
+                Connected smart devices and embedded systems.
+            </p>
+        </div>
+
+        <div class="card" data-target="biotech-section">
+            <i class="fas fa-dna"></i>
+
+            <h3>Biotechnology</h3>
+
+            <p>
+                Genetic engineering, pharmaceuticals, and medical devices.
+            </p>
+        </div>
+
+        <div class="card" data-target="fintech-section">
+            <i class="fas fa-money-bill-wave"></i>
+
+            <h3>Fintech</h3>
+
+            <p>
+                Financial technologies, blockchain, and digital payments.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="all_section">
+
+        <div id="ai-section" class="section-card">
+
+            <h2>AI - IPC Categories</h2>
+
+            <div class="content">
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>G06N</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Computer Systems Based on Specific Models</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Covers neural networks, machine learning systems,
+                        and artificial intelligence processing models.
+                    </p>
+
+                </div>
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>G06F</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Electric Digital Data Processing</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Includes intelligent computing algorithms,
+                        software automation, and AI-based processing.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="web-section" class="section-card">
+
+            <h2>Web Technologies</h2>
+
+            <div class="content">
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>H04L</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Digital Information Transmission</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Covers internet communication systems,
+                        networking protocols, and web infrastructure.
+                    </p>
+
+                </div>
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>G06Q</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Data Processing Systems</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Includes e-commerce platforms,
+                        online transactions, and business web applications.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Security Section -->
+        <div id="security-section" class="section-card">
+
+            <h2>Cyber Security</h2>
+
+            <div class="content">
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>H04L 9/00</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Cryptographic Mechanisms</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Encryption methods, authentication systems,
+                        and secure communication technologies.
+                    </p>
+
+                </div>
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>G06F 21/00</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Security Arrangements</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Protection against unauthorized access,
+                        malware detection, and cybersecurity systems.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Data Section -->
+        <div id="data-section" class="section-card">
+
+            <h2>Data Science</h2>
+
+            <div class="content">
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>G06F 16/00</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Information Retrieval</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Database management, search engines,
+                        and data indexing technologies.
+                    </p>
+
+                </div>
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>G06Q 10/00</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Data Analytics</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Business intelligence systems,
+                        predictive analytics, and statistical processing.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- IoT Section -->
+        <div id="iot-section" class="section-card">
+
+            <h2>Internet of Things (IoT)</h2>
+
+            <div class="content">
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>H04W</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Wireless Communication Networks</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Smart connected devices,
+                        wireless communication, and IoT networks.
+                    </p>
+
+                </div>
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>G08C</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Transmission Systems</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Remote monitoring systems,
+                        sensors, and machine-to-machine communication.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Biotechnology -->
+        <div id="biotech-section" class="section-card">
+
+            <h2>Biotechnology</h2>
+
+            <div class="content">
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>C12N</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Microorganisms or Enzymes</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Genetic engineering, cell fusion,
+                        and recombinant DNA technology.
+                    </p>
+
+                </div>
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>A61K</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Preparations for Medical Purposes</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Pharmaceuticals, vaccines,
+                        and medicinal preparations derived from biotechnological processes.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="fintech-section" class="section-card">
+
+            <h2>Fintech</h2>
+
+            <div class="content">
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>G06Q 20/00</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Payment Architectures</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Digital payment systems,
+                        mobile wallets, and electronic fund transfers.
+                    </p>
+
+                </div>
+
+                <div class="ipc-item">
+
+                    <p class="code">Code :</p>
+                    <h6>G06Q 40/00</h6>
+
+                    <p class="title">Title :</p>
+                    <p>Finance, Insurance, and Trading</p>
+
+                    <p class="Discription">Description :</p>
+                    <p>
+                        Algorithmic trading, risk management,
+                        and blockchain-based financial systems.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="./categories.js"></script>
+
+</body>
+</html>

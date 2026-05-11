@@ -26,6 +26,8 @@ include "../../src/view/ipcounselView.php";
                 <li><a href="../document-history/document-history.php" class="active"><i
                             class="fa-solid fa-clock-rotate-left"></i>
                         document history</a></li>
+                <li><a href="../categories/categories.html" class="active"><i
+                            class="fa-solid fa-layer-group"></i>Categories</a></li>
             </ul>
 
 
