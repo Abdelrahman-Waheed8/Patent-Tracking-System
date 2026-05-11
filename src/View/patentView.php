@@ -1,6 +1,6 @@
 <?php 
 
-class patentView extends patentControl
+class patentView extends Patent
 {
     public function displayContent()
     {

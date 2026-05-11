@@ -18,7 +18,7 @@ function respond(int $statusCode, array $payload): void
 
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $action = $_GET['action'] ?? $_POST['action'] ?? 'list';
-$controller = new licensingControl();
+$controller = new License();
 
 try {
     if ($method === 'GET' && $action === 'list') {

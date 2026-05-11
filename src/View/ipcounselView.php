@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 class IPcounselView extends IpcounselControl
+=======
+class IPcounselView extends Ipcounsel
+>>>>>>> 464c9faf0a2c3baf7a27a165fdfb66d77c292f3e
 {
     public function ViewTable()
     {

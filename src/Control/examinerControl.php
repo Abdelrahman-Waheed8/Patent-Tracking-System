@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 class ExaminerController extends examinerModel {
+=======
+class Examiner extends examinerModel {
+>>>>>>> 464c9faf0a2c3baf7a27a165fdfb66d77c292f3e
     private $uid;
     private $patentID;
     private $action;

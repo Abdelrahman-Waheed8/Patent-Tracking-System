@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 class ExaminerView extends ExaminerController
+=======
+class ExaminerView extends Examiner
+>>>>>>> 464c9faf0a2c3baf7a27a165fdfb66d77c292f3e
 {
     public function renderTable($patents)
     {

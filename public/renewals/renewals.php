@@ -5,7 +5,7 @@ include "../../src/model/patentModel.php";
 include "../../src/control/patentControl.php";
 include "../../src/view/patentView.php";
 
-$controller = new patentControl();
+$controller = new Patent();
 $userData = $controller->filterData($_SESSION["user_id"])
 ?>
 <!DOCTYPE html>

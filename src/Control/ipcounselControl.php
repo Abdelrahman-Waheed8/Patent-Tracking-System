@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 class IpcounselControl extends IPcounselModel
+=======
+class Ipcounsel extends IPcounselModel
+>>>>>>> 464c9faf0a2c3baf7a27a165fdfb66d77c292f3e
 {
     private $uid;
     private $action;

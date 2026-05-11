@@ -11,7 +11,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $argument_disc_id = $_POST["argument_disc_id"];
         $argument_text = $_POST["argument_text"];
 
+<<<<<<< HEAD
         $control = new IpcounselControl($_SESSION["user_id"],$action,$argument_disc_id, $argument_text);
+=======
+        $control = new Ipcounsel($_SESSION["user_id"],$action,$argument_disc_id, $argument_text);
+>>>>>>> 464c9faf0a2c3baf7a27a165fdfb66d77c292f3e
         if($control->submitIpCounselAction())
             {
                 header("Location: ../public/ip_counsel/ipcounsel.php?action=success");

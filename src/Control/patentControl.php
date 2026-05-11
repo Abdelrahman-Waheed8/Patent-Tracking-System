@@ -1,5 +1,5 @@
 <?php
-class patentControl extends patentModel
+class Patent extends patentModel
 {
     public function calculateMaitenanceWindows($grantDateString)
     {

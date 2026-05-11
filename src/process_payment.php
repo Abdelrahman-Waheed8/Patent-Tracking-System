@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $transactionId = $_POST["transaction_id"] ?? '';
 
     if (!empty($patentId) && !empty($transactionId)) {
-        $controller = new patentControl();
+        $controller = new Patent();
         
         // This relies on the processPayment method added in the previous step
         $result = $controller->processPayment($patentId, $transactionId, $_SESSION["user_id"]);

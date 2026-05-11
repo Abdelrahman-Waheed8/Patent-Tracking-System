@@ -1,6 +1,6 @@
 <?php
 
-class adminControl extends signupModel
+class Admin extends signupModel
 {
     private $fname;
     private $lname;
