@@ -36,6 +36,20 @@ include "../../src/view/examinerView.php";
                 <h2>Pending Patent Reviews</h2>
             </div>
 
+            <?php 
+            if (isset($_GET['approve'])) {
+                if ($_GET['approve'] === 'success') {
+                    echo "<div style='background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 12px; border-radius: 4px; margin-bottom: 20px;'>";
+                    echo "Patent has been successfully approved and granted!";
+                    echo "</div>";
+                } elseif ($_GET['approve'] === 'failed') {
+                    echo "<div style='background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 12px; border-radius: 4px; margin-bottom: 20px;'>";
+                    echo "Failed to approve and grant patent. Please try again.";
+                    echo "</div>";
+                }
+            }
+            ?>
+
             <section>
                 <table>
                     <thead>
@@ -101,15 +115,19 @@ include "../../src/view/examinerView.php";
                     <thead>
                         <tr>
                             <th>Title</th>
+                            <th>Description</th>
                             <th>App number</th>
                             <th>Filing Date</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>ACTION</th>
                         </tr>
                     </thead>
 
                     <tbody id="legalReviewTable">
-
+                            <?php
+                            $view = new ExaminerView();
+                            $view->showLegalReview();
+                            ?>
                     </tbody>
                 </table>
             </section>

@@ -117,16 +117,82 @@ class examinerModel extends DBH
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getLegalReview()
+    public function getLegalReviewApps()
     {
         $pdo = $this->connect();
 
-        $sql = ";";
+        $sql = "SELECT 
+        pa.AppID,
+        pa.appNum,
+        pa.Status,
+        d.Title,
+        d.Description,
+        oa.Deadline,
+        GROUP_CONCAT(DISTINCT CONCAT(l.Action, ': ', l.Description) SEPARATOR ' | ') AS LogHistory
+        FROM patentapplication pa
+        LEFT JOIN officeaction oa ON pa.AppID = oa.AppID
+        LEFT JOIN logs l ON pa.AppID IS NOT NULL
+        LEFT JOIN disclosure d ON pa.disc_ID = d.disc_ID
+        WHERE pa.Status = 'Legal_Review'
+        GROUP BY pa.AppID, pa.appNum, pa.Status, d.Title, d.Description, oa.Deadline
+        ORDER BY oa.Deadline ASC;";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function approveAndCreatePatent($AppID)
+    {
+        $pdo = $this->connect();
+
+        try {
+            $pdo->beginTransaction();
+
+            // Update patent application status to approved
+            $stmt1 = $pdo->prepare("UPDATE patentapplication SET Status = 'approved' WHERE AppID = :AppID");
+            $stmt1->bindParam(":AppID", $AppID);
+            $stmt1->execute();
+
+            // Get the application number from patent application
+            $stmt2 = $pdo->prepare("SELECT appNum FROM patentapplication WHERE AppID = :AppID");
+            $stmt2->bindParam(":AppID", $AppID);
+            $stmt2->execute();
+            $appData = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+            if (!$appData) {
+                throw new Exception("Patent application not found");
+            }
+
+            $appNum = $appData['appNum'];
+            $grantDate = date('Y-m-d');
+            $expirationDate = date('Y-m-d', strtotime('+3.5 years'));
+
+            // Insert into patent table
+            $stmt3 = $pdo->prepare("INSERT INTO patent (Number, GrantDate, Status, Expiration) 
+                                   VALUES (:number, :grantDate, 'Active', :expiration)");
+            $stmt3->bindParam(":number", $appNum);
+            $stmt3->bindParam(":grantDate", $grantDate);
+            $stmt3->bindParam(":expiration", $expirationDate);
+            $stmt3->execute();
+
+            // Get the last inserted patent ID
+            $patentID = $pdo->lastInsertId();
+
+            // Insert into grantedpatents table
+            $stmt4 = $pdo->prepare("INSERT INTO grantedpatents (Patent_ID, AppID) 
+                                   VALUES (:patentID, :AppID)");
+            $stmt4->bindParam(":patentID", $patentID);
+            $stmt4->bindParam(":AppID", $AppID);
+            $stmt4->execute();
+
+            $pdo->commit();
+            return true;
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            throw $e;
+        }
     }
 
 }

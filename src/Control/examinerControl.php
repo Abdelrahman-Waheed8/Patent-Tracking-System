@@ -84,4 +84,24 @@ class Examiner extends examinerModel {
         $this->errors['action'] = 'Invalid examiner action';
         return false;
     }
+
+    public function filterData()
+    {
+        $result = [];
+        $data = $this->getLegalReviewApps();
+
+        foreach($data as $row)
+        {
+            if ($row['Status'] == 'Legal_Review')
+            {
+                $result[] = [
+                    'Title' => htmlspecialchars($row['Title']),
+                    'appNum' => htmlspecialchars($row['appNum']),
+                    'FilingDate' => htmlspecialchars($row['FilingDate']),
+                    'Status' => htmlspecialchars($row['Status']),
+                ];
+            }
+        }
+        return $result;
+    }
 }

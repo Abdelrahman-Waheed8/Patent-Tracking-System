@@ -33,22 +33,28 @@ class ExaminerView extends Examiner
             }
             echo "</div>";
 
-            // Clear errors after displaying
             unset($_SESSION['errorsExaminer']);
         }
     }
 
     public function showLegalReview()
     {
-        $legalreview = $this->getLegalReview();
+        $legalreview = $this->getLegalReviewApps();
         foreach ($legalreview as $row) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($row['Title']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['Description']) . "</td>";
             echo "<td>" . htmlspecialchars($row['appNum']) . "</td>";
-            $reason = !empty($row['RejectionReason']) ? htmlspecialchars($row['RejectionReason']) : 'No reason specified';
-            echo "<td>" . $reason . "</td>";
             echo "<td>" . htmlspecialchars($row['Deadline']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['Status']). "</td>";
+            echo "<td>";
+            echo "<form method='POST' action='../../src/examiner.php' style='display:inline;'>";
+            echo "<input type='hidden' name='AppID' value='" . htmlspecialchars($row['AppID']) . "'>";
+            echo "<input type='hidden' name='action' value='approve_patent'>";
+            echo "<button type='submit' class='approve-btn' style='padding: 8px 12px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;'>Approve & Grant Patent</button>";
+            echo "</form>";
+            echo "</td>";
             echo "</tr>";
         }
-    } 
+    }
 }
