@@ -1,150 +1,107 @@
-const examinerData = [
-    {
-        id: "INV-2026-001",
-        title: "AI-based Monitoring System",
-        inventor: "John Doe",
-        status: "Pending",
-        description: "Advanced smart packaging with sensors.",
-        references: "Packaging Research 2024",
-        files: "packaging_device.pdf"
-    },
-    {
-        id: "INV-2026-002",
-        title: "Smart Packaging Device",
-        inventor: "Jane Smith",
-        status: "Pending",        description: "Advanced smart packaging with sensors.",
-        references: "Packaging Research 2024",
-        files: "packaging_device.pdf"
-    },
-    {
-        id: "INV-2026-003",
-        title: "Smart Packaging Device",
-        inventor: "Jane Smith",
-        status: "rejected",
-        description: "Advanced smart packaging with sensors.",
-        references: "Packaging Research 2024",
-        files: "packaging_device.pdf"
-    }
-];
-
-document.addEventListener("DOMContentLoaded", () => {
-
-
-let table = document.getElementById("table_body");
-
-examinerData.forEach(item => {
-    table.innerHTML += `
-        <tr data-id="${item.id}">
-            <td>
-                <strong>${item.title}</strong><br>
-                <small>${item.id}</small>
-            </td>
-            <td>${item.inventor}</td>
-            <td>
-                <span class="status-badge ${getStatusClass(item.status)}">
-                    ${item.status}
-                </span>
-            </td>
-            <td>
-                <button class="review-btn">Review</button>
-            </td>
-        </tr>
-    `;
-});
-function getStatusClass(status) {
-    switch(status.toLowerCase()) {
-        case "pending":
-            return "status-pending";
-        case "approved":
-            return "status-approved";
-        case "rejected":
-            return "status-rejected";
-        default:
-            return "status-pending";
-    }
-}
-    const modal = document.getElementById("review-modal");
-    const closeBtn = document.querySelector(".close-modal");
-    const detailsContainer = document.getElementById("review-details");
-    let currentRow = null;
-    // Review Button
-document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("review-btn")) {
-        const row = e.target.closest("tr");
-        currentRow = row;
-        const id = row.dataset.id;
-        const patent = examinerData.find(p => p.id === id);
-
-        detailsContainer.innerHTML = `
-            <div class="detail-item">
-                <strong>Title:</strong>
-                <span>${patent.title}</span>
-            </div>
-            <div class="detail-item">
-                <strong>Inventor:</strong>
-                <span>${patent.inventor}</span>
-            </div>
-            <div class="detail-item">
-                <strong>Description:</strong>
-                <p>${patent.description}</p>
-            </div>
-            <div class="detail-item">
-                <strong>References:</strong>
-                <span>${patent.references}</span>
-            </div>
-            <div class="detail-item">
-                <strong>Files:</strong>
-                <span>${patent.files}</span>
-            </div>
-            <div class="decision-buttons">
-                    <button class="approve-btn">
-                        Approve
-                    </button>
-                    <button class="reject-btn">
-                        Reject
-                    </button>
-                    <button class="revision-btn">
-                        Need Revision
-                    </button>
-                </div>
-        `;
-
-        modal.classList.add("active");
-    }
-if (
-    e.target.classList.contains("approve-btn") ||
-    e.target.classList.contains("reject-btn") ||
-    e.target.classList.contains("revision-btn")
-) {
-
-    const id = currentRow.dataset.id;
-    const patent = examinerData.find(p => p.id === id);
-    let newStatus = patent.status;
-    if (e.target.classList.contains("approve-btn")) {
-        newStatus = "approved";
-    } 
-    else if (e.target.classList.contains("reject-btn")) {
-        newStatus = "rejected";
-    } 
-    else if (e.target.classList.contains("revision-btn")) {
-        newStatus = "Pending"; 
-    }
-    patent.status = newStatus;
-    const statusCell = currentRow.querySelector(".status-badge");
-    statusCell.textContent = newStatus;
-    statusCell.className = `status-badge ${getStatusClass(newStatus)}`;
-    modal.classList.remove("active");
-}
-});
-    // Close Modal
-    closeBtn.addEventListener("click", () => {
-        modal.classList.remove("active");
-    });
-    // Close when clicking outside
-    modal.addEventListener("click", (e) => {
-        if(e.target === modal) {
-            modal.classList.remove("active");
+(function(){
+        // Utility to show/hide modal
+        const modal = document.getElementById('review-modal');
+        const detailsContainer = document.getElementById('review-details');
+        function showModal(html){
+            detailsContainer.innerHTML = html;
+            modal.style.display = 'flex';
         }
-    });
+        function hideModal(){
+            detailsContainer.innerHTML = '';
+            modal.style.display = 'none';
+        }
 
-});
+        // Build details HTML from table row
+        function buildDetailsFromRow(row){
+            const cells = Array.from(row.querySelectorAll('td'));
+            const headers = ['Application ID','Disclosure ID','Application Number','Filing Date','Status'];
+            let html = '<div class="modal-body">';
+            html += '<table class="modal-table">';
+            for(let i=0;i<Math.min(headers.length,cells.length);i++){
+                const val = cells[i] ? cells[i].textContent.trim() : '';
+                html += `<tr><th>${headers[i]}:</th><td>${escapeHtml(val)}</td></tr>`;
+            }
+            html += '</table>';
+            html += '</div>';
+            return html;
+        }
+
+        function escapeHtml(s){
+            return (s||'')
+                .replace(/&/g,'&amp;')
+                .replace(/</g,'&lt;')
+                .replace(/>/g,'&gt;')
+                .replace(/"/g,'&quot;')
+                .replace(/'/g,'&#039;');
+        }
+
+        // Handler for review buttons
+        document.addEventListener('click', function(e){
+            const btn = e.target.closest('button.review-btn, [data-action="review"]');
+            if(!btn) return;
+            const row = btn.closest('tr');
+            if(!row) return;
+
+            const cells = row.querySelectorAll('td');
+            const appId = cells[0] ? cells[0].textContent.trim() : '';
+            const discId = cells[1] ? cells[1].textContent.trim() : '';
+            const statusText = (cells[4] ? cells[4].textContent.trim() : (btn.dataset.status||'')).toLowerCase();
+            const detailsHtml = buildDetailsFromRow(row);
+
+            if(statusText.includes('reject')){
+                // Rejected modal: show details, radio actions and textarea for argument
+                let html = detailsHtml;
+                html += '<div class="ipc-actions">';
+                html += '<form id="reject-form" action="../../src/ipcounsel.php" method="POST">';
+                html += `<input type="hidden" name="argument_disc_id" value="${discId}">`;
+                html += `<input type="hidden" name="argument_disc_id" value="${appId}">`;
+                html += '<div><label><input type="radio" name="ipc_action" value="accept"> Accept rejection</label></div>';
+                html += '<div><label><input type="radio" name="ipc_action" value="argue" checked> Argue with examiner</label></div>';
+                html += '<div id="argument-wrap" style="margin-top:8px;">';
+                html += '<label for="argument_text">State why the examiner is wrong:</label><br>';
+                html += '<textarea id="argument_text" name="argument_text" rows="4" style="width:100%" placeholder="Type your argument here..."></textarea>';
+                html += '</div>';
+                html += '<div style="margin-top:10px; text-align:right;">';
+                html += '<button type="submit" id="submit-argument" class="btn primary">Submit Argument</button> ';
+                html += '<button type="button" id="cancel-review" class="btn">Cancel</button>';
+                html += '</div>';
+                html += '</form></div>';
+
+                showModal(html);
+
+                // Event bindings
+                const submitBtn = document.getElementById('submit-argument');
+                const cancelBtn = document.getElementById('cancel-review');
+                const forms = document.getElementById('reject-form');
+                const argumentText = document.getElementById('argument_text');
+
+                // Toggle textarea visibility depending on radio
+                forms.querySelectorAll('input[name="ipc_action"]').forEach(function(r){
+                    r.addEventListener('change', function(){
+                        const wrap = document.getElementById('argument-wrap');
+                        if(this.value === 'argue') wrap.style.display = '';
+                        else wrap.style.display = 'none';
+                    });
+                });
+
+                cancelBtn.addEventListener('click', function(){ hideModal(); });
+
+            } else {
+                // Fallback: just show details with cancel
+                let html = detailsHtml + '<div style="margin-top:12px; text-align:right;"><button type="button" id="cancel-review-2" class="btn">Close</button></div>';
+                showModal(html);
+                document.getElementById('cancel-review-2').addEventListener('click', hideModal);
+            }
+        });
+
+        // Close icon and overlay click handler
+        document.addEventListener('click', function(e){
+            if(e.target.classList.contains('close-modal')) hideModal();
+            // click outside modal
+            if(e.target.id === 'review-modal') hideModal();
+        });
+
+        // Initially hide modal
+        if(modal) modal.style.display = 'none';
+
+    })();

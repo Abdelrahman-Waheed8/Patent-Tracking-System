@@ -92,8 +92,6 @@ class patentControl extends patentModel
             return false;
         }
 
-        // Ensure the fee record exists in the database before updating it
-        // We use 1000.00 as the default base fee as per our fee calculation logic
         $this->patentFee($patentId, 1000.00);
         $this->viewPatent($uid);
 

@@ -137,7 +137,6 @@ section{
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-
 }
 table{
     width: 100%;
@@ -340,6 +339,80 @@ td small{
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ================= Modal additions */
+
+/* Generic button styles used inside modal */
+.btn{
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    background: #f1f3f5;
+    color: #222;
+}
+.btn.primary{
+    background: #296d74;
+    color: #fff;
+}
+.btn:active{ transform: translateY(1px); }
+
+/* Modal content table */
+.modal-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+}
+.modal-table th{
+    text-align: left;
+    padding: 8px 0;
+    color: #03353b;
+    width: 45%;
+    font-weight: 700;
+}
+.modal-table td{
+    padding: 8px 0;
+    color: #444;
+}
+
+/* Argument textarea and form */
+#argument_text{
+    width: 100%;
+    resize: vertical;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    background: #fff;
+}
+#argument_text:focus{ outline: none; border-color: #296d74; box-shadow: 0 0 0 3px rgba(41,109,116,0.06); }
+
+.ipc-actions label{ cursor: pointer; }
+.ipc-actions input[type="radio"]{ margin-right:8px; }
+
+#argument-wrap{ margin-top:8px; }
+
+/* Small helpers */
+.modal-body{ margin-bottom: 6px; }
+
+/* Ensure modal buttons align on small screens */
+.modal .btn{ min-width: 100px; }
+
+/* Keep previous responsive block (overrides below) */
+/* ================= Responsive ================= */
+
+@media(max-width:768px){
+
+    .content-wrapper{
+        padding: 15px;
+    }
+
+    .decision-buttons{
+        flex-direction: column;
+    }
+
 }
 
 /* ================= Responsive ================= */

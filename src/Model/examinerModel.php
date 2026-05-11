@@ -54,8 +54,78 @@ class examinerModel extends DBH
         $stmt2->execute();
         $patentApp = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-        
-        
+        $officeActionType = "";
+        switch($status)
+        {
+            case "approved" :
+                $officeActionType = "Approved";
+                break;
+            case "Legal_Review":
+                $officeActionType = "Legal Review";
+                break;
+            case "rejected":
+                $officeActionType = "Rejected";
+                break;
+            default:
+                $officeActionType = "Initial Review";
+                break;
+        }
+
+        $stmt3 = $pdo->prepare("INSERT INTO officeaction (AppID, DateReceived, Deadline, `Type`, `Status`) 
+        VALUES (:AppID, NOW(), DATE_ADD(NOW(), INTERVAL 3 MONTH), :tp, :sts)");
+        $stmt3->bindParam(":AppID", $patentApp['AppID']);
+        $stmt3->bindParam(":sts", $status);
+        $stmt3->bindParam(":tp", $officeActionType);
+        $stmt3->execute();
+
         return $stmt->execute();
+    }
+
+    public function documentExaminer($userID, $action, $type, $description, $patentID = null, $discID = null)
+    {
+        $pdo = $this->connect();
+
+        $query = "INSERT INTO logs (usr_ID, `Action`, `TimeStamp`, `type`, `Description`)
+                  VALUES (:usr_ID, :actn, NOW(), :tp, :dsc);";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":usr_ID", $userID);
+        $stmt->bindParam(":tp", $type);
+        $stmt->bindParam(":actn", $action);
+        $stmt->bindParam(":dsc", $description);
+        $stmt->execute();
+
+        if($patentID && $description)
+            {
+                $query2 = "INSERT INTO prior_art (disc_ID, `Description`, Link) 
+                           VALUES (:discID, :dsc, :lnk);";
+                $stmt2 = $pdo->prepare($query2);
+                $stmt2->bindParam(":discID", $discID);
+                $stmt2->bindParam(":dsc", $description);
+                $stmt2->bindParam(":lnk", $patentID);
+                $stmt2->execute();
+            }
+    }
+
+    public function checkPatent($patentID)
+    {
+        $pdo = $this->connect();
+
+        $stmt = $pdo->prepare("SELECT * FROM patent WHERE Patent_ID = :pID");
+        $stmt->bindParam(":pID", $patentID);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getLegalReview()
+    {
+        $pdo = $this->connect();
+
+        $sql = ";";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

@@ -1,5 +1,6 @@
 <?php 
 include "../../src/examiner.php"; 
+include "../../src/view/examinerView.php";
 ?>
 
 <!DOCTYPE html>
@@ -113,11 +114,52 @@ include "../../src/examiner.php";
                     <button type="submit" class="approve-btn" onclick="setStatus('Legal_Review')">
                         Approve
                     </button>
-                    <button type="submit" class="reject-btn" onclick="setStatus('rejected')">
+                    <button type="button" class="reject-btn" onclick="openRejectModal()">
                         Reject
                     </button>
                     <button type="submit" class="revision-btn" onclick="setStatus('pending')">
                         Need Revision
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Rejection Reason Modal -->
+    <div class="modal-overlay" id="reject-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Rejection Reason</h2>
+                <i class="fas fa-times close-modal" onclick="closeRejectModal()"></i>
+            </div>
+
+            <form action="../../src/examiner.php" method="POST">
+                <input type="hidden" name="disc_id" id="reject_disc_id">
+                <input type="hidden" name="status" value="rejected">
+                
+                <div style="padding:25px;">
+                    <div class="detail-item" style="margin-bottom: 15px;">
+                        <label for="prior-art" style="font-weight: bold; display: block; margin-bottom: 5px;">Prior art refrence</label>
+                        <input type="text" name="prior-art" placeholder="Ex: Patent ID" style="width: 100%; font-weight: bold; display: block; margin-bottom: 5px;">
+                    </div>
+                    
+                    <div class="detail-item">
+                        <label for="additional_comments" style="font-weight: bold; display: block; margin-bottom: 5px;">Reason For Rejection:</label>
+                        <textarea name="additional_comments" id="additional_comments" rows="5" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; resize: vertical;" placeholder="Provide details for the rejection..."></textarea>
+                    </div>
+                </div>
+
+                <?php
+                $view = new ExaminerView();
+                $view->displayErrors();
+                ?>
+
+                <div class="decision-buttons" style="padding:0 25px 25px;">
+                    <button type="submit" class="reject-btn">
+                        Confirm Rejection
+                    </button>
+                    <button type="button" class="revision-btn" onclick="closeRejectModal()">
+                        Cancel
                     </button>
                 </div>
             </form>
