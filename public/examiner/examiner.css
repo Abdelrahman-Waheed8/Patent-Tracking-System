@@ -340,3 +340,16 @@ td small{
     }
 
 }
+.empty-row td {
+    padding: 0;
+    background: #f9f9f9;
+}
+
+.empty-box {
+    height: 250px;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 16px;
+}

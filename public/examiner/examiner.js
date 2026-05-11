@@ -121,3 +121,28 @@ function setStatus(status) {
     statusInput.value = status;
   }
 }
+const legalTable = document.getElementById("legalReviewTable");
+
+function checkEmptyTable() {
+
+    const rows = legalTable.querySelectorAll("tr:not(.empty-row)");
+
+    if (rows.length === 0) {
+        legalTable.innerHTML = `
+        <tr class="empty-row">
+          <td colspan="5">
+              <div class="empty-box">
+                  No Legal Reviews Found
+              </div>
+          </td>
+      </tr>
+        `;
+    }
+    else {
+        const emptyRow = legalTable.querySelector(".empty-row");
+        if (emptyRow) {
+            emptyRow.remove();
+        }
+    }
+}
+checkEmptyTable();
