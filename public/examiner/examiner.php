@@ -23,11 +23,11 @@ include "../../src/view/examinerView.php";
                 <h2>Examiner Panel</h2>
             </div>
             <div class="right">
-                <i class="fas fa-bell icon-btn"></i>
-                <div class="user icon-btn">
-                    <i class="fas fa-user"></i>
-                    <i class="fas fa-chevron-down small"></i>
-                </div>
+                <a class="logout-btn" href="../index.php">
+                    <button class="logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </a>
             </div>
         </nav>
 

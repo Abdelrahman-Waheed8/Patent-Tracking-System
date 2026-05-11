@@ -57,7 +57,24 @@ body{
     display: flex;
     flex-direction: column;
 }
+.logout {
+    margin-top: auto;
+    margin: 20px 10px;
+    padding: 10px;
+    border: 1px solid #e74c3c;
+    background: transparent;
+    color: #e74c3c;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
+.logout:hover {
+    background: #e74c3c;
+    color: white;
+}
+.logout-btn{
+    text-decoration: none;
+}
 /* Cards */
 .cards {
     display: grid;
