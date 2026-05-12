@@ -33,7 +33,6 @@ $userData = $controller->filterData($_SESSION["user_id"])
                 <li><a href="../patent/patent.php"><i class="fas fa-file"></i> Patents</a></li>
                 <li><a href="./renewals.php" class="active"><i class="fas fa-sync"></i> Renewals</a></li>
                 <li><a href="../licensing/licensing.php"><i class="fas fa-handshake"></i> Licensing</a></li>
-                <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
 
             <a href="../index.php" class="logout_btn">
@@ -176,10 +175,11 @@ $userData = $controller->filterData($_SESSION["user_id"])
                     </div>
                     <form action="../../src/process_payment.php" method="POST" id="payment-form">
                         <input type="hidden" name="patent_id" id="form-patent-id" value="">
-                        
+
                         <div class="detail-item" id="transaction-container" style="display: none;">
                             <strong>Transaction ID</strong>
-                            <input type="text" id="transaction-input" name="transaction_id" placeholder="Enter Transaction ID" style="padding: 5px; width: 150px;" required>
+                            <input type="text" id="transaction-input" name="transaction_id"
+                                placeholder="Enter Transaction ID" style="padding: 5px; width: 150px;" required>
                         </div>
 
                         <div class="btn-pay">

@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+body{
+    background-color: #f1f3f5;
+}
+
+.container{
+    min-height: 100vh;
+}
+
+/* ================= Navbar ================= */
+
+.panel-header{
+    background-color: #296d74;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.left,
+.right{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.icon-btn{
+    cursor: pointer;
+    transition: 0.2s;
+    opacity: 0.85;
+}
+
+.icon-btn:hover{
+    opacity: 1;
+}
+
+.left h2{
+    font-size: 18px;
+    font-weight: 700;
+}
+.left i:hover{
+    cursor: pointer;
+}
+/* Logout */
+.logout {
+    margin-top: auto;
+    margin: 20px 10px;
+    padding: 10px;
+    border: 1px solid #e74c3c;
+    background: transparent;
+    color: #e74c3c;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.logout:hover {
+    background: #e74c3c;
+    color: white;
+}
+.logout-btn{
+    text-decoration: none;
+}
+.table_page{
+    width: 100%;
+    background-color: #fff;
+    padding: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin: 20px ;
+    width: 100%;
+
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+thead{
+    background: #296d74;
+    border-radius: 20px;
+
+}
+
+th{
+    color: white;
+    padding: 16px;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+td{
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #444;
+}
+
+tbody tr:hover{
+    background-color: #f7fbfc;
+}
+
+td strong{
+    color: #03353b;
+    font-size: 14px;
+}
+
+td small{
+    color: #888;
+    font-size: 12px;
+}

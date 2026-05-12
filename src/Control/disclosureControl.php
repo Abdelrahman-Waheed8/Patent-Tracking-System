@@ -151,8 +151,7 @@ class Disclosure extends disclosureModel
             if (!move_uploaded_file($file['tmp_name'], $path)) {
                 $this->errors['uploadFail_' . $file['name']] = 'Could not save: ' . $file['name'];
             } else {
-                $this->uploadedFiles[] = $path;
-            }
+                $this->uploadedFiles[] = ['path' => $path, 'original_name' => $file['name']];             }
         }
     }
 }

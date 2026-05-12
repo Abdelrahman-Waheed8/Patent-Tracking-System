@@ -17,71 +17,91 @@ include "../../src/view/ipcounselView.php";
 </head>
 
 <body>
+    <div class="containerAll">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2 class="logo">IP System</h2>
 
-    <div class="container">
+            <ul class="menu">
+                <li><a href="../document-history/document-history.php" class="active"><i
+                            class="fa-solid fa-clock-rotate-left"></i>
+                        document history</a></li>
+                <li><a href="../categories/categories.html" class="active"><i
+                            class="fa-solid fa-layer-group"></i>Categories</a></li>
+            </ul>
 
-        <!-- Navbar -->
-        <nav class="panel-header">
 
-            <div class="left">
-                <i class="fas fa-list icon-btn" onclick="toggleSidebar()"></i>
-                <h2>IP Counsel Panel</h2>
-            </div>
+            <a class="logout-btn" href="../index.php">
+                <button class="logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </a>
+        </div>
+        <div class="container">
 
-            <div class="right">
-                <i class="fas fa-bell icon-btn"></i>
+            <!-- Navbar -->
+            <nav class="panel-header">
 
-                <div class="user icon-btn">
-                    <i class="fas fa-user"></i>
-                    <i class="fas fa-chevron-down small"></i>
+                <div class="left">
+                    <i class="fas fa-list icon-btn" onclick="toggleSidebar()"></i>
+                    <h2>IP Counsel Panel</h2>
                 </div>
-            </div>
 
-        </nav>
 
-        <!-- Content -->
-        <div class="content-wrapper">
-            <section>
-                <table id="examiner-table">
-                    <thead>
-                        <tr>
-                            <th>Application ID</th>
-                            <th>Disclosure ID</th>
-                            <th>Application Number</th>
-                            <th>Filing Date</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                        <thead>
-                        <tbody id="table_body">
-                            <?php
+
+            </nav>
+
+            <!-- Content -->
+            <div class="content-wrapper">
+                <section class="table-wrapper">
+                    <div class="table-wrapper">
+                        <table id="examiner-table">
+                            <thead>
+                                <tr>
+                                    <th>Application ID</th>
+                                    <th>Disclosure ID</th>
+                                    <th>Application Number</th>
+                                    <th>Filing Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                <thead>
+                                <tbody id="table_body">
+                                    <?php
                             $view = new IPcounselView();
                             $view->ViewTable();
                             ?>
-                        </tbody>
-                </table>
-            </section>
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
 
-            <section id="rejection-section">
-                <h2>Rejection Details</h2>
-                <table id="rejection-table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Application Number</th>
-                            <th>Rejection Reason</th>
-                            <th>Deadline</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rejection_body">
-                    <?php
+                <section id="rejection-section">
+                    <h2>Rejection Details</h2>
+                    <div class="table_wrapper">
+                        <table id="rejection-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Application Number</th>
+                                    <th>Rejection Reason</th>
+                                    <th>Deadline</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rejection_body">
+                                <?php
                         $view->showRejectedApps();
                     ?>
-                    </tbody>
-                </table>
-            </section>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+            </div>
         </div>
     </div>
+
+
     <!-- Review Modal -->
     <div class="modal-overlay" id="review-modal">
         <div class="modal">
@@ -93,7 +113,7 @@ include "../../src/view/ipcounselView.php";
         </div>
     </div>
     <script>
-    
+
     </script>
     <script src="./ipcounsel.js"></script>
 </body>
