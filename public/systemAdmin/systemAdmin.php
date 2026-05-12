@@ -27,7 +27,27 @@ $licenses = $licensingView->showAllLicenses();
 </head>
 
 <body>
-    <div class="container">
+    <div class="contianerAll">
+        <div class="sidebar">
+            <h2 class="logo">IP System</h2>
+
+            <ul class="menu">
+                <li><a href="../document-history/document-history.php" class="active"><i
+                            class="fa-solid fa-clock-rotate-left"></i>
+                        document history</a></li>
+                <li><a href="../categories/categories.html" class="active"><i
+                            class="fa-solid fa-layer-group"></i>Categories</a></li>
+                </li>
+            </ul>
+
+
+            <a class="logout-btn" href="../index.php">
+                <button class="logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </a>
+        </div>
+        <div class="container">
         <!-- Navbar -->
         <nav class="panel-header">
             <div class="left">
@@ -142,7 +162,7 @@ $licenses = $licensingView->showAllLicenses();
             </div>
         </div>
     </div>
-
+    </div>
     <!-- Edit User Modal -->
     <div id="editModalOverlay" class="modal-overlay"></div>
     <div id="editModal" class="modal">

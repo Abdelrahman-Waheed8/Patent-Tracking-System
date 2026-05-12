@@ -17,13 +17,11 @@
 
             <ul class="menu">
                 <li><a href="../dashboard/dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a href="../inventors/inventors.php"><i class="fas fa-user-astronaut"></i> Inventors</a></li>
                 <li><a href="../invention_disclosure/disclosure.php"><i class="fas fa-lightbulb"></i> Disclosure</a>
                 </li>
                 <li><a href="../patent/patent.php"><i class="fas fa-file"></i> Patents</a></li>
                 <li><a href="../renewals/renewals.php"><i class="fas fa-sync"></i> Renewals</a></li>
                 <li><a href="./licensing.php" class="active"><i class="fas fa-handshake"></i> Licensing</a></li>
-                <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
             </ul>
 
 
